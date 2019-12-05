@@ -46,23 +46,23 @@ class Login extends Component {
           {auth.status === requestFail(DO_LOGIN) &&
             <Alert color="danger">Invalid phoneNumber or password!</Alert>
           }
-          <h2 className='text-center mb-5'>Login</h2>
+          <h2 className='text-center mb-5'>HVI后台业务管理系统</h2>
           <Form onSubmit={handleSubmit(this.handleLogin)}>
             <Field
-              label='phoneNumber'
+              label='请输入用户名称'
               name='phoneNumber'
               type='phoneNumber'
               validate={[isFieldRequired]}
               component={renderField}
             />
             <Field
-              label='Password'
+              label='请输入密码'
               name='password'
               type='password'
               validate={[isFieldRequired]}
               component={renderField}
             />
-            <Button color='primary' type='submit'>Login</Button>
+            <Button color='primary' type='submit'>登录</Button>
           </Form>
         </Col>
       </Row>

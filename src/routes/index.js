@@ -12,11 +12,19 @@ import Users from './Users'
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
 import 'styles/core.scss'
+import SideBar from '../containers/SideBar/SideBar'
 
 const routes = ({ isAuthenticated }) => (
   <Router>
     <div>
       <Header />
+      <div
+        style={{
+            position: 'relative',
+            height: 'calc(100vh - 50px)'
+        }}
+      >
+      {isAuthenticated && <SideBar />}
       <Container className='main-content'>
         <Route exact path='/' render={() => (
           isAuthenticated ? (
@@ -34,6 +42,7 @@ const routes = ({ isAuthenticated }) => (
         )} />
         <Route path='/records' component={userIsAuthenticatedRedir(Records)} />
       </Container>
+      </div>
     </div>
   </Router>
 )

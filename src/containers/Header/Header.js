@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+
 import { Collapse, Container, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem }
   from 'reactstrap'
 import { canManageUsers } from 'helpers/roleHelpers'
@@ -37,12 +38,12 @@ class Header extends React.Component {
 
     return (
       <div>
-        <Navbar color="inverse" inverse toggleable>
+        <Navbar color="primary" inverse toggleable>
           <NavbarToggler right onClick={this.toggle} />
-          <NavbarBrand href="/">HVR SYSTEM</NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <NavbarBrand href="/">HVR后台业务管理系统</NavbarBrand>
+          {/* <Collapse isOpen={this.state.isOpen} navbar>
             {auth.me
-            ? <Nav className="ml-auto" navbar>
+            && <Nav className="ml-auto" navbar>
               <NavItem>
                 <Link to='/dashboard' className='nav-link'>Dashboard</Link>
               </NavItem>
@@ -59,19 +60,9 @@ class Header extends React.Component {
                 <Link to='/' onClick={this.handleLogout} className='nav-link'>Logout</Link>
               </NavItem>
             </Nav>
-            : <Nav className="ml-auto" navbar>
-              <NavItem>
-                <Link to='/login' className='nav-link'>Login</Link>
-              </NavItem>
-              <NavItem>
-                <Link to='/signup' className='nav-link'>Sign up</Link>
-              </NavItem>
-            </Nav>}
-          </Collapse>
+            }
+          </Collapse> */}
         </Navbar>
-        {auth.me && <Container fluid className='text-right mt-2 mb-2'>
-          Welcome <strong>{auth.me.first_name} {auth.me.last_name}</strong>!
-        </Container>}
       </div>
     )
   }
