@@ -15,8 +15,9 @@ const doGetLogs = apiCall({
   method: 'get',
   path: () => `/logs/`,
   payloadOnSuccess: (res, { payload }) => ({
-    ...res,
-    payload
+    logs: res.logs,
+    count: res.count,
+    ...pick(get(payload, 'params', {}), ['page', 'page_size',]),
   })
 })
 

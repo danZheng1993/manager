@@ -25,7 +25,7 @@ export const deleteLog = createAction(DELETE_LOG)
 const initialState = {
   log: null,
   status: 'INIT',
-  logs: {},
+  logs: [],
   loading: false,
   params: {
     count: 0,
@@ -72,7 +72,11 @@ export default handleActions({
   [requestSuccess(GET_LOGS)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(GET_LOGS),
-    logs: Object.values(payload),
+    logs: payload.logs,
+    params: {
+      ...state.params,
+      ...omit(payload, 'logs')
+    },
     error: null,
     loading: false
   }),

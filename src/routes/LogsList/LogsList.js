@@ -57,7 +57,6 @@ class LogsList extends Component {
   render() {
     const { logsList, params } = this.props
     const pagination = pick(params, ['page', 'page_size', 'count'])
-
     return (
       <div>
         <h2 className='text-center mb-5'>Manage Logs</h2>
@@ -82,7 +81,7 @@ class LogsList extends Component {
                 <th scope='row'>{index + 1}</th>
                 <td>{log.first_name} {log.last_name}</td>
                 <td>{log.phoneNumber}</td>
-                <td>{ucFirst(log.role)}</td>
+                {/* <td>{ucFirst(log.role)}</td> */}
                 <td className='text-right'>
                   <Button color='info' size='sm' onClick={this.handleViewReport(log)}>
                     Report

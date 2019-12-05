@@ -80,7 +80,6 @@ export default handleActions({
     users: payload.users,
     params: {
       ...state.params,
-      count: payload.count,
       ...omit(payload, 'users')
     },
     error: null,
