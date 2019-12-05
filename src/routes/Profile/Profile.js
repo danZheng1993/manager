@@ -21,7 +21,7 @@ class Profile extends Component {
   handleSave = (values) => {
     const { history, saveProfile } = this.props
     saveProfile({
-      body: values,
+      body: {userName: values.userName, old_password: values.old_password, new_password: values.new_password},
       success: () => history.push('/dashboard')
     })
   }
@@ -53,18 +53,6 @@ class Profile extends Component {
             <Row>
               <Col xs={12}>    
                 <Field
-                  label='phoneNumber'
-                  name='phoneNumber'
-                  type='text'
-                  required
-                  validate={[isFieldRequired]}
-                  component={InputField}
-                />
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>    
-                <Field
                   label='userName'
                   name='userName'
                   type='text'
@@ -75,21 +63,37 @@ class Profile extends Component {
               </Col>
             </Row>
             <Row>
-              <Col sm={6} xs={12}>
+              <Col xs={12}>
                 <Field
-                  label='Password'
-                  name='password'
+                  label='旧密码'
+                  name='old_password'
                   type='password'
                   placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;'
+                  validate={[isFieldRequired]}
                   component={InputField}
                 />
               </Col>
-              <Col sm={6} xs={12}>
+            </Row>
+            <Row>
+              <Col xs={12}>
                 <Field
-                  label='Confirm Password'
+                  label='新密码'
+                  name='new_password'
+                  type='password'
+                  placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;'
+                  validate={[isFieldRequired]}
+                  component={InputField}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <Field
+                  label='确认新密码'
                   name='confirm_password'
                   type='password'
                   placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;'
+                  validate={[isFieldRequired]}
                   component={InputField}
                 />
               </Col>
@@ -117,8 +121,11 @@ const actions = {
 
 const validate = values => {
   const errors = {}
-  if (values.password !== values.confirm_password) {
+  if (values.new_password !== values.confirm_password) {
     errors.confirm_password = 'Confirm Password should match with Password field.'
+  }
+  if (String(values.new_password).length < 6 || String(values.new_password).length > 20) {
+    errors.new_password = '密码长度为6-26位，由数字和字母组合' 
   }
   return errors
 }
