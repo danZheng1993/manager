@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import constants from '../../constants'
 import { Collapse, Container, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem }
   from 'reactstrap'
 import { canManageUsers } from 'helpers/roleHelpers'
@@ -35,33 +35,40 @@ class Header extends React.Component {
 
   render() {
     const { auth } = this.props
-
     return (
       <div>
         <Navbar color="primary" inverse toggleable>
           <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand href="/">HVR后台业务管理系统</NavbarBrand>
-          {/* <Collapse isOpen={this.state.isOpen} navbar>
+           <Collapse isOpen={this.state.isOpen} navbar>
             {auth.me
             && <Nav className="ml-auto" navbar>
-              <NavItem>
-                <Link to='/dashboard' className='nav-link'>Dashboard</Link>
-              </NavItem>
               {canManageUsers(auth.me) && <NavItem>
-                <Link to='/users' className='nav-link'>Users</Link>
+                <Link to='/users' className='nav-link'>
+                  users
+                </Link>
               </NavItem>}
               <NavItem>
-                <Link to='/records' className='nav-link'>Records</Link>
+                
+                <Link to='/profile' className='nav-link'>
+                  <img src={constants.BASE_URL + auth.me.photo} 
+                  width="28" height="28" style={{borderRadius: '50%'}} alt="avatar" />
+                  {auth.me.userName}
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to='/profile' className='nav-link'>Profile</Link>
+                <Link to='/records' className='nav-link'>
+                  <i className="fa fa-fw fa-bell" style={{ fontSize: '1.5em' }} />
+                </Link>
               </NavItem>
               <NavItem>
-                <Link to='/' onClick={this.handleLogout} className='nav-link'>Logout</Link>
+                <Link to='/' onClick={this.handleLogout} className='nav-link'>
+                <i className="fa fa-fw fa-power-off" style={{ fontSize: '1.5em' }} />
+                </Link>
               </NavItem>
             </Nav>
             }
-          </Collapse> */}
+          </Collapse>
         </Navbar>
       </div>
     )

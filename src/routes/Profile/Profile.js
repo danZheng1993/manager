@@ -51,20 +51,10 @@ class Profile extends Component {
           <h2 className='text-center mb-5'>Edit Your Profile</h2>
           <Form onSubmit={handleSubmit(this.handleSave)}>
             <Row>
-              <Col sm={6} xs={12}>
+              <Col xs={12}>    
                 <Field
-                  label='First Name'
-                  name='first_name'
-                  type='text'
-                  required
-                  validate={[isFieldRequired]}
-                  component={InputField}
-                />
-              </Col>
-              <Col sm={6} xs={12}>
-                <Field
-                  label='Last Name'
-                  name='last_name'
+                  label='phoneNumber'
+                  name='phoneNumber'
                   type='text'
                   required
                   validate={[isFieldRequired]}
@@ -75,9 +65,9 @@ class Profile extends Component {
             <Row>
               <Col xs={12}>    
                 <Field
-                  label='phoneNumber'
-                  name='phoneNumber'
-                  type='phoneNumber'
+                  label='userName'
+                  name='userName'
+                  type='text'
                   required
                   validate={[isFieldRequired]}
                   component={InputField}
