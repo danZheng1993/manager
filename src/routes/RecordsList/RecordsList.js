@@ -67,7 +67,7 @@ class RecordsList extends Component {
 
     return (
       <div>
-        <h2 className='text-center mb-5'>Manage Jogging Records</h2>
+        <h2 className='text-center mb-5'>Manage Records</h2>
         <Row className='text-right mb-3'>
           <Col md={6} xs={12}>
             <Form inline onSubmit={handleSubmit(this.handleFilter)}>

@@ -99,7 +99,7 @@ class RecordEdit extends Component {
             <Alert color='success'>Updated successfully!</Alert>
           }
           <h2 className='text-center mb-5'>
-            {params.id ? 'Edit Jogging Record' : 'Add New Jogging Record'}
+            {params.id ? 'Edit Record' : 'Add New Record'}
           </h2>
           <Form onSubmit={handleSubmit(this.handleSave)}>
             <Field

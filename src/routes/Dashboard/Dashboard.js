@@ -23,7 +23,7 @@ const Dashboard = ({ profile, show }) => (
             <Button tag={Link} to='/users' className='text-left'>Manage Users</Button>
           }
           <Button tag={Link} to='/records' className='text-left'>
-            Manage Jogging Tracking Records
+            Manage Records
           </Button>
           <Button onClick={()=> show('reportModal')} className='text-left'>View My Report</Button>
           <Button tag={Link} to='/profile' className='text-left'>Edit Your Profile</Button>

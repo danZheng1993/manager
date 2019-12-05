@@ -1,5 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
-import { requestSuccess, requestFail } from 'redux/api/request'
+import { requestSuccess, requestFail } from '../api/request'
 import { omit, reject } from 'lodash'
 
 // ------------------------------------

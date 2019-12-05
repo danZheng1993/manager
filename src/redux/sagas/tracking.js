@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga/effects'
 import { get, pick } from 'lodash'
 import { GET_RECORD, GET_RECORDS, CREATE_RECORD, UPDATE_RECORD, DELETE_RECORD }
-  from 'redux/modules/tracking'
+  from '../modules/tracking'
 import apiCall from '../api/apiCall'
 
 const doGetRecord = apiCall({
