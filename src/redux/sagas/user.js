@@ -15,8 +15,9 @@ const doGetUsers = apiCall({
   method: 'get',
   path: () => `/users/`,
   payloadOnSuccess: (res, { payload }) => ({
-    ...res,
-    ...pick(get(payload, 'params', {}), ['page', 'page_size']),
+    users: res.users,
+    count: res.count,
+    ...pick(get(payload, 'params', {}), ['page', 'page_size',]),
   })
 })
 

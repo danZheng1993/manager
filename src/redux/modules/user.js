@@ -77,10 +77,11 @@ export default handleActions({
   [requestSuccess(GET_USERS)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(GET_USERS),
-    users: Object.values(payload),
+    users: payload.users,
     params: {
       ...state.params,
-      ...omit(payload, 'results')
+      count: payload.count,
+      ...omit(payload, 'users')
     },
     error: null,
     loading: false

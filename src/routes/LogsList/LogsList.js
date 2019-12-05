@@ -1,7 +1,7 @@
 import { Button, Table } from 'reactstrap'
 import React, { Component } from 'react'
-import { deleteUser, getUsers } from 'redux/modules/user'
-import { usersListSelector, usersParamsSelector } from 'redux/selectors'
+import { deleteLog, getLogs } from 'redux/modules/log'
+import { logsListSelector, logsParamsSelector } from 'redux/selectors'
 
 import { Link } from 'react-router-dom'
 import MdPersonAdd from 'react-icons/lib/md/person-add'
@@ -17,53 +17,53 @@ import { show } from 'redux-modal'
 import { ucFirst } from 'helpers'
 import { withRouter } from 'react-router'
 
-class UsersList extends Component {
+class LogsList extends Component {
   static propTypes = {
-    deleteUser: PropTypes.func,
-    getUsers: PropTypes.func,
-    usersList: PropTypes.array,
+    deleteLog: PropTypes.func,
+    getLogs: PropTypes.func,
+    logsList: PropTypes.array,
     history: PropTypes.object,
   };
 
   componentWillMount () {
-    const { getUsers, params } = this.props
-    getUsers({ params })
+    const { getLogs, params } = this.props
+    getLogs({ params })
   }
 
-  handleDeleteUser = (id) => () => {
-    const { deleteUser } = this.props
-    confirm('Are you sure to delete the user?').then(
+  handleDeleteLog = (id) => () => {
+    const { deleteLog } = this.props
+    confirm('Are you sure to delete the log?').then(
       () => {
-        deleteUser({ id })
+        deleteLog({ id })
       }
     )
   }
 
-  handleViewReport = (user) => () => {
+  handleViewReport = (log) => () => {
     const { show } = this.props
-    show('reportModal', { user })
+    show('reportModal', { log })
   }
 
   handlePagination = (pagination) => {
-    const { getUsers, params } = this.props
-    getUsers({
+    const { getLogs, params } = this.props
+    getLogs({
       params: {
-        ...pick(params, ['page', 'page_size', 'count']),
+        ...pick(params, ['page', 'page_size']),
         ...pagination
       }
     })
   }
 
   render() {
-    const { usersList, params } = this.props
+    const { logsList, params } = this.props
     const pagination = pick(params, ['page', 'page_size', 'count'])
-    console.log(">>>>>>>>>>>>>",usersList,pagination)
+
     return (
       <div>
-        <h2 className='text-center mb-5'>Manage Users</h2>
+        <h2 className='text-center mb-5'>Manage Logs</h2>
         <div className='text-right mb-2'>
-          <Link to='/users/new' className='btn btn-primary'>
-            <MdPersonAdd size='1.2em' /> Add a New User
+          <Link to='/logs/new' className='btn btn-primary'>
+            <MdPersonAdd size='1.2em' /> Add a New Log
           </Link>
         </div>
         <Table striped>
@@ -77,22 +77,22 @@ class UsersList extends Component {
             </tr>
           </thead>
           <tbody>
-            {usersList && usersList.map((user, index) => (
+            {logsList && logsList.map((log, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
-                <td>{user.first_name} {user.last_name}</td>
-                <td>{user.phoneNumber}</td>
-                <td>{ucFirst(user.role)}</td>
+                <td>{log.first_name} {log.last_name}</td>
+                <td>{log.phoneNumber}</td>
+                <td>{ucFirst(log.role)}</td>
                 <td className='text-right'>
-                  <Button color='info' size='sm' onClick={this.handleViewReport(user)}>
+                  <Button color='info' size='sm' onClick={this.handleViewReport(log)}>
                     Report
                   </Button>
                   {' '}
-                  <Button color='primary' tag={Link} size='sm' to={`/users/edit/${user._id}`}>
+                  <Button color='primary' tag={Link} size='sm' to={`/logs/edit/${log.id}`}>
                     Edit
                   </Button>
                   {' '}
-                  <Button color='danger' size='sm' onClick={this.handleDeleteUser(user._id)}>
+                  <Button color='danger' size='sm' onClick={this.handleDeleteLog(log.id)}>
                     Delete
                   </Button>
                 </td>
@@ -108,17 +108,17 @@ class UsersList extends Component {
 }
 
 const selector = createStructuredSelector({
-  usersList: usersListSelector,
-  params: usersParamsSelector
+  logsList: logsListSelector,
+  params: logsParamsSelector
 })
 
 const actions = {
-  getUsers,
-  deleteUser,
+  getLogs,
+  deleteLog,
   show
 }
 
 export default compose(
   connect(selector, actions),
   withRouter
-)(UsersList)
+)(LogsList)

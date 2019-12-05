@@ -39,9 +39,9 @@ export default ({
 
   try {
     yield put({
-      type: requestPending(type)
+      type: requestPending(type),
+      loading: true
     })
-
     const res = yield call(axios.request, {
       url: typeof path === 'function' ? path(action) : path,
       method: method.toLowerCase(),

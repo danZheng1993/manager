@@ -66,6 +66,18 @@ export const scenesListSelector = (state) =>
 export const sceneStateSelector = (state) =>
   get(state, 'scene', {})
 
+export const logDetailSelector = (state) =>
+  get(state, 'log.log', {})
+
+export const logsListSelector = (state) =>
+  get(state, 'log.logs', [])
+
+  export const logsloadingSelector = (state) =>
+  get(state, 'log.loading', false)
+
+export const logStateSelector = (state) =>
+  get(state, 'log', {})
+
 export const feedbackDetailSelector = (state) =>
   get(state, 'feedback.feedback', {})
 
@@ -149,6 +161,9 @@ export const recordsParamsSelector = (state) =>
 
 export const usersParamsSelector = (state) =>
   get(state, 'user.params', {})
+
+export const logsParamsSelector = (state) =>
+  get(state, 'log.params', {})
 
 export const usersloadingSelector = (state) =>
   get(state, 'user.loading', false)

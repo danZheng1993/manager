@@ -14,6 +14,7 @@ import job from './modules/job'
 import chat from './modules/chat'
 import banner from './modules/banner'
 import news from './modules/news'
+import log from './modules/log'
 
 export default combineReducers({
   auth,
@@ -29,5 +30,6 @@ export default combineReducers({
   subcategory,
   chat,
   banner,
-  news
+  news,
+  log
 })

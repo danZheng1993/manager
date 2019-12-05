@@ -10,6 +10,7 @@ import job from './job'
 import chat from './chat'
 import banner from './banner'
 import news from './news'
+import log from './log'
 import subcategory from './subcategory'
 
 export default function* rootSaga () {
@@ -26,5 +27,6 @@ export default function* rootSaga () {
     chat(),
     banner(),
     news(),
+    log(),
   ])
 }

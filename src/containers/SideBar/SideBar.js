@@ -52,24 +52,24 @@ class SideBar extends React.Component {
         >
           <SideNav.Toggle />
           <SideNav.Nav defaultSelected="home">
-            <NavItem eventKey="">
+            <NavItem eventKey="dashboard">
               <NavIcon>
                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
                 首页
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="dashboard">
                 <NavText>
                   系统首页
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="logs">
                 <NavText>
                   登录日志
                 </NavText>
               </NavItem>   
-              <NavItem eventKey="">
+              <NavItem eventKey="profile">
                 <NavText>
                   账户设置
                 </NavText>
@@ -83,14 +83,14 @@ class SideBar extends React.Component {
                 VR管理
               </NavText>
             </NavItem>
-            <NavItem eventKey="login">
+            <NavItem eventKey="users">
               <NavIcon>
                 <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
                 用户管理
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="users">
                 <NavText>
                 服务方管理
                 </NavText>
