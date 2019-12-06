@@ -9,7 +9,6 @@ import Pagination from 'components/Pagination'
 import PropTypes from 'prop-types'
 import ReportModal from 'containers/ReportModal'
 import { compose } from 'redux'
-import confirm from 'containers/ConfirmModal'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
@@ -26,20 +25,6 @@ class MediasList extends Component {
   componentWillMount () {
     const { getMedias, params } = this.props
     getMedias({ params })
-  }
-
-  handleDeleteMedia = (id) => () => {
-    const { deleteMedia } = this.props
-    confirm('Are you sure to delete the media?').then(
-      () => {
-        deleteMedia({ id })
-      }
-    )
-  }
-
-  handleViewReport = (media) => () => {
-    const { show } = this.props
-    show('reportModal', { media })
   }
 
   handlePagination = (pagination) => {
@@ -91,7 +76,7 @@ class MediasList extends Component {
                   查看
                   </Button>
                   {' '}
-                  <Button color='danger' size='sm' onClick={this.handleDeleteMedia(media._id)}>
+                  <Button color='primary' tag={Link} size='sm' to={`/medias/edit/${media._id}`}>
                   审核
                   </Button>
                 </td>

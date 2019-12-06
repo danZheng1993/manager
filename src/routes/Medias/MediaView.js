@@ -43,10 +43,9 @@ class MediaView extends Component {
         {media &&
         <div>
           <Row>
-            <Col sm={6}>
+            <Col sm={3}>
             <img src={constants.MEDIA_BASE_URL + media.snapshot}    
                   width="100%" height="90%" alt="snapshot" />
-
               {/* <VrPlayer
                 sources={[ // Declare an array of video sources
                   { url: 'localhost:4000/mediaSource/media3.mp4', type: 'video/mp4' },
@@ -62,11 +61,11 @@ class MediaView extends Component {
               <p>是否公开 : {media.isPublic ? '是' : '否' } </p>
               <p>上传时间 : {getDateTimeStr(media.created)} </p>
               <p>播放次数 : {media.visits}次 </p>
-              <p>收藏次数 : {media.visits}次 </p>
-              <p>分享次数 : {media.visits}次 </p>
+              <p>收藏次数 : {media.favourites}次 </p>
+              <p>分享次数 : {media.shares}次 </p>
             </Col>
           </Row>
-          <h4 className='text-center mb-5'>项目信息</h4>
+          <h6 className='text-center mb-5'>项目信息</h6>
           <Table size="sm" bordered className="detail-table">
             <tbody>
               <tr>
