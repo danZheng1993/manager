@@ -1,5 +1,6 @@
 import { createAction, handleActions } from 'redux-actions'
 import { requestSuccess, requestFail, requestPending } from '../api/request'
+import {updateUnreadMessageList} from '../api/helpers'
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -8,8 +9,14 @@ export const DO_LOGOUT = 'DO_LOGOUT'
 export const DO_SIGNUP = 'DO_SIGNUP'
 export const GET_PROFILE = 'GET_PROFILE'
 export const SAVE_PROFILE = 'SAVE_PROFILE'
+export const PUSH_NOTIFICATION = 'PUSH_NOTIFICATION'
+export const PUSH_UNREAD_MESSAGES = 'PUSH_UNREAD_MESSAGES'
 export const GET_CONTACTS = 'GET_CONTACTS'
 export const ADD_TO_CONTACTS = 'ADD_TO_CONTACTS'
+export const ADD_TO_COLLECTIONS = 'ADD_TO_COLLECTIONS'
+export const REMOVE_FROM_COLLECTIONS = 'REMOVE_FROM_COLLECTIONS'
+export const ADD_TO_ATTENTIONS = 'ADD_TO_ATTENTIONS'
+export const REMOVE_FROM_ATTENTIONS = 'REMOVE_FROM_ATTENTIONS'
 export const SEND_CODE = 'SEND_CODE'
 export const CHECK_CODE = 'CHECK_CODE'
 // ------------------------------------
@@ -27,6 +34,12 @@ export const getProfile = createAction(GET_PROFILE)
 export const saveProfile = createAction(SAVE_PROFILE)
 export const getContacts = createAction(GET_CONTACTS)
 export const addToContacts = createAction(ADD_TO_CONTACTS)
+export const addToCollections = createAction(ADD_TO_COLLECTIONS)
+export const removeFromCollections = createAction(REMOVE_FROM_COLLECTIONS)
+export const addToAttentions = createAction(ADD_TO_ATTENTIONS)
+export const removeFromAttentions = createAction(REMOVE_FROM_ATTENTIONS)
+export const pushNotification = createAction(PUSH_NOTIFICATION)
+export const pushUnreadMessages = createAction(PUSH_UNREAD_MESSAGES)
 
 const getInitialState = () => {
   let authRestore = JSON.parse(localStorage.getItem('hvr_auth') || null)
@@ -64,7 +77,9 @@ export default handleActions({
     token: payload.token,
     status: requestSuccess(DO_LOGIN),
     me: payload.info,
-    loading: false
+    loading: false,
+    unread: {},
+    notification: [],
   }),
 
   [requestFail(DO_LOGIN)]: (state, { payload }) => ({
@@ -85,6 +100,22 @@ export default handleActions({
     loading: false
   }),
 
+  [PUSH_UNREAD_MESSAGES]: (state, { payload }) => ({
+    ...state,
+    status: PUSH_UNREAD_MESSAGES,
+    unread: updateUnreadMessageList(state.unread, payload),
+    error: null,
+    loading: false
+  }),
+
+  [PUSH_NOTIFICATION]: (state, { payload }) => ({
+    ...state,
+    status: PUSH_NOTIFICATION,
+    notification: [...state.notification, payload],
+    error: null,
+    loading: false
+  }),
+
   
   [requestPending(DO_SIGNUP)]: (state, { payload }) => ({
     ...state,
@@ -101,6 +132,8 @@ export default handleActions({
     loading: false,
     token: payload.token,
     me: payload.info,
+    unread: {},
+    notification: [],
   }),
 
   [requestFail(DO_SIGNUP)]: (state, { payload }) => ({
@@ -115,7 +148,7 @@ export default handleActions({
   
   [requestPending(SEND_CODE)]: (state, { payload }) => ({
     ...state,
-    status: requestPending(DO_LOGIN),
+    status: requestPending(SEND_CODE),
     error: null,
     loading: true,
   }),
@@ -139,18 +172,21 @@ export default handleActions({
   
   [requestPending(CHECK_CODE)]: (state, { payload }) => ({
     ...state,
-    status: requestPending(DO_LOGIN),
+    status: requestPending(CHECK_CODE),
     error: null,
     loading: true,
   }),
 
   [requestSuccess(CHECK_CODE)]: (state, { payload }) => ({
     ...state,
+    token: payload.token,
     status: requestSuccess(CHECK_CODE),
     verified: payload.verified,
+    me: payload.info,
     error: null,
-    loading: false
-
+    loading: false,
+    unread: {},
+    notification: [],
   }),
 
   [requestFail(CHECK_CODE)]: (state, { payload }) => ({
@@ -168,7 +204,6 @@ export default handleActions({
     status: requestPending(SAVE_PROFILE),
     error: null,
     loading: true,
-    
   }),
 
   [requestSuccess(SAVE_PROFILE)]: (state, { payload }) => ({
@@ -176,6 +211,13 @@ export default handleActions({
     status: requestSuccess(SAVE_PROFILE),
     me: payload,
     error: null,
+    loading: false
+  }),
+
+  [requestFail(SAVE_PROFILE)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(SAVE_PROFILE),
+    error: payload,
     loading: false
   }),
 
@@ -195,6 +237,13 @@ export default handleActions({
     loading: false
   }),
 
+  [requestFail(ADD_TO_CONTACTS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(ADD_TO_CONTACTS),
+    error: payload,
+    loading: false
+  }),
+
   [requestPending(GET_CONTACTS)]: (state, { payload }) => ({
     ...state,
     status: requestPending(GET_CONTACTS),
@@ -209,6 +258,105 @@ export default handleActions({
     contacts: Object.values(payload),
     error: null,
     loading: false
-  })
+  }),
+
+  [requestFail(GET_CONTACTS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(GET_CONTACTS),
+    error: payload,
+    loading: false
+  }),
+
+  [requestPending(ADD_TO_COLLECTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(ADD_TO_COLLECTIONS),
+    error: null,
+    loading: true,
+    
+  }),
+
+  [requestSuccess(ADD_TO_COLLECTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(ADD_TO_COLLECTIONS),
+    me: payload,
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(ADD_TO_ATTENTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(ADD_TO_ATTENTIONS),
+    error: payload,
+    loading: false
+  }),
+
+  [requestPending(ADD_TO_ATTENTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(ADD_TO_ATTENTIONS),
+    error: null,
+    loading: true,
+    
+  }),
+
+  [requestSuccess(ADD_TO_ATTENTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(ADD_TO_ATTENTIONS),
+    me: payload,
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(ADD_TO_ATTENTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(ADD_TO_ATTENTIONS),
+    error: payload,
+    loading: false
+  }),
+
+  [requestPending(REMOVE_FROM_COLLECTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(REMOVE_FROM_COLLECTIONS),
+    error: null,
+    loading: true,
+    
+  }),
+
+  [requestSuccess(REMOVE_FROM_COLLECTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(REMOVE_FROM_COLLECTIONS),
+    me: payload,
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(REMOVE_FROM_COLLECTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(REMOVE_FROM_COLLECTIONS),
+    error: payload,
+    loading: false
+  }),
+
+  [requestPending(REMOVE_FROM_ATTENTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(REMOVE_FROM_ATTENTIONS),
+    error: null,
+    loading: true,
+    
+  }),
+
+  [requestSuccess(REMOVE_FROM_ATTENTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(REMOVE_FROM_ATTENTIONS),
+    me: payload,
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(REMOVE_FROM_ATTENTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(REMOVE_FROM_ATTENTIONS),
+    error: payload,
+    loading: false
+  }),
 
 }, getInitialState())

@@ -12,7 +12,13 @@ export const authloadingSelector = (state) =>
 export const profileSelector = (state) =>
   get(state, 'auth.me', null)
 
-  export const contactsSelector = (state) =>
+export const unreadMessagesSelector = (state) =>
+  get(state, 'auth.unread', {})
+
+export const notificationsSelector = (state) =>
+  get(state, 'auth.notification', [])
+
+export const contactsSelector = (state) =>
   get(state, 'auth.contacts', null)
 
 export const userDetailSelector = (state) =>
@@ -21,6 +27,9 @@ export const userDetailSelector = (state) =>
 export const usersListSelector = (state) =>
   get(state, 'user.users', [])
 
+export const usersSearchResultSelector = (state) =>
+  get(state, 'user.searchResult', [])
+  
 export const recordDetailSelector = (state) =>
   get(state, 'tracking.record', {})
 
@@ -42,6 +51,12 @@ export const jobsloadingSelector = (state) =>
 export const jobStateSelector = (state) =>
   get(state, 'job', {})
 
+export const jobsSearchResultSelector = (state) =>
+  get(state, 'job.searchResult', [])
+
+  export const jobsFeedbackSelector = (state) =>
+  get(state, 'job.feedbacks', [])
+
 export const typeDetailSelector = (state) =>
   get(state, 'type.type', {})
 
@@ -54,13 +69,25 @@ export const typesListSelector = (state) =>
 export const typeStateSelector = (state) =>
   get(state, 'type', {})
 
+export const settingDetailSelector = (state) =>
+  get(state, 'setting.setting', {})
+
+export const settingsListSelector = (state) =>
+  get(state, 'setting.settings', [])
+
+  export const settingsloadingSelector = (state) =>
+  get(state, 'setting.loading', false)
+
+export const settingStateSelector = (state) =>
+  get(state, 'setting', {})
+
 export const sceneDetailSelector = (state) =>
   get(state, 'scene.scene', {})
 
 export const scenesListSelector = (state) =>
   get(state, 'scene.scenes', [])
 
-  export const scenesloadingSelector = (state) =>
+export const scenesloadingSelector = (state) =>
   get(state, 'scene.loading', false)
 
 export const sceneStateSelector = (state) =>
@@ -70,13 +97,39 @@ export const logDetailSelector = (state) =>
   get(state, 'log.log', {})
 
 export const logsListSelector = (state) =>
-  get(state, 'log.logs', [])
+get(state, 'log.logs', [])
 
-  export const logsloadingSelector = (state) =>
-  get(state, 'log.loading', false)
+export const logsloadingSelector = (state) =>
+get(state, 'log.loading', false)
 
 export const logStateSelector = (state) =>
   get(state, 'log', {})
+export const invoiceDetailSelector = (state) =>
+  get(state, 'invoice.invoice', {})
+
+export const invoicesListSelector = (state) =>
+  get(state, 'invoice.invoices', [])
+
+export const invoicesloadingSelector = (state) =>
+  get(state, 'invoice.loading', false)
+
+export const invoiceStateSelector = (state) =>
+  get(state, 'invoice', {})
+
+export const mediaDetailSelector = (state) =>
+  get(state, 'media.media', {})
+
+export const mediasListSelector = (state) =>
+  get(state, 'media.medias', [])
+
+export const mediasSearchResultSelector = (state) =>
+  get(state, 'media.searchResult', [])
+
+export const mediasloadingSelector = (state) =>
+  get(state, 'media.loading', false)
+
+export const mediaStateSelector = (state) =>
+  get(state, 'media', {})
 
 export const feedbackDetailSelector = (state) =>
   get(state, 'feedback.feedback', {})
@@ -126,7 +179,10 @@ export const newssListSelector = (state) =>
 export const newsStateSelector = (state) =>
   get(state, 'news', {})
 
-  export const bannerDetailSelector = (state) =>
+export const newsSearchResultSelector = (state) =>
+  get(state, 'news.searchResult', [])
+
+export const bannerDetailSelector = (state) =>
   get(state, 'banner.banner', {})
 
 export const bannersListSelector = (state) =>
@@ -161,9 +217,16 @@ export const recordsParamsSelector = (state) =>
 
 export const usersParamsSelector = (state) =>
   get(state, 'user.params', {})
-
+  
 export const logsParamsSelector = (state) =>
   get(state, 'log.params', {})
 
 export const usersloadingSelector = (state) =>
   get(state, 'user.loading', false)
+
+export const myInvoiceSelector = (state) =>
+  get(state, 'invoice.myInvoice', false)
+
+export const myJobsSelector = (state) =>
+  get(state, 'job.myJobs', false)
+

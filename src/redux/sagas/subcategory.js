@@ -1,7 +1,6 @@
 import { takeLatest } from 'redux-saga/effects'
 import { get, pick } from 'lodash'
-import { GET_SUBCATEGORY, GET_SUBCATEGORYS, CREATE_SUBCATEGORY, 
-  UPDATE_SUBCATEGORY, DELETE_SUBCATEGORY }
+import { GET_SUBCATEGORY, GET_SUBCATEGORYS, CREATE_SUBCATEGORY, UPDATE_SUBCATEGORY, DELETE_SUBCATEGORY }
   from '../modules/subcategory'
 import apiCall from '../api/apiCall'
 
@@ -15,10 +14,6 @@ const doGetSubcategorys = apiCall({
   type: GET_SUBCATEGORYS,
   method: 'get',
   path: () => `/subcategorys/`,
-  payloadOnSuccess: (res, { payload }) => ({
-    ...res,
-    payload
-  })
 })
 
 const doCreateSubcategory = apiCall({

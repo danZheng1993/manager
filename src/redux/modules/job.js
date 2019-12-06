@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions'
 import { requestSuccess, requestFail, requestPending } from '../api/request'
-import { omit, reject } from 'lodash'
+import { omit, reject, findIndex } from 'lodash'
 
 // ------------------------------------
 // Constants
@@ -12,8 +12,13 @@ export const UPDATE_JOB = 'UPDATE_JOB'
 export const DELETE_JOB = 'DELETE_JOB'
 export const APPLY_JOB = 'APPLY_JOB'
 export const HIRE_JOB = 'HIRE_JOB'
-export const UPDATE_JOB_STATUS = 'UPDATE_JOB_STATUS'
+export const CANCEL_JOB = 'CANCEL_JOB'
+export const UPDATE_MY_JOBS_LIST = 'UPDATE_MY_JOBS_LIST'
+export const REMOVE_FROM_MY_JOBS_LIST = 'REMOVE_FROM_MY_JOBS_LIST'
+export const GIVE_FEEDBACK = 'GIVE_FEEDBACK'
+export const GET_JOB_FEEDBACK = 'GET_JOB_FEEDBACK'
 export const SEARCH_JOB = 'SEARCH_JOB'
+export const GET_MY_JOB = 'GET_MY_JOB'
 export const SET_JOBS_PAGINATION = 'SET_JOBS_PAGINATION'
 
 // ------------------------------------
@@ -27,16 +32,29 @@ export const updateJob = createAction(UPDATE_JOB)
 export const deleteJob = createAction(DELETE_JOB)
 export const applyJob = createAction(APPLY_JOB)
 export const hireJob = createAction(HIRE_JOB)
-export const updateJobStatus = createAction(UPDATE_JOB_STATUS)
+export const cancelJob = createAction(CANCEL_JOB)
+export const giveFeedback = createAction(GIVE_FEEDBACK)
+export const getFeedback = createAction(GET_JOB_FEEDBACK)
+export const getMyJob = createAction(GET_MY_JOB)
+export const updateMyJobsList = createAction(UPDATE_MY_JOBS_LIST)
+export const removeFromMyJobsList = createAction(REMOVE_FROM_MY_JOBS_LIST)
 export const searchJob = createAction(SEARCH_JOB)
 
 const initialState = {
   job: null,
   status: 'INIT',
-  jobs: {},
+  jobs: [],
   loading: false,
+  searchResult: [],
+  feedbacks: [],
+  myJobs: []
 }
 
+const refreshResult = (list, update) => {
+  let index = findIndex(list, {_id: update._id})
+  list.splice(index, 1)
+  return [...list, update]
+}
 // ------------------------------------
 // Reducer
 // ------------------------------------
@@ -84,7 +102,29 @@ export default handleActions({
     error: payload,
     loading: false
   }),
+  
+  [requestPending(GET_MY_JOB)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(GET_MY_JOB),
+    error: null,
+    loading: true,
+  }),
 
+  [requestSuccess(GET_MY_JOB)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(GET_MY_JOB),
+    myJobs: Object.values(payload),
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(GET_MY_JOB)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(GET_MY_JOB),
+    error: payload,
+    loading: false
+  }),
+  
   [requestPending(SEARCH_JOB)]: (state, { payload }) => ({
     ...state,
     status: requestPending(SEARCH_JOB),
@@ -95,7 +135,7 @@ export default handleActions({
   [requestSuccess(SEARCH_JOB)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(SEARCH_JOB),
-    jobs: Object.values(payload),
+    searchResult: Object.values(payload),
     error: null,
     loading: false
   }),
@@ -104,6 +144,44 @@ export default handleActions({
     ...state,
     status: requestFail(SEARCH_JOB),
     error: payload,
+    loading: false
+  }),
+  
+  [requestPending(GET_JOB_FEEDBACK)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(GET_JOB_FEEDBACK),
+    error: null,
+    loading: true,
+  }),
+
+  [requestSuccess(GET_JOB_FEEDBACK)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(GET_JOB_FEEDBACK),
+    feedbacks: Object.values(payload),
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(GET_JOB_FEEDBACK)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(GET_JOB_FEEDBACK),
+    error: payload,
+    loading: false
+  }),
+
+  [UPDATE_MY_JOBS_LIST]: (state, {payload }) => ({
+    ...state,
+    status: UPDATE_MY_JOBS_LIST,
+    myJobs: refreshResult(state.myJobs, payload),
+    error: null,
+    loading: false
+  }),
+
+  [REMOVE_FROM_MY_JOBS_LIST]: (state, {payload }) => ({
+    ...state,
+    status: REMOVE_FROM_MY_JOBS_LIST,
+    myJobs: reject(state.myJobs, { _id: payload.id }),
+    error: null,
     loading: false
   }),
 
@@ -195,24 +273,46 @@ export default handleActions({
     loading: false
   }),
 
-  [requestPending(UPDATE_JOB_STATUS)]: (state, { payload }) => ({
+  [requestPending(CANCEL_JOB)]: (state, { payload }) => ({
     ...state,
-    status: requestPending(UPDATE_JOB_STATUS),
+    status: requestPending(CANCEL_JOB),
     error: null,
     loading: true,
   }),
 
-  [requestSuccess(UPDATE_JOB_STATUS)]: (state, { payload }) => ({
+  [requestSuccess(CANCEL_JOB)]: (state, { payload }) => ({
     ...state,
-    status: requestSuccess(UPDATE_JOB_STATUS),
+    status: requestSuccess(CANCEL_JOB),
     job: payload,
     error: null,
     loading: false
   }),
 
-  [requestFail(UPDATE_JOB_STATUS)]: (state, { payload }) => ({
+  [requestFail(CANCEL_JOB)]: (state, { payload }) => ({
     ...state,
-    status: requestFail(UPDATE_JOB_STATUS),
+    status: requestFail(CANCEL_JOB),
+    error: payload,
+    loading: false
+  }),
+
+  [requestPending(GIVE_FEEDBACK)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(GIVE_FEEDBACK),
+    error: null,
+    loading: true,
+  }),
+
+  [requestSuccess(GIVE_FEEDBACK)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(GIVE_FEEDBACK),
+    job: payload,
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(GIVE_FEEDBACK)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(GIVE_FEEDBACK),
     error: payload,
     loading: false
   }),

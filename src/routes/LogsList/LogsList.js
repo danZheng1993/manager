@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
-import { ucFirst } from 'helpers'
+import { getDateTimeStr } from 'helpers'
 import { withRouter } from 'react-router'
 
 class LogsList extends Component {
@@ -59,42 +59,24 @@ class LogsList extends Component {
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
-        <h2 className='text-center mb-5'>Manage Logs</h2>
-        <div className='text-right mb-2'>
-          <Link to='/logs/new' className='btn btn-primary'>
-            <MdPersonAdd size='1.2em' /> Add a New Log
-          </Link>
-        </div>
         <Table striped>
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>phoneNumber</th>
-              <th>Role</th>
-              <th className='text-right'>Actions</th>
+              <th>Logged</th>
+              <th>IP</th>
+              <th>Phone Number</th>
+              <th>User Name</th>
             </tr>
           </thead>
           <tbody>
             {logsList && logsList.map((log, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
-                <td>{log.first_name} {log.last_name}</td>
+                <td>{getDateTimeStr(log.logged)}</td>
+                <td>{log.ipAddress}</td>
                 <td>{log.phoneNumber}</td>
-                {/* <td>{ucFirst(log.role)}</td> */}
-                <td className='text-right'>
-                  <Button color='info' size='sm' onClick={this.handleViewReport(log)}>
-                    Report
-                  </Button>
-                  {' '}
-                  <Button color='primary' tag={Link} size='sm' to={`/logs/edit/${log.id}`}>
-                    Edit
-                  </Button>
-                  {' '}
-                  <Button color='danger' size='sm' onClick={this.handleDeleteLog(log.id)}>
-                    Delete
-                  </Button>
-                </td>
+                <td>{log.userName}</td>
               </tr>
             ))}
           </tbody>
