@@ -58,6 +58,7 @@ export default handleActions({
   [requestFail(GET_MEDIA)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_MEDIA),
+    media: null,
     error: payload,
     loading: false
   }),

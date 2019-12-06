@@ -8,4 +8,12 @@ body {
   padding: 1.5rem 0;
 }
 
+.detail-table tbody tr th {
+  background-color: rgba($color: #000000, $alpha: 0.36);
+  text-align: center;
+  width: 30%;
+}
+.detail-table tbody tr td {
+  padding-left: 20px;
+}
 @import '../../node_modules/react-datetime/css/react-datetime';

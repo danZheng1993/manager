@@ -1,10 +1,10 @@
 import { Button, Table } from 'reactstrap'
 import React, { Component } from 'react'
+import Loader from '../../containers/Loader'
 import { deleteMedia, getMedias } from 'redux/modules/media'
-import { mediasListSelector, mediasParamsSelector } from 'redux/selectors'
+import { mediasListSelector, mediasParamsSelector, mediasloadingSelector } from 'redux/selectors'
 import constants from '../../constants'
 import { Link } from 'react-router-dom'
-import MdPersonAdd from 'react-icons/lib/md/person-add'
 import Pagination from 'components/Pagination'
 import PropTypes from 'prop-types'
 import ReportModal from 'containers/ReportModal'
@@ -16,10 +16,8 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { getDateTimeStr } from 'helpers'
 import { withRouter } from 'react-router'
-
 class MediasList extends Component {
   static propTypes = {
-    deleteMedia: PropTypes.func,
     getMedias: PropTypes.func,
     mediasList: PropTypes.array,
     history: PropTypes.object,
@@ -55,11 +53,12 @@ class MediasList extends Component {
   }
 
   render() {
-    const { mediasList, params } = this.props
+    const { mediasList, params, loading } = this.props
+
     const pagination = pick(params, ['page', 'page_size', 'count'])
-    console.log(">>>>>>>>>>>>>",mediasList,pagination)
     return (
       <div>
+        <Loader active={loading} />
         <h2 className='text-center mb-5'>Manage Medias</h2>
         <Table striped>
           <thead>
@@ -88,7 +87,7 @@ class MediasList extends Component {
                 <td>{getDateTimeStr(media.created)}</td>
                 <td>{media.title}</td>
                 <td className='text-right'>
-                  <Button color='primary' tag={Link} size='sm' to={`/medias/edit/${media._id}`}>
+                  <Button color='primary' tag={Link} size='sm' to={`/medias/view/${media._id}`}>
                   查看
                   </Button>
                   {' '}
@@ -101,7 +100,7 @@ class MediasList extends Component {
           </tbody>
         </Table>
         <Pagination pagination={pagination} setPagination={this.handlePagination} />
-        <ReportModal />
+        <ReportModal />    
       </div>
     )
   }
@@ -109,7 +108,8 @@ class MediasList extends Component {
 
 const selector = createStructuredSelector({
   mediasList: mediasListSelector,
-  params: mediasParamsSelector
+  params: mediasParamsSelector,
+  loading: mediasloadingSelector
 })
 
 const actions = {

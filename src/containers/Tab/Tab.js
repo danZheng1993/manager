@@ -21,12 +21,18 @@ class Tab extends React.Component {
 
     this.state = {
       isOpen: false,
-      pathname: '/'
+      pathname: '',
+      path: []
     }
   }
   componentWillMount() {
+    const { pathname } = this.state
+    const { location } = this.props
+    if (!pathname) {
+      this.setState({pathname: location.pathname, path: location.pathname.split('/')})
+    }
     this.unlisten = this.props.history.listen((location, action) => {
-      this.setState({pathname: location.pathname})
+      this.setState({pathname: location.pathname, path: location.pathname.split('/')})
     })
   }
   componentWillUnmount() {
@@ -52,24 +58,30 @@ class Tab extends React.Component {
   }
   render() {
     const { auth } = this.props
-
+    const { path } = this.state
+    console.log(path[3])
     return (
+      
       <div>
         {auth.me &&
         <Navbar style={{backgroundColor: '#f1f1f1'}} toggleable className="d-flex justify-content-between">
           <NavbarToggler right onClick={this.toggle} />
-            <Nav navbar>
-                <NavItem >
-                  <Link to='/records' className='nav-link' style={this.setActive('/records')}>
-                  VR详情
-                  </Link>
-                </NavItem>
-                <NavItem style={{backgroundColor: '#f1f1ff'}}>
-                  <Link to='/profile' className='nav-link' style={this.setActive('/profile')}>
-                  审核
-                  </Link>
-                </NavItem>
-            </Nav>
+            {path[3] ? (
+              path[1] == 'medias' && 
+                <Nav navbar>
+                  <NavItem >
+                    <Link to={`/medias/view/${path[3]}`} className='nav-link' style={this.setActive(`/medias/view/${path[3]}`)}>
+                    VR详情
+                    </Link>
+                  </NavItem>
+                  <NavItem style={{backgroundColor: '#f1f1ff'}}>
+                    <Link to={`/medias/edit/${path[3]}`} className='nav-link' style={this.setActive(`/medias/edit/${path[3]}`)}>
+                    审核
+                    </Link>
+                  </NavItem>
+                </Nav> 
+              ): <Nav navbar></Nav>
+            }
             <Nav navbar>
               <NavItem>
                 <Link to='/records' className='nav-link'>
