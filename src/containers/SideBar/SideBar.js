@@ -75,7 +75,7 @@ class SideBar extends React.Component {
                 </NavText>
               </NavItem>   
             </NavItem>
-            <NavItem eventKey="records">
+            <NavItem eventKey="medias">
               <NavIcon>
                 <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
               </NavIcon>

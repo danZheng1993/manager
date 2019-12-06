@@ -10,10 +10,12 @@ import Records from './Records'
 import Signup from './Signup'
 import Users from './Users'
 import Logs from './LogsList'
+import Medias from './Medias'
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
 import 'styles/core.scss'
 import SideBar from '../containers/SideBar/SideBar'
+import Tab from '../containers/Tab'
 
 const routes = ({ isAuthenticated }) => (
   <Router>
@@ -26,24 +28,29 @@ const routes = ({ isAuthenticated }) => (
         }}
       >
       {isAuthenticated && <SideBar />}
-      <Container className='main-content'>
-        <Route exact path='/' render={() => (
-          isAuthenticated ? (
-            <Redirect to="/dashboard"/>
-          ) : (
-            <Redirect to="/login"/>
-          )
-        )} />
-        <Route path='/login' component={userIsNotAuthenticatedRedir(Login)} />
-        <Route path='/signup' component={userIsNotAuthenticatedRedir(Signup)} />
-        <Route path='/dashboard' component={userIsAuthenticatedRedir(Dashboard)} />
-        <Route path='/profile' component={userIsAuthenticatedRedir(Profile)} />
-        <Route path='/users' component={userIsAuthenticatedRedir(
-          /*userIsAdminOrManagerRedir*/(Users)
-        )} />
-        <Route path='/records' component={userIsAuthenticatedRedir(Records)} />
-        <Route path='/logs' component={userIsAuthenticatedRedir(Logs)} />
-      </Container>
+
+        <div style={{marginLeft: '60px'}}>
+          <Tab />
+          <Container className='main-content'>
+            <Route exact path='/' render={() => (
+              isAuthenticated ? (
+                <Redirect to="/dashboard"/>
+              ) : (
+                <Redirect to="/login"/>
+              )
+            )} />
+            <Route path='/login' component={userIsNotAuthenticatedRedir(Login)} />
+            <Route path='/signup' component={userIsNotAuthenticatedRedir(Signup)} />
+            <Route path='/dashboard' component={userIsAuthenticatedRedir(Dashboard)} />
+            <Route path='/profile' component={userIsAuthenticatedRedir(Profile)} />
+            <Route path='/users' component={userIsAuthenticatedRedir(
+              /*userIsAdminOrManagerRedir*/(Users)
+            )} />
+            <Route path='/records' component={userIsAuthenticatedRedir(Records)} />
+            <Route path='/logs' component={userIsAuthenticatedRedir(Logs)} />
+            <Route path='/medias' component={userIsAuthenticatedRedir(Medias)} />
+          </Container>
+        </div>
       </div>
     </div>
   </Router>

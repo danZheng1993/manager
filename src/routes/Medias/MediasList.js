@@ -2,7 +2,7 @@ import { Button, Table } from 'reactstrap'
 import React, { Component } from 'react'
 import { deleteMedia, getMedias } from 'redux/modules/media'
 import { mediasListSelector, mediasParamsSelector } from 'redux/selectors'
-
+import constants from '../../constants'
 import { Link } from 'react-router-dom'
 import MdPersonAdd from 'react-icons/lib/md/person-add'
 import Pagination from 'components/Pagination'
@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
-import { ucFirst } from 'helpers'
+import { getDateTimeStr } from 'helpers'
 import { withRouter } from 'react-router'
 
 class MediasList extends Component {
@@ -61,39 +61,39 @@ class MediasList extends Component {
     return (
       <div>
         <h2 className='text-center mb-5'>Manage Medias</h2>
-        <div className='text-right mb-2'>
-          <Link to='/medias/new' className='btn btn-primary'>
-            <MdPersonAdd size='1.2em' /> Add a New Media
-          </Link>
-        </div>
         <Table striped>
           <thead>
             <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>phoneNumber</th>
-              <th>Role</th>
-              <th className='text-right'>Actions</th>
+              <th>编号</th>
+              <th>封面</th>
+              <th>标题</th>
+              <th>是否公开</th>
+              <th>审核状态</th>
+              <th>发布时间</th>
+              <th>推荐</th>
+              <th className='text-right'>操作</th>
             </tr>
           </thead>
           <tbody>
             {mediasList && mediasList.map((media, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
-                <td>{media.first_name} {media.last_name}</td>
-                <td>{media.phoneNumber}</td>
-                <td>{ucFirst(media.role)}</td>
+                <td>
+                  <img src={constants.MEDIA_BASE_URL + media.snapshot}    
+                  width="30" height="30" alt="snapshot" />
+                </td>
+                <td>{media.title}</td>
+                <td>{media.isPublic ? '是' : '否'}</td>
+                <td>{media.title}</td>
+                <td>{getDateTimeStr(media.created)}</td>
+                <td>{media.title}</td>
                 <td className='text-right'>
-                  <Button color='info' size='sm' onClick={this.handleViewReport(media)}>
-                    Report
-                  </Button>
-                  {' '}
                   <Button color='primary' tag={Link} size='sm' to={`/medias/edit/${media._id}`}>
-                    Edit
+                  查看
                   </Button>
                   {' '}
                   <Button color='danger' size='sm' onClick={this.handleDeleteMedia(media._id)}>
-                    Delete
+                  审核
                   </Button>
                 </td>
               </tr>

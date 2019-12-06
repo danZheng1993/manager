@@ -220,6 +220,9 @@ export const usersParamsSelector = (state) =>
   
 export const logsParamsSelector = (state) =>
   get(state, 'log.params', {})
+  
+export const mediasParamsSelector = (state) =>
+  get(state, 'media.params', {})
 
 export const usersloadingSelector = (state) =>
   get(state, 'user.loading', false)

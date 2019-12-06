@@ -8,10 +8,10 @@ import { Field, reduxForm } from 'redux-form'
 import { filter } from 'lodash'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { createMedia, getMedia, updateMedia, CREATE_USER, UPDATE_USER } from 'redux/modules/media'
+import { createMedia, getMedia, updateMedia, CREATE_MEDIA, UPDATE_MEDIA } from 'redux/modules/media'
 import { isAdmin, isManager } from 'helpers/roleHelpers'
 import { isFieldRequired, ucFirst } from 'helpers'
-import { requestFail, requestSuccess } from 'redux/api/request'
+import { requestFail, requestSuccess } from '../../redux/api/request'
 import * as selectors from 'redux/selectors'
 import InputField from 'components/InputField'
 
@@ -37,10 +37,10 @@ const getRoleOptions = ({ role }) =>
   filter(roleOptions, (item) => item.roles.includes(role))
 
 const requestIsFailed = ({ status }) =>
-  status === requestFail(CREATE_USER) || status === requestFail(UPDATE_USER)
+  status === requestFail(CREATE_MEDIA) || status === requestFail(UPDATE_MEDIA)
 
 const requestIsSuccess = ({ status }) =>
-  status === requestSuccess(CREATE_USER) || status === requestSuccess(UPDATE_USER)
+  status === requestSuccess(CREATE_MEDIA) || status === requestSuccess(UPDATE_MEDIA)
 
 class MediaEdit extends Component {
   static propTypes = {
