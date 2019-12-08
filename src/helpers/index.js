@@ -1,4 +1,9 @@
 import moment from 'moment'
+import React from 'react'
+
+import { requestFail, requestSuccess } from '../redux/api/request'
+import 'react-notifications/lib/notifications.css'
+import {NotificationManager} from 'react-notifications'
 
 export const isFieldRequired = value =>
   value ? undefined : 'This Field is Required.'
@@ -31,3 +36,27 @@ export const getDateTimeStr = (dateTime) =>
 
 export const getPageCount = ({ page_size, count }) =>
   Math.ceil(count / page_size)
+
+export const requestIsFailed = (status, action) =>
+{ return status === requestFail(action) }
+
+export const requestIsSuccess = (status, action) =>
+{ return status === requestSuccess(action) }
+
+export const  createNotification = (type, message) => {
+    switch (type) {
+      case 'info':
+        NotificationManager.info('message')
+        break
+      case 'success':
+        NotificationManager.success(message, 'Success!', 3000)
+        break
+      case 'warning':
+        NotificationManager.warning('Warning message', 'Close after 3000ms', 3000)
+        break
+      case 'error':
+        NotificationManager.error(message, 'Error!', 3000,)
+        break
+    }
+}
+

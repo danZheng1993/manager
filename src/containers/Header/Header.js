@@ -41,15 +41,9 @@ class Header extends React.Component {
           <NavbarToggler right onClick={this.toggle} />
           <NavbarBrand href="/">HVR后台业务管理系统</NavbarBrand>
            <Collapse isOpen={this.state.isOpen} navbar>
-            {auth.me
+            {auth.me && canManageUsers(auth.me)
             && <Nav className="ml-auto" navbar>
-              {canManageUsers(auth.me) && <NavItem>
-                <Link to='/users' className='nav-link'>
-                  users
-                </Link>
-              </NavItem>}
               <NavItem>
-                
                 <Link to='/profile' className='nav-link'>
                   <img src={constants.BASE_URL + auth.me.photo} 
                   width="28" height="28" style={{borderRadius: '50%'}} alt="avatar" />

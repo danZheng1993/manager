@@ -1,4 +1,4 @@
-import { Button, Table } from 'reactstrap'
+import { Button, Table, Row, Col, Label} from 'reactstrap'
 import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
 import { deleteMedia, getMedias } from 'redux/modules/media'
@@ -6,6 +6,7 @@ import { mediasListSelector, mediasParamsSelector, mediasloadingSelector } from 
 import constants from '../../constants'
 import { Link } from 'react-router-dom'
 import Pagination from 'components/Pagination'
+import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
 import ReportModal from 'containers/ReportModal'
 import { compose } from 'redux'
@@ -13,9 +14,34 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
-import { getDateTimeStr } from 'helpers'
+import { getDateTimeStr, getDateStr } from 'helpers'
 import { withRouter } from 'react-router'
+import DateTime from 'react-datetime'
+
+import InputField from 'components/InputField'
+import { Field, reduxForm } from 'redux-form'
+const checkOptions = [
+  {label: '全部', value: '' }, 
+  {label: '未审核', value: '未审核' }, 
+  {label: '审核通过', value: '审核通过' }, 
+  {label: '审核未通过', value: '审核未通过' }, 
+]
+const publicOptions = [
+  {label: '全部', value: '' }, 
+  {label: '公开', value: true }, 
+  {label: '不公开', value: false }, 
+]
 class MediasList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      startDate: '',
+      endDate: '',
+      title: '',
+      checkOption: '',
+      publicOption: ''
+    }
+  }
   static propTypes = {
     getMedias: PropTypes.func,
     mediasList: PropTypes.array,
@@ -37,14 +63,87 @@ class MediasList extends Component {
     })
   }
 
-  render() {
-    const { mediasList, params, loading } = this.props
+  handleFilter = () => {
+    const { getMedias, params } = this.props
+    const { title, checkOption, publicOption, startDate, endDate } = this.state
+    let filter = {}
+    if (title) filter['title'] = title
+    if (checkOption) filter['checkOption'] = checkOption
+    if (publicOption != '') filter['publicOption'] = publicOption
+    if (startDate) filter['startDate'] = startDate
+    if (endDate) filter['endDate'] = endDate
 
+    getMedias({
+      params: {
+        ...pick(params, ['page', 'page_size', 'count']),
+        filter
+      }
+    })
+  }
+
+  handleSelect =(date)  => {
+    console.log(date)
+    this.setState({selectionRange: date.selection})
+  }
+
+  render() {
+    const { mediasList, params, loading, handleSubmit } = this.props
+    const {startDate, endDate} = this.state
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
         <Loader active={loading} />
-        <h2 className='text-center mb-5'>Manage Medias</h2>
+        <Row className='text-right mb-3'>
+          <Col md={2} xs={12}>
+            <Input
+              label='title'
+              type='text'
+              placeholder='title'
+              onChange={(e) => this.setState({title: e.target.value})}
+              />
+            </Col>
+            <Col md={2}>
+              <Input
+                label='审核状态 : '
+                name='checkOption'
+                type='select'
+                options={checkOptions}
+                component={InputField}
+                onChange={(e) => this.setState({checkOption: e.target.value})}
+              />
+            </Col>
+            <Col md={2}>
+              <Input
+                label='审核状态 : '
+                name='publicOption'
+                type='select'
+                options={publicOptions}
+                component={InputField}
+                onChange={(e) => this.setState({publicOption: e.target.value})}
+                />
+            </Col>
+            <Col md={2} className="text-left">
+              <Label>StartDate :</Label>
+              <DateTime
+                placeholder='From'
+                dateFormat='YYYY-MM-DD'
+                timeFormat={false}
+                onChange={(startDate) => this.setState({startDate})}
+              />
+            </Col>
+            <Col md={2} className="text-left">
+            <Label>End Date :</Label>
+              <DateTime 
+                placeholder='From'
+                dateFormat='YYYY-MM-DD'
+                timeFormat={false}
+                onChange={(endDate) => this.setState({endDate})}
+              />
+            </Col>
+            <Col md={2}>
+            <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
+          </Col>
+        </Row>
         <Table striped>
           <thead>
             <tr>

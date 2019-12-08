@@ -233,3 +233,9 @@ export const myInvoiceSelector = (state) =>
 export const myJobsSelector = (state) =>
   get(state, 'job.myJobs', false)
 
+export const mediaStatusSelector = (state) =>
+  get(state, 'media.status', false)
+
+
+  export const mediaErrorSelector = (state) =>
+  get(state, 'media.error', false)

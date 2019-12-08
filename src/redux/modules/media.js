@@ -34,6 +34,7 @@ const initialState = {
     page_size: 10,
     page: 1
   },
+  error: null,
 }
 
 // ------------------------------------
@@ -59,7 +60,7 @@ export default handleActions({
     ...state,
     status: requestFail(GET_MEDIA),
     media: null,
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -85,7 +86,7 @@ export default handleActions({
   [requestFail(GET_MEDIAS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_MEDIAS),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -107,7 +108,7 @@ export default handleActions({
   [requestFail(CREATE_MEDIA)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_MEDIA),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -129,7 +130,7 @@ export default handleActions({
   [requestFail(UPDATE_MEDIA)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_MEDIA),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -155,7 +156,7 @@ export default handleActions({
   [requestFail(DELETE_MEDIA)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_MEDIA),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 

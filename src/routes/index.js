@@ -13,6 +13,8 @@ import Logs from './LogsList'
 import Medias from './Medias'
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
+import {NotificationContainer} from 'react-notifications'
+
 import 'styles/core.scss'
 import SideBar from '../containers/SideBar/SideBar'
 import Tab from '../containers/Tab'
@@ -20,6 +22,7 @@ import Tab from '../containers/Tab'
 const routes = ({ isAuthenticated }) => (
   <Router>
     <div>
+      <NotificationContainer />
       <Header />
       <div
         style={{
@@ -30,7 +33,7 @@ const routes = ({ isAuthenticated }) => (
       {isAuthenticated && <SideBar />}
 
         <div style={{marginLeft: '60px'}}>
-          <Tab />
+          { isAuthenticated && <Tab /> }
           <Container className='main-content'>
             <Route exact path='/' render={() => (
               isAuthenticated ? (
@@ -41,14 +44,14 @@ const routes = ({ isAuthenticated }) => (
             )} />
             <Route path='/login' component={userIsNotAuthenticatedRedir(Login)} />
             <Route path='/signup' component={userIsNotAuthenticatedRedir(Signup)} />
-            <Route path='/dashboard' component={userIsAuthenticatedRedir(Dashboard)} />
-            <Route path='/profile' component={userIsAuthenticatedRedir(Profile)} />
+            <Route path='/dashboard' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Dashboard))} />
+            <Route path='/profile' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Profile))} />
             <Route path='/users' component={userIsAuthenticatedRedir(
               /*userIsAdminOrManagerRedir*/(Users)
             )} />
-            <Route path='/records' component={userIsAuthenticatedRedir(Records)} />
-            <Route path='/logs' component={userIsAuthenticatedRedir(Logs)} />
-            <Route path='/medias' component={userIsAuthenticatedRedir(Medias)} />
+            <Route path='/records' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Records))} />
+            <Route path='/logs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Logs))} />
+            <Route path='/medias' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Medias))} />
           </Container>
         </div>
       </div>

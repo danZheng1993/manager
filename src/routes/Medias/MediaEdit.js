@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../containers/Loader'
 import constants from '../../constants'
-import { Col, Row, Table, Button } from 'reactstrap'
+import { Col, Row, Table, Button, Alert } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -10,8 +10,8 @@ import { withRouter } from 'react-router'
 import { getMedia, updateMedia } from 'redux/modules/media'
 import confirm from 'containers/ConfirmModal'
 import VrPlayer from 'react-vr-player'
-import { getDateTimeStr } from '../../helpers'
-import { mediaDetailSelector, mediasloadingSelector } from '../../redux/selectors'
+import { getDateTimeStr, requestIsFailed, requestIsSuccess, createNotification } from '../../helpers'
+import { mediaDetailSelector, mediasloadingSelector, mediaStatusSelector, mediaErrorSelector } from '../../redux/selectors'
 
 class MediaEdit extends Component {
   static propTypes = {
@@ -30,13 +30,23 @@ class MediaEdit extends Component {
     if (isAllowed) {
       confirm('确定审核通过?').then(
         () => {
-          updateMedia({ id, body: {isAllowed} })
+          updateMedia({ 
+            id,
+            body: {isAllowed},
+            success: () => createNotification('success',),
+            fail: (payload) => createNotification('error', payload.data.message) 
+           })
         }
       )
     } else {
       confirm('确定审核不通过?').then(
         () => {
-          updateMedia({ id, body: {isAllowed} })
+          updateMedia({ 
+            id, 
+            body: {isAllowed},
+            success: () => createNotification('success'),
+            fail: (payload) => createNotification('error', payload.data.message) 
+          })
         }
       )
     }
@@ -86,7 +96,7 @@ class MediaEdit extends Component {
 
 const selector = createStructuredSelector({
   media: mediaDetailSelector,
-  loading: mediasloadingSelector
+  loading: mediasloadingSelector,
 })
 
 const actions = {
