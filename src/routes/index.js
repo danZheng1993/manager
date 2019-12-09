@@ -18,6 +18,7 @@ import {NotificationContainer} from 'react-notifications'
 import 'styles/core.scss'
 import SideBar from '../containers/SideBar/SideBar'
 import Tab from '../containers/Tab'
+import Providers from './Providers'
 
 const routes = ({ isAuthenticated }) => (
   <Router>
@@ -52,6 +53,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/records' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Records))} />
             <Route path='/logs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Logs))} />
             <Route path='/medias' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Medias))} />
+            <Route path='/providers' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Providers))} />
           </Container>
         </div>
       </div>

@@ -90,11 +90,16 @@ class SideBar extends React.Component {
               <NavText>
                 用户管理
               </NavText>        
-              <NavItem eventKey="users">
+              <NavItem eventKey="providers">
                 <NavText>
                 服务方管理
                 </NavText>
               </NavItem>
+              <NavItem eventKey="">
+                <NavText>
+                需求方管理
+                </NavText>
+              </NavItem>   
               <NavItem eventKey="">
                 <NavText>
                 红包管理
@@ -103,11 +108,6 @@ class SideBar extends React.Component {
               <NavItem eventKey="">
                 <NavText>
                 合作公司添加
-                </NavText>
-              </NavItem>   
-              <NavItem eventKey="">
-                <NavText>
-                  账户设置
                 </NavText>
               </NavItem>   
             </NavItem>

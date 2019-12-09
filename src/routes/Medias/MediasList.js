@@ -14,12 +14,11 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
-import { getDateTimeStr, getDateStr } from 'helpers'
+import { getDateTimeStr } from 'helpers'
 import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 
 import InputField from 'components/InputField'
-import { Field, reduxForm } from 'redux-form'
 const checkOptions = [
   {label: '全部', value: '' }, 
   {label: '未审核', value: '未审核' }, 
@@ -39,7 +38,8 @@ class MediasList extends Component {
       endDate: '',
       title: '',
       checkOption: '',
-      publicOption: ''
+      publicOption: '',
+      filter: {}
     }
   }
   static propTypes = {
@@ -55,10 +55,12 @@ class MediasList extends Component {
 
   handlePagination = (pagination) => {
     const { getMedias, params } = this.props
+    const {filter} = this.state
     getMedias({
       params: {
         ...pick(params, ['page', 'page_size', 'count']),
-        ...pagination
+        ...pagination,
+        filter
       }
     })
   }
@@ -72,7 +74,7 @@ class MediasList extends Component {
     if (publicOption != '') filter['publicOption'] = publicOption
     if (startDate) filter['startDate'] = startDate
     if (endDate) filter['endDate'] = endDate
-
+    this.setState({filter})
     getMedias({
       params: {
         ...pick(params, ['page', 'page_size', 'count']),
@@ -87,8 +89,7 @@ class MediasList extends Component {
   }
 
   render() {
-    const { mediasList, params, loading, handleSubmit } = this.props
-    const {startDate, endDate} = this.state
+    const { mediasList, params, loading } = this.props
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
