@@ -3,13 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { withRouter } from 'react-router'
-import { Link } from 'react-router-dom'
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav'
+import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav'
 import '@trendmicro/react-sidenav/dist/react-sidenav.css'
-
-// import { Collapse, Container, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem }
-  // from 'reactstrap'
-import { canManageUsers } from 'helpers/roleHelpers'
 import { logout } from 'redux/modules/auth'
 
 
@@ -95,7 +90,7 @@ class SideBar extends React.Component {
                 服务方管理
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="clients">
                 <NavText>
                 需求方管理
                 </NavText>

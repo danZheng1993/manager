@@ -1,6 +1,4 @@
 import moment from 'moment'
-import React from 'react'
-
 import { requestFail, requestSuccess } from '../redux/api/request'
 import 'react-notifications/lib/notifications.css'
 import {NotificationManager} from 'react-notifications'
@@ -56,6 +54,8 @@ export const  createNotification = (type, message) => {
         break
       case 'error':
         NotificationManager.error(message, 'Error!', 3000,)
+        break
+      default :
         break
     }
 }

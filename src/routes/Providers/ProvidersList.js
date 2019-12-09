@@ -1,4 +1,4 @@
-import { Button, Table, Row, Col, Label} from 'reactstrap'
+import { Button, Table, Row, Col} from 'reactstrap'
 import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
 import { deleteUser, getUsers } from 'redux/modules/user'
@@ -15,7 +15,6 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 
-import InputField from 'components/InputField'
 const typeOptions = [
   {label: '全部', value: '' }, 
   {label: '合作方子公司', value: '合作方子公司' }, 
@@ -26,7 +25,7 @@ class UsersList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: '',
+      phoneNumber: '',
       typeOption: '',
       filter : {permission: 'ALLOWED', role: 'provider'}
     }
@@ -57,10 +56,10 @@ class UsersList extends Component {
 
   handleFilter = () => {
     const { getUsers, params } = this.props
-    const { title, checkOption } = this.state
+    const { phoneNumber, typeOption } = this.state
     let filter = {permission: 'ALLOWED', role: 'provider'}
-    if (title) filter['title'] = title
-    if (checkOption) filter['checkOption'] = checkOption
+    if (phoneNumber) filter['phoneNumber'] = phoneNumber
+    if (typeOption) filter['typeOption'] = typeOption
     this.setState({filter})
     getUsers({
       params: {
@@ -84,6 +83,12 @@ class UsersList extends Component {
     )
   }
 
+  handleKeyPress(target) {
+    if(target.charCode==13){
+      this.handleFilter()
+    } 
+  }
+
   render() {
     const { usersList, params, loading } = this.props
     const pagination = pick(params, ['page', 'page_size', 'count'])
@@ -93,25 +98,22 @@ class UsersList extends Component {
         <Row className='text-right mb-3'>
           <Col md={2} xs={12}>
             <Input
-              label='title'
+              label='输入搜索 :'
               type='text'
-              placeholder='title'
-              onChange={(e) => this.setState({title: e.target.value})}
+              placeholder='手机号/公司名称'
+              onChange={(e) => this.setState({phoneNumber: e.target.value})}
+              onKeyPress = {(e) => this.handleKeyPress(e)}
               />
             </Col>
             <Col md={2}>
               <Input
                 label='审核状态 : '
-                name='checkOption'
+                name='typeOption'
                 type='select'
                 options={typeOptions}
-                component={InputField}
                 onChange={(e) => this.setState({typeOption: e.target.value})}
               />
             </Col>
-           <Col md={2}>
-            <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
-          </Col>
         </Row>
         <Table striped>
           <thead>

@@ -1,11 +1,12 @@
 import React from 'react'
-import { FormFeedback, FormGroup, Input, Label } from 'reactstrap'
+import { Input, Label } from 'reactstrap'
 
 export default ({
   input,
   label,
   placeholder,
   onChange,
+  onKeyPress,
   options,
   type,
 }) => (
@@ -13,7 +14,7 @@ export default ({
     <Label>
       {label}
     </Label>
-    <Input {...input} placeholder={placeholder || label} type={type} onChange={onChange}>
+    <Input {...input} placeholder={placeholder || label} type={type} onChange={onChange} onKeyPress={onKeyPress}>
       {type === 'select' && options ? options.map((item, index) => (
         <option key={index} value={item.value}>{item.label}</option>
       )) : undefined}

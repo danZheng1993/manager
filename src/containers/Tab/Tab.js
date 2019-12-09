@@ -2,10 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import constants from '../../constants'
-import { Collapse, Container, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Row, Col, Button }
+import { Navbar, NavbarToggler, Nav, NavItem, Button }
   from 'reactstrap'
-import { canManageUsers } from 'helpers/roleHelpers'
 import { logout } from 'redux/modules/auth'
 import { withRouter } from 'react-router'
 import { compose } from 'redux'
@@ -66,7 +64,7 @@ class Tab extends React.Component {
         {auth.me &&
         <Navbar style={{backgroundColor: '#f1f1f1'}} toggleable className="d-flex justify-content-between">
           <NavbarToggler right onClick={this.toggle} />
-            { path[1] == 'medias' && path.length == 4 && 
+            { path[1] === 'medias' && path.length === 4 && 
                 <Nav navbar>
                   <NavItem >
                     <Link to={`/medias/view/${path[3]}`} className='nav-link' style={this.setActive(`/medias/view/${path[3]}`)}>
@@ -80,7 +78,7 @@ class Tab extends React.Component {
                   </NavItem>
                 </Nav> 
             }
-            { path[1] == 'providers' && path.length == 3 && 
+            { path[1] === 'providers' && path.length === 3 && 
                 <Nav navbar>
                   <NavItem >
                     <Link to={`/providers/allowed`} className='nav-link' style={this.setActive(`/providers/allowed`)}>
@@ -94,7 +92,7 @@ class Tab extends React.Component {
                   </NavItem>
                 </Nav> 
             }
-            { path[1] == 'providers' && path.length == 4 && 
+            { path[1] === 'providers' && path.length === 4 && 
               <Nav navbar>
                 <NavItem >
                   <Link to={`/providers/view/${path[3]}`} className='nav-link' style={this.setActive(`/providers/view/${path[3]}`)}>

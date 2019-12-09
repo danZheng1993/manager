@@ -19,6 +19,7 @@ import 'styles/core.scss'
 import SideBar from '../containers/SideBar/SideBar'
 import Tab from '../containers/Tab'
 import Providers from './Providers'
+import Clients from './Clients'
 
 const routes = ({ isAuthenticated }) => (
   <Router>
@@ -54,6 +55,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/logs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Logs))} />
             <Route path='/medias' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Medias))} />
             <Route path='/providers' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Providers))} />
+            <Route path='/clients' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Clients))} />
           </Container>
         </div>
       </div>
