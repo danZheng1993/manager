@@ -41,7 +41,7 @@ export const requestIsFailed = (status, action) =>
 export const requestIsSuccess = (status, action) =>
 { return status === requestSuccess(action) }
 
-export const  createNotification = (type, message) => {
+export const  createNotification = (type, message = '') => {
     switch (type) {
       case 'info':
         NotificationManager.info('message')

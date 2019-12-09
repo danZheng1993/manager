@@ -69,11 +69,6 @@ class UsersList extends Component {
     })
   }
 
-  handleSelect =(date)  => {
-    console.log(date)
-    this.setState({selectionRange: date.selection})
-  }
-
   handleDeleteUser = (id) => () => {
     const { deleteUser } = this.props
     confirm('Are you sure to delete the user?').then(

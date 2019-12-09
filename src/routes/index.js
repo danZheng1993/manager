@@ -11,15 +11,17 @@ import Signup from './Signup'
 import Users from './Users'
 import Logs from './LogsList'
 import Medias from './Medias'
+import Tab from '../containers/Tab'
+import Providers from './Providers'
+import Clients from './Clients'
+import Jobs from './Jobs'
+
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
 import {NotificationContainer} from 'react-notifications'
 
 import 'styles/core.scss'
 import SideBar from '../containers/SideBar/SideBar'
-import Tab from '../containers/Tab'
-import Providers from './Providers'
-import Clients from './Clients'
 
 const routes = ({ isAuthenticated }) => (
   <Router>
@@ -56,6 +58,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/medias' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Medias))} />
             <Route path='/providers' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Providers))} />
             <Route path='/clients' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Clients))} />
+            <Route path='/Jobs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Jobs))} />
           </Container>
         </div>
       </div>

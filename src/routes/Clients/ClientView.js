@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
 import { getUser } from 'redux/modules/user'
-import { searchJob } from 'redux/modules/job'
+import { getJobs } from 'redux/modules/job'
 import { userDetailSelector, usersloadingSelector, jobsloadingSelector, jobsSearchResultSelector } from '../../redux/selectors'
 import ClientProfile from './ClientProfile'
 
@@ -23,8 +23,8 @@ class UserView extends Component {
   };
 
   componentWillMount () {
-    const { getUser, match: { params }, searchJob } = this.props
-    params.id && getUser({ id: params.id, success: () => searchJob({body: {creator: params.id}}) })
+    const { getUser, match: { params }, getJobs } = this.props
+    params.id && getUser({ id: params.id, success: () => getJobs({body: {creator: params.id}}) })
   }  
   
   toggle = tab => {
@@ -58,7 +58,7 @@ const selector = createStructuredSelector({
 
 const actions = {
   getUser,
-  searchJob
+  getJobs
 }
 
 export default compose(

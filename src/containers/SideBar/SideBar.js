@@ -72,7 +72,7 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="medias">
               <NavIcon>
-                <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-video-camera" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
                 VR管理
@@ -80,7 +80,7 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="users">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-user-circle-o" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
                 用户管理
@@ -106,9 +106,9 @@ class SideBar extends React.Component {
                 </NavText>
               </NavItem>   
             </NavItem>
-            <NavItem eventKey="signup">
+            <NavItem eventKey="jobs">
               <NavIcon>
-                <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-th-list" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
                 订单管理
@@ -116,7 +116,7 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-newspaper-o" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               资讯管理
@@ -134,7 +134,7 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="users">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-pencil-square-o" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               合同管理
@@ -142,7 +142,7 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-credit-card-alt" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               发票管理
@@ -178,7 +178,7 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-bell" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               运营
@@ -248,7 +248,7 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-gear" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               设置

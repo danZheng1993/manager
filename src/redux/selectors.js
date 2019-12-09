@@ -223,6 +223,9 @@ export const logsParamsSelector = (state) =>
   
 export const mediasParamsSelector = (state) =>
   get(state, 'media.params', {})
+  
+export const jobsParamsSelector = (state) =>
+  get(state, 'job.params', {})
 
 export const usersloadingSelector = (state) =>
   get(state, 'user.loading', false)
