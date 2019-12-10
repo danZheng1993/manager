@@ -68,7 +68,6 @@ class NewssList extends Component {
   }
 
   handleSelect =(date)  => {
-    console.log(date)
     this.setState({selectionRange: date.selection})
   }
 
@@ -94,11 +93,10 @@ class NewssList extends Component {
   render() {
     const { newssList, params, loading } = this.props
     const pagination = pick(params, ['page', 'page_size', 'count'])
-    console.log(newssList)
     return (
       <div>
         <Loader active={loading} />
-        <Row className='text-right mb-3'>
+        <Row className='mb-3'>
           <Col md={2} xs={12}>
             <Input
               label='title'
@@ -138,7 +136,7 @@ class NewssList extends Component {
               <th>发布时间</th>
               <th>阅读数量</th>
               <th>设为banner展示</th>
-              <th className='text-right'>操作</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -150,7 +148,7 @@ class NewssList extends Component {
                 <td>{getDateTimeStr(news.created)}</td>
                 <td>{news.visits}</td>
                 <td><Switch onChange={() => this.handleChange(news._id, news.setBanner)} checked={news.setBanner} /></td>
-                <td className='text-right'>
+                <td>
                   <Button color='primary' tag={Link} size='sm' to={`/news/edit/${news._id}`}>
                   编辑
                   </Button>

@@ -68,7 +68,7 @@ class RecordsList extends Component {
     return (
       <div>
         <h2 className='text-center mb-5'>Manage Records</h2>
-        <Row className='text-right mb-3'>
+        <Row className='mb-3'>
           <Col md={6} xs={12}>
             <Form inline onSubmit={handleSubmit(this.handleFilter)}>
               <Field
@@ -105,7 +105,7 @@ class RecordsList extends Component {
               <th className='text-center'>Duration</th>
               <th className='text-center'>Distance</th>
               <th className='text-center'>Avg. Speed</th>
-              <th className='text-right'>Actions</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -119,7 +119,7 @@ class RecordsList extends Component {
                 <td className='text-center'>
                   {distanceUnit(record.distance / record.duration, '/s')}
                 </td>
-                <td className='text-right'>
+                <td>
                   <Link className='btn btn-primary btn-sm' to={`/records/edit/${record.id}`}>
                     Edit
                   </Link>

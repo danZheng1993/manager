@@ -90,7 +90,7 @@ class UsersList extends Component {
     return (
       <div>
         <Loader active={loading} />
-        <Row className='text-right mb-3'>
+        <Row className='mb-3'>
           <Col md={2} xs={12}>
             <Input
               label='输入搜索 :'
@@ -120,7 +120,7 @@ class UsersList extends Component {
               <th>所在城市</th>
               <th>公司名称</th>
               <th>总收入</th>
-              <th className='text-right'>操作</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -133,7 +133,7 @@ class UsersList extends Component {
                 <td>{user.location}</td>
                 <td>{user.companyName}</td>
                 <td>¥{user.balance}</td>
-                <td className='text-right'>
+                <td>
                   <Button color='primary' tag={Link} size='sm' to={`/providers/view/${user._id}`}>
                   查看
                   </Button>

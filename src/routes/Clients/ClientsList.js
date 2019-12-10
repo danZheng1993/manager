@@ -81,7 +81,7 @@ class UsersList extends Component {
     return (
       <div>
         <Loader active={loading} />
-        <Row className='text-right mb-3'>
+        <Row className='mb-3'>
           <Col md={2} xs={12}>
             <Input
               label='输入搜索 :'

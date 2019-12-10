@@ -61,7 +61,7 @@ class UsersList extends Component {
     return (
       <div>
         <h2 className='text-center mb-5'>Manage Users</h2>
-        <div className='text-right mb-2'>
+        <div className='mb-2'>
           <Link to='/users/new' className='btn btn-primary'>
             <MdPersonAdd size='1.2em' /> Add a New User
           </Link>
@@ -73,7 +73,7 @@ class UsersList extends Component {
               <th>Name</th>
               <th>phoneNumber</th>
               <th>Role</th>
-              <th className='text-right'>Actions</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -83,7 +83,7 @@ class UsersList extends Component {
                 <td>{user.first_name} {user.last_name}</td>
                 <td>{user.phoneNumber}</td>
                 <td>{ucFirst(user.role)}</td>
-                <td className='text-right'>
+                <td>
                   <Button color='info' size='sm' onClick={this.handleViewReport(user)}>
                     Report
                   </Button>

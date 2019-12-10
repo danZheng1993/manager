@@ -148,7 +148,7 @@ class UserEdit extends Component {
                   Cancel
                 </Link>
               </Col>
-              <Col className='text-right'>
+              <Col>
                 <Button color='primary' type='submit'>Save</Button>
               </Col>
             </Row>

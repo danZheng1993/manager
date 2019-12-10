@@ -94,7 +94,7 @@ class MediasList extends Component {
     return (
       <div>
         <Loader active={loading} />
-        <Row className='text-right mb-3'>
+        <Row className='mb-3'>
           <Col md={2} xs={12}>
             <Input
               label='title'
@@ -155,7 +155,7 @@ class MediasList extends Component {
               <th>审核状态</th>
               <th>发布时间</th>
               <th>推荐</th>
-              <th className='text-right'>操作</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -171,7 +171,7 @@ class MediasList extends Component {
                 <td>{media.title}</td>
                 <td>{getDateTimeStr(media.created)}</td>
                 <td>{media.title}</td>
-                <td className='text-right'>
+                <td>
                   <Button color='primary' tag={Link} size='sm' to={`/medias/view/${media._id}`}>
                   查看
                   </Button>
