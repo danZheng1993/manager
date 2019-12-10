@@ -1,7 +1,7 @@
 import { Button, Table, Row, Col, Label} from 'reactstrap'
 import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
-import { deleteNews, getNewss } from 'redux/modules/news'
+import { deleteNews, getNewss, updateNews } from 'redux/modules/news'
 import { newssListSelector, newssParamsSelector, newssloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
 import Pagination from 'components/Pagination'
@@ -13,7 +13,6 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
-import { show } from 'redux-modal'
 import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
@@ -82,13 +81,20 @@ class NewssList extends Component {
     )
   }
 
-  handleChange = () => {
-
+  handleChange = (id, value) => {
+    const {updateNews,} = this.props
+    updateNews({
+      id,
+      body: {setBanner: !value},
+      success: () => createNotification('success'),
+      fail: (payload) => createNotification('error', payload.data.message)
+    })
   }
 
   render() {
     const { newssList, params, loading } = this.props
     const pagination = pick(params, ['page', 'page_size', 'count'])
+    console.log(newssList)
     return (
       <div>
         <Loader active={loading} />
@@ -143,7 +149,7 @@ class NewssList extends Component {
                 <td>{news.title}</td>
                 <td>{getDateTimeStr(news.created)}</td>
                 <td>{news.visits}</td>
-                <td><Switch onChange={this.handleChange} checked={news.setBanner} /></td>
+                <td><Switch onChange={() => this.handleChange(news._id, news.setBanner)} checked={news.setBanner} /></td>
                 <td className='text-right'>
                   <Button color='primary' tag={Link} size='sm' to={`/news/edit/${news._id}`}>
                   编辑
@@ -173,7 +179,7 @@ const selector = createStructuredSelector({
 const actions = {
   getNewss,
   deleteNews,
-  show
+  updateNews
 }
 
 export default compose(

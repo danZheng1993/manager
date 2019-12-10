@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions'
 import { requestSuccess, requestFail, requestPending } from '../api/request'
 import { omit, reject } from 'lodash'
-
+import {refreshResult} from '../api/helpers'
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -124,6 +124,7 @@ export default handleActions({
     ...state,
     status: requestSuccess(UPDATE_NEWS),
     news: payload,
+    newss : refreshResult(state.newss, payload),
     error: null,
     loading: false
   }),
