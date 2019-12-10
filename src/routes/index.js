@@ -17,6 +17,7 @@ import Clients from './Clients'
 import Jobs from './Jobs'
 import News from './News'
 import Invoices from './Invoices'
+import Banners from './Banners'
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
@@ -60,9 +61,10 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/medias' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Medias))} />
             <Route path='/providers' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Providers))} />
             <Route path='/clients' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Clients))} />
-            <Route path='/Jobs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Jobs))} />
-            <Route path='/News' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(News))} />
-            <Route path='/Invoices' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Invoices))} />
+            <Route path='/jobs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Jobs))} />
+            <Route path='/news' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(News))} />
+            <Route path='/invoices' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Invoices))} />
+            <Route path='/banners' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Banners))} />
           </Container>
         </div>
       </div>

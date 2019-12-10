@@ -54,7 +54,7 @@ export const jobStateSelector = (state) =>
 export const jobsSearchResultSelector = (state) =>
   get(state, 'job.searchResult', [])
 
-  export const jobsFeedbackSelector = (state) =>
+export const jobsFeedbackSelector = (state) =>
   get(state, 'job.feedbacks', [])
 
 export const typeDetailSelector = (state) =>
@@ -63,7 +63,7 @@ export const typeDetailSelector = (state) =>
 export const typesListSelector = (state) =>
   get(state, 'type.types', [])
 
-  export const typesloadingSelector = (state) =>
+export const typesloadingSelector = (state) =>
   get(state, 'type.loading', false)
 
 export const typeStateSelector = (state) =>
@@ -75,7 +75,7 @@ export const settingDetailSelector = (state) =>
 export const settingsListSelector = (state) =>
   get(state, 'setting.settings', [])
 
-  export const settingsloadingSelector = (state) =>
+export const settingsloadingSelector = (state) =>
   get(state, 'setting.loading', false)
 
 export const settingStateSelector = (state) =>
@@ -97,10 +97,10 @@ export const logDetailSelector = (state) =>
   get(state, 'log.log', {})
 
 export const logsListSelector = (state) =>
-get(state, 'log.logs', [])
+  get(state, 'log.logs', [])
 
 export const logsloadingSelector = (state) =>
-get(state, 'log.loading', false)
+  get(state, 'log.loading', false)
 
 export const logStateSelector = (state) =>
   get(state, 'log', {})
@@ -137,7 +137,7 @@ export const feedbackDetailSelector = (state) =>
 export const feedbacksListSelector = (state) =>
   get(state, 'feedback.feedbacks', [])
 
-  export const feedbacksloadingSelector = (state) =>
+export const feedbacksloadingSelector = (state) =>
   get(state, 'feedback.loading', false)
 
 export const feedbackStateSelector = (state) =>
@@ -149,31 +149,31 @@ export const serviceDetailSelector = (state) =>
 export const servicesListSelector = (state) =>
   get(state, 'service.services', [])
 
-  export const servicesloadingSelector = (state) =>
+export const servicesloadingSelector = (state) =>
   get(state, 'service.loading', false)
 
 export const serviceStateSelector = (state) =>
   get(state, 'service', {})
 
-  export const chatDetailSelector = (state) =>
+export const chatDetailSelector = (state) =>
   get(state, 'chat.chat', {})
 
 export const chatsListSelector = (state) =>
   get(state, 'chat.chats', [])
 
-  export const chatsloadingSelector = (state) =>
+export const chatsloadingSelector = (state) =>
   get(state, 'chat.loading', false)
 
 export const chatStateSelector = (state) =>
   get(state, 'chat', {})
 
-  export const newsDetailSelector = (state) =>
+export const newsDetailSelector = (state) =>
   get(state, 'news.news', {})
 
 export const newssListSelector = (state) =>
   get(state, 'news.newss', [])
 
-  export const newssloadingSelector = (state) =>
+export const newssloadingSelector = (state) =>
   get(state, 'news.loading', false)
 
 export const newsStateSelector = (state) =>
@@ -188,7 +188,7 @@ export const bannerDetailSelector = (state) =>
 export const bannersListSelector = (state) =>
   get(state, 'banner.banners', [])
 
-  export const bannersloadingSelector = (state) =>
+export const bannersloadingSelector = (state) =>
   get(state, 'banner.loading', false)
 
 export const bannerStateSelector = (state) =>
@@ -200,7 +200,7 @@ export const subcategoryDetailSelector = (state) =>
 export const subcategorysListSelector = (state) =>
   get(state, 'subcategory.subcategorys', [])
 
-  export const subcategorysloadingSelector = (state) =>
+export const subcategorysloadingSelector = (state) =>
   get(state, 'subcategory.loading', false)
 
 export const subcategoryStateSelector = (state) =>
@@ -230,8 +230,11 @@ export const newssParamsSelector = (state) =>
 export const jobsParamsSelector = (state) =>
   get(state, 'job.params', {})
 
-  export const invoicesParamsSelector = (state) =>
+export const invoicesParamsSelector = (state) =>
   get(state, 'invoice.params', {})
+
+export const bannersParamsSelector = (state) =>
+  get(state, 'banner.params', {})
 
 export const usersloadingSelector = (state) =>
   get(state, 'user.loading', false)
@@ -245,6 +248,5 @@ export const myJobsSelector = (state) =>
 export const mediaStatusSelector = (state) =>
   get(state, 'media.status', false)
 
-
-  export const mediaErrorSelector = (state) =>
+export const mediaErrorSelector = (state) =>
   get(state, 'media.error', false)

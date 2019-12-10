@@ -160,24 +160,6 @@ class SideBar extends React.Component {
             </NavItem>
             <NavItem eventKey="">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
-              </NavIcon>
-              <NavText>
-              客服
-              </NavText>        
-              <NavItem eventKey="">
-                <NavText>
-                添加工单
-                </NavText>
-              </NavItem>
-              <NavItem eventKey="">
-                <NavText>
-                工单列表
-                </NavText>
-              </NavItem>    
-            </NavItem>
-            <NavItem eventKey="">
-              <NavIcon>
                 <i className="fa fa-fw fa-bell" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
@@ -199,12 +181,12 @@ class SideBar extends React.Component {
                 </NavText>
               </NavItem>    
               {/* 广告管理      */}
-              <NavItem eventKey="">
+              <NavItem eventKey="banners">
                 <NavText>
                 广告列表
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="banners/new">
                 <NavText>
                 添加广告
                 </NavText>

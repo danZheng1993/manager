@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions'
 import { requestSuccess, requestFail, requestPending } from '../api/request'
 import { omit, reject } from 'lodash'
-
+import {refreshResult} from '../api/helpers'
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -25,8 +25,16 @@ export const deleteBanner = createAction(DELETE_BANNER)
 const initialState = {
   banner: null,
   status: 'INIT',
-  banners: {},
+  banners: [],
   loading: false,
+  params: {
+    count: 0,
+    previous: null,
+    next: null,
+    page_size: 10,
+    page: 1
+  },
+  error: null,
 }
 
 // ------------------------------------
@@ -51,7 +59,8 @@ export default handleActions({
   [requestFail(GET_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_BANNER),
-    error: payload,
+    banner: null,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -65,7 +74,11 @@ export default handleActions({
   [requestSuccess(GET_BANNERS)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(GET_BANNERS),
-    banners: Object.values(payload),
+    banners: payload.banners,
+    params: {
+      ...state.params,
+      ...omit(payload, 'banners')
+    },
     error: null,
     loading: false
   }),
@@ -73,7 +86,8 @@ export default handleActions({
   [requestFail(GET_BANNERS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_BANNERS),
-    error: payload,
+    error: payload.data.message,
+    banners: null,
     loading: false
   }),
 
@@ -95,7 +109,7 @@ export default handleActions({
   [requestFail(CREATE_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_BANNER),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -110,6 +124,7 @@ export default handleActions({
     ...state,
     status: requestSuccess(UPDATE_BANNER),
     banner: payload,
+    banners : refreshResult(state.banners, payload),
     error: null,
     loading: false
   }),
@@ -117,7 +132,7 @@ export default handleActions({
   [requestFail(UPDATE_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_BANNER),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -131,7 +146,7 @@ export default handleActions({
   [requestSuccess(DELETE_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(DELETE_BANNER),
-    banners: reject(state.banners, { id: payload.id }),
+    banners: reject(state.banners, { _id: payload.id }),
     params: {
       ...state.params,
       count: Math.max(state.params.count - 1, 0),
@@ -143,7 +158,7 @@ export default handleActions({
   [requestFail(DELETE_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_BANNER),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
