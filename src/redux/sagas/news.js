@@ -15,8 +15,9 @@ const doGetNewss = apiCall({
   method: 'get',
   path: () => `/news/`,
   payloadOnSuccess: (res, { payload }) => ({
-    ...res,
-    payload
+    newss: res.newss,
+    count: res.count,
+    ...pick(get(payload, 'params', {}), ['page', 'page_size',]),
   })
 })
 

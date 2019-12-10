@@ -15,6 +15,7 @@ import Tab from '../containers/Tab'
 import Providers from './Providers'
 import Clients from './Clients'
 import Jobs from './Jobs'
+import News from './News'
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
@@ -49,7 +50,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/login' component={userIsNotAuthenticatedRedir(Login)} />
             <Route path='/signup' component={userIsNotAuthenticatedRedir(Signup)} />
             <Route path='/dashboard' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Dashboard))} />
-            <Route path='/profile' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Profile))} />
+            <Route path='/profile' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Profile))}s />
             <Route path='/users' component={userIsAuthenticatedRedir(
               /*userIsAdminOrManagerRedir*/(Users)
             )} />
@@ -59,6 +60,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/providers' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Providers))} />
             <Route path='/clients' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Clients))} />
             <Route path='/Jobs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Jobs))} />
+            <Route path='/News' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(News))} />
           </Container>
         </div>
       </div>

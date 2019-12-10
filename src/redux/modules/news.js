@@ -10,7 +10,6 @@ export const GET_NEWSS = 'GET_NEWSS'
 export const CREATE_NEWS = 'CREATE_NEWS'
 export const UPDATE_NEWS = 'UPDATE_NEWS'
 export const DELETE_NEWS = 'DELETE_NEWS'
-export const SEARCH_NEWS = 'SEARCH_NEWS'
 export const SET_NEWSS_PAGINATION = 'SET_NEWSS_PAGINATION'
 
 // ------------------------------------
@@ -21,7 +20,6 @@ export const getNews = createAction(GET_NEWS)
 export const getNewss = createAction(GET_NEWSS)
 export const createNews = createAction(CREATE_NEWS)
 export const updateNews = createAction(UPDATE_NEWS)
-export const searchNews = createAction(SEARCH_NEWS)
 export const deleteNews = createAction(DELETE_NEWS)
 
 const initialState = {
@@ -29,7 +27,14 @@ const initialState = {
   status: 'INIT',
   newss: [],
   loading: false,
-  searchResult: []
+  params: {
+    count: 0,
+    previous: null,
+    next: null,
+    page_size: 10,
+    page: 1
+  },
+  error: null,
 }
 
 // ------------------------------------
@@ -54,7 +59,8 @@ export default handleActions({
   [requestFail(GET_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_NEWS),
-    error: payload,
+    news: null,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -68,7 +74,11 @@ export default handleActions({
   [requestSuccess(GET_NEWSS)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(GET_NEWSS),
-    newss: Object.values(payload),
+    newss: payload.newss,
+    params: {
+      ...state.params,
+      ...omit(payload, 'newss')
+    },
     error: null,
     loading: false
   }),
@@ -76,29 +86,8 @@ export default handleActions({
   [requestFail(GET_NEWSS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_NEWSS),
-    error: payload,
-    loading: false
-  }),
-
-  [requestPending(SEARCH_NEWS)]: (state, { payload }) => ({
-    ...state,
-    status: requestPending(SEARCH_NEWS),
-    error: null,
-    loading: true,
-  }),
-
-  [requestSuccess(SEARCH_NEWS)]: (state, { payload }) => ({
-    ...state,
-    status: requestSuccess(SEARCH_NEWS),
-    searchResult: Object.values(payload),
-    error: null,
-    loading: false
-  }),
-
-  [requestFail(SEARCH_NEWS)]: (state, { payload }) => ({
-    ...state,
-    status: requestFail(SEARCH_NEWS),
-    error: payload,
+    error: payload.data.message,
+    newss: null,
     loading: false
   }),
 
@@ -120,7 +109,7 @@ export default handleActions({
   [requestFail(CREATE_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_NEWS),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -142,7 +131,7 @@ export default handleActions({
   [requestFail(UPDATE_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_NEWS),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -156,7 +145,7 @@ export default handleActions({
   [requestSuccess(DELETE_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(DELETE_NEWS),
-    newss: reject(state.newss, { id: payload.id }),
+    newss: reject(state.newss, { _id: payload.id }),
     params: {
       ...state.params,
       count: Math.max(state.params.count - 1, 0),
@@ -168,7 +157,7 @@ export default handleActions({
   [requestFail(DELETE_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_NEWS),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 

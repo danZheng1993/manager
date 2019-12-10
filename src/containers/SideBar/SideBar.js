@@ -114,19 +114,19 @@ class SideBar extends React.Component {
                 订单管理
               </NavText>
             </NavItem>
-            <NavItem eventKey="">
+            <NavItem eventKey="news">
               <NavIcon>
                 <i className="fa fa-fw fa-newspaper-o" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               资讯管理
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="news">
                 <NavText>
                 资讯管理
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="news/new">
                 <NavText>
                 发布资讯
                 </NavText>
