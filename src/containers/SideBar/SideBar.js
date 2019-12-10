@@ -140,19 +140,19 @@ class SideBar extends React.Component {
               合同管理
               </NavText>        
             </NavItem>
-            <NavItem eventKey="">
+            <NavItem eventKey="invoices">
               <NavIcon>
                 <i className="fa fa-fw fa-credit-card-alt" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               发票管理
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="invoices">
                 <NavText>
                 发票列表
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="invoices/pending">
                 <NavText>
                 发票申请列表
                 </NavText>

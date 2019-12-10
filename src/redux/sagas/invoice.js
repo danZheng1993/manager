@@ -1,6 +1,6 @@
 import { takeLatest } from 'redux-saga/effects'
 import { get, pick } from 'lodash'
-import { GET_INVOICE, GET_INVOICES, CREATE_INVOICE, UPDATE_INVOICE, DELETE_INVOICE, GET_MY_INVOICE }
+import { GET_INVOICE, GET_INVOICES, CREATE_INVOICE, UPDATE_INVOICE, DELETE_INVOICE }
   from '../modules/invoice'
 import apiCall from '../api/apiCall'
 
@@ -14,18 +14,17 @@ const doGetInvoices = apiCall({
   type: GET_INVOICES,
   method: 'get',
   path: () => `/invoices/`,
+  payloadOnSuccess: (res, { payload }) => ({
+    invoices: res.invoices,
+    count: res.count,
+    ...pick(get(payload, 'params', {}), ['page', 'page_size',]),
+  })
 })
 
 const doCreateInvoice = apiCall({
   type: CREATE_INVOICE,
   method: 'post',
   path: () => `/invoices/`
-})
-
-const doGetMyInvoice = apiCall({
-  type: GET_MY_INVOICE,
-  method: 'get',
-  path: () => `/invoices/me/`
 })
 
 const doUpdateInvoice = apiCall({
@@ -47,5 +46,4 @@ export default function* rootSaga () {
   yield takeLatest(CREATE_INVOICE, doCreateInvoice)
   yield takeLatest(UPDATE_INVOICE, doUpdateInvoice)
   yield takeLatest(DELETE_INVOICE, doDeleteInvoice)
-  yield takeLatest(GET_MY_INVOICE, doGetMyInvoice)
 }

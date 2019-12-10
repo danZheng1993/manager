@@ -1,7 +1,7 @@
 import { createAction, handleActions } from 'redux-actions'
 import { requestSuccess, requestFail, requestPending } from '../api/request'
 import { omit, reject } from 'lodash'
-import { refreshResult} from '../api/helpers'
+import {refreshResult} from '../api/helpers'
 // ------------------------------------
 // Constants
 // ------------------------------------
@@ -10,8 +10,6 @@ export const GET_INVOICES = 'GET_INVOICES'
 export const CREATE_INVOICE = 'CREATE_INVOICE'
 export const UPDATE_INVOICE = 'UPDATE_INVOICE'
 export const DELETE_INVOICE = 'DELETE_INVOICE'
-export const GET_MY_INVOICE = 'GET_MY_INVOICE'
-export const UPDATE_MY_INVOICELIST = 'UPDATE_MY_INVOICE_LIST'
 export const SET_INVOICES_PAGINATION = 'SET_INVOICES_PAGINATION'
 
 // ------------------------------------
@@ -23,15 +21,20 @@ export const getInvoices = createAction(GET_INVOICES)
 export const createInvoice = createAction(CREATE_INVOICE)
 export const updateInvoice = createAction(UPDATE_INVOICE)
 export const deleteInvoice = createAction(DELETE_INVOICE)
-export const getMyInvoice = createAction(GET_MY_INVOICE)
-export const updateMyInvoiceList = createAction(UPDATE_MY_INVOICELIST)
 
 const initialState = {
   invoice: null,
   status: 'INIT',
   invoices: [],
-  myInvoice: [],
   loading: false,
+  params: {
+    count: 0,
+    previous: null,
+    next: null,
+    page_size: 10,
+    page: 1
+  },
+  error: null,
 }
 
 // ------------------------------------
@@ -56,7 +59,8 @@ export default handleActions({
   [requestFail(GET_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_INVOICE),
-    error: payload,
+    invoice: null,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -70,15 +74,11 @@ export default handleActions({
   [requestSuccess(GET_INVOICES)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(GET_INVOICES),
-    invoices: Object.values(payload),
-    error: null,
-    loading: false
-  }),
-
-  [UPDATE_MY_INVOICELIST]: (state, {payload }) => ({
-    ...state,
-    status: UPDATE_MY_INVOICELIST,
-    myInvoice: refreshResult(state.myInvoice, payload),
+    invoices: payload.invoices,
+    params: {
+      ...state.params,
+      ...omit(payload, 'invoices')
+    },
     error: null,
     loading: false
   }),
@@ -86,29 +86,8 @@ export default handleActions({
   [requestFail(GET_INVOICES)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_INVOICES),
-    error: payload,
-    loading: false
-  }),
-
-  [requestPending(GET_MY_INVOICE)]: (state, { payload }) => ({
-    ...state,
-    status: requestPending(GET_MY_INVOICE),
-    error: null,
-    loading: true,
-  }),
-
-  [requestSuccess(GET_MY_INVOICE)]: (state, { payload }) => ({
-    ...state,
-    status: requestSuccess(GET_MY_INVOICE),
-    myInvoice: Object.values(payload),
-    error: null,
-    loading: false
-  }),
-
-  [requestFail(GET_MY_INVOICE)]: (state, { payload }) => ({
-    ...state,
-    status: requestFail(GET_MY_INVOICE),
-    error: payload,
+    error: payload.data.message,
+    invoices: null,
     loading: false
   }),
 
@@ -130,7 +109,7 @@ export default handleActions({
   [requestFail(CREATE_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_INVOICE),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -145,6 +124,7 @@ export default handleActions({
     ...state,
     status: requestSuccess(UPDATE_INVOICE),
     invoice: payload,
+    invoices : refreshResult(state.invoices, payload),
     error: null,
     loading: false
   }),
@@ -152,7 +132,7 @@ export default handleActions({
   [requestFail(UPDATE_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_INVOICE),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 
@@ -166,7 +146,7 @@ export default handleActions({
   [requestSuccess(DELETE_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(DELETE_INVOICE),
-    invoices: reject(state.invoices, { id: payload.id }),
+    invoices: reject(state.invoices, { _id: payload.id }),
     params: {
       ...state.params,
       count: Math.max(state.params.count - 1, 0),
@@ -178,7 +158,7 @@ export default handleActions({
   [requestFail(DELETE_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_INVOICE),
-    error: payload,
+    error: payload.data.message,
     loading: false
   }),
 

@@ -230,6 +230,9 @@ export const newssParamsSelector = (state) =>
 export const jobsParamsSelector = (state) =>
   get(state, 'job.params', {})
 
+  export const invoicesParamsSelector = (state) =>
+  get(state, 'invoice.params', {})
+
 export const usersloadingSelector = (state) =>
   get(state, 'user.loading', false)
 
