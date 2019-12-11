@@ -18,6 +18,7 @@ import Jobs from './Jobs'
 import News from './News'
 import Invoices from './Invoices'
 import Banners from './Banners'
+import Settings from './Settings'
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
@@ -65,6 +66,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/news' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(News))} />
             <Route path='/invoices' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Invoices))} />
             <Route path='/banners' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Banners))} />
+            <Route path='/settings' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
           </Container>
         </div>
       </div>

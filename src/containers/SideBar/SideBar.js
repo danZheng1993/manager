@@ -132,7 +132,7 @@ class SideBar extends React.Component {
                 </NavText>
               </NavItem>    
             </NavItem>
-            <NavItem eventKey="users">
+            <NavItem eventKey="contracts">
               <NavIcon>
                 <i className="fa fa-fw fa-pencil-square-o" style={{ fontSize: '1.75em' }} />
               </NavIcon>
@@ -158,7 +158,7 @@ class SideBar extends React.Component {
                 </NavText>
               </NavItem>    
             </NavItem>
-            <NavItem eventKey="">
+            <NavItem eventKey="banners">
               <NavIcon>
                 <i className="fa fa-fw fa-bell" style={{ fontSize: '1.75em' }} />
               </NavIcon>
@@ -192,73 +192,73 @@ class SideBar extends React.Component {
                 </NavText>
               </NavItem>
             </NavItem>
-            <NavItem eventKey="">
+            <NavItem eventKey="statistics">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               统计
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="statistics/transaction">
                 <NavText>
                 交易统计
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="statistics/search">
                 <NavText>
                 搜索统计
                 </NavText>
               </NavItem>    
             </NavItem>
-            <NavItem eventKey="">
+            <NavItem eventKey="financial">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-dollar" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               财务
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="financial">
                 <NavText>
                 综合统计
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="financial/list">
                 <NavText>
                 对账列表
                 </NavText>
               </NavItem>    
             </NavItem>
-            <NavItem eventKey="">
+            <NavItem eventKey="settings">
               <NavIcon>
                 <i className="fa fa-fw fa-gear" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               设置
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="settings">
                 <NavText>
                 启动页设置
                 </NavText>
               </NavItem>
-              <NavItem eventKey="">
+              <NavItem eventKey="settings/main">
                 <NavText>
                 基本设置
                 </NavText>
               </NavItem>    
-              <NavItem eventKey="">
+              <NavItem eventKey="settings/transaction">
                 <NavText>
                 交易信息
                 </NavText>
               </NavItem>    
             </NavItem>
-            <NavItem eventKey="">
+            <NavItem eventKey="permissions">
               <NavIcon>
-                <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                <i className="fa fa-fw fa-vcard" style={{ fontSize: '1.75em' }} />
               </NavIcon>
               <NavText>
               权限管理
               </NavText>        
-              <NavItem eventKey="">
+              <NavItem eventKey="permissions/">
                 <NavText>
                 部门管理
                 </NavText>
@@ -268,30 +268,12 @@ class SideBar extends React.Component {
                 成员管理
                 </NavText>
               </NavItem>    
-              <NavItem eventKey="">
+              <NavItem eventKey="database">
                 <NavText>
                 数据库管理
                 </NavText>
               </NavItem>    
             </NavItem>
-            <NavItem eventKey="charts">
-              <NavIcon>
-                <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
-              </NavIcon>
-              <NavText>
-                Charts
-              </NavText>
-              <NavItem eventKey="charts/linechart">
-                <NavText>
-                    Line Chart
-                </NavText>
-              </NavItem>
-              <NavItem eventKey="charts/barchart">
-                <NavText>
-                    Bar Chart
-                </NavText>
-              </NavItem>
-          </NavItem>
           </SideNav.Nav>
         </SideNav>
       </div>
