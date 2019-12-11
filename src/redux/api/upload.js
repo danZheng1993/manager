@@ -1,8 +1,7 @@
-import {AsyncStorage} from 'react-native'
-let baseURL = "http://192.168.31.207:4000/"
-var defaultHeader
-defaultHeaders = async () => {
-  var auth = await AsyncStorage.getItem('hvr_auth');
+import axios from 'axios'
+let baseURL = "http://192.168.0.101:4000/"
+const defaultHeaders = () => {
+  var auth = localStorage.getItem('hvr_auth')
   //axios.defaults.baseURL = process.env.API_ROOT + '/'
   var headers = {
     'Accept': '*/*',
@@ -12,20 +11,24 @@ defaultHeaders = async () => {
   if (auth) {
     const token = JSON.parse(auth).token
     headers['Authorization'] = 'Bearer ' + token
-    console.log('token', token)
   } 
-  return headers;
+  return headers
 }
 
-defaultHeaders().then((header => defaultHeader = header))
+const upload = (uri, method, file, body={}) => {
+  const data = new FormData()
+  console.log(file)
+  data.append("image", file)
+  Object.keys(body).forEach(key => {
+    data.append(key, body[key])
+  })
 
-let upload = (uri, method, data) => {
-  console.log("upload")
-  return fetch(baseURL + uri, {
-      method: method,
-      body: data,
-      headers:  Object.assign({}, defaultHeader)
-    })
+  return axios.request({
+    url: baseURL + uri,
+    method,
+    headers: Object.assign({}, defaultHeaders()),
+    data: data,
+  })
 }
 
-module.exports = upload;
+export default upload
