@@ -10,7 +10,6 @@ import { getSettings, updateSettings } from 'redux/modules/setting'
 import { isFieldRequired, createNotification } from 'helpers'
 import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
-import constants from '../../constants'
 
 class Settings extends Component {
   static propTypes = {

@@ -1,45 +1,140 @@
-import React from 'react'
-import { Button, ButtonGroup, Col, Jumbotron, Row } from 'reactstrap'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Button, Col, Row, Input} from 'reactstrap'
+import { compose } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { show } from 'redux-modal'
 import { createStructuredSelector } from 'reselect'
-import { canManageUsers } from 'helpers/roleHelpers'
-import { profileSelector } from 'redux/selectors'
-import ReportModal from 'containers/ReportModal'
-import './Dashboard.scss'
+import { withRouter } from 'react-router'
+import { createNotification } from 'helpers'
+import {settingsListSelector} from '../../redux/selectors'
+import {getSettings} from '../../redux/modules/setting'
+import uploadFile from '../../redux/api/upload'
+import constants from '../../constants'
+import Card from './Card'
 
-const Dashboard = ({ profile, show }) => (
-  <Row>
-    <Col xs={12} md={{ size: 6, offset: 3 }}>
-      <Jumbotron>
-        <h1>Welcome, {profile.first_name}!</h1>
-        <p className="lead">
-          Thanks for using HVR SYSTEM. <br />
-          Please use the following navigations to use this app.
-        </p>
-        <ButtonGroup vertical className='btn-block'>
-          {canManageUsers(profile) &&
-            <Button tag={Link} to='/users' className='text-left'>Manage Users</Button>
-          }
-          <Button tag={Link} to='/records' className='text-left'>
-            Manage Records
-          </Button>
-          <Button onClick={()=> show('reportModal')} className='text-left'>View My Report</Button>
-          <Button tag={Link} to='/profile' className='text-left'>Edit Your Profile</Button>
-        </ButtonGroup>
-      </Jumbotron>
-      <ReportModal user={profile} />
-    </Col>
-  </Row>
-)
+class Dashboard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      file: '',
+      imagePreviewUrl: ''
+    }
+  }
+
+  static propTypes = {
+    settings: PropTypes.object,
+  }
+
+  componentWillMount () {
+    const { getSettings } = this.props
+    getSettings(
+      {success: (payload) => this.setState({imagePreviewUrl: constants.BASE_URL + payload.data.splash})}
+    )
+  }
+
+  handleSave = () => {
+    const {file} = this.state
+    if (!file)  return
+    uploadFile('settings/splash', 'post', file, {})
+      .then(() => createNotification('success'),)
+      .catch(err => createNotification('error', 'Error!'))
+  }
+
+  handleImageChange = (e)  => {
+    e.preventDefault()
+
+    let reader = new FileReader()
+    let file = e.target.files[0]
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      })
+    }
+    file && reader.readAsDataURL(file)
+    console.log(file, reader.result)
+  }
+
+
+  render() {
+    const {settings} = this.props
+    let {imagePreviewUrl} = this.state
+    console.log("settings", settings)
+    return (
+      <div>
+        <Row>
+          <Col sm={3}>
+            <Card title="今日订单总数" value="200" icon="fa-book"/>
+          </Col>
+          <Col sm={3}>
+            <Card title="今日交易总额" value="¥999999.00" icon="fa-dollar"/>
+          </Col>
+          <Col sm={3}>
+            <Card title="昨日交易总额" value="¥999999.00" icon="fa-database"/>
+          </Col>
+          <Col sm={3}>
+            <Card title="近7天交易总额" value="¥999999.00" icon="fa-line-chart"/>
+          </Col>
+        </Row>
+        <div className="card-box">
+          <p className="title">用户总览</p>
+          <Row>
+          <Col sm={6}>
+            <p className="text-center">需求方总览</p>
+            <Row>
+              <Col sm={4} className="text-center">
+                <p className="important-value">100</p>
+                <p className="">今日新增</p>
+              </Col>
+              <Col sm={4} className="text-center">
+                <p className="important-value">200</p>
+                <p className="">昨日新增</p>
+              </Col>
+              <Col sm={4} className="text-center">
+                <p className="important-value">1000</p>
+                <p className="">本月新增</p>
+              </Col>
+            </Row>
+          </Col>
+          <Col sm={6}>
+            <p className="text-center">服务方总览</p>
+            <Row>
+              <Col sm={4} className="text-center">
+                <p className="important-value">100</p>
+                <p className="">今日新增</p>
+              </Col>
+              <Col sm={4} className="text-center">
+                <p className="important-value">200</p>
+                <p className="">昨日新增</p>
+              </Col>
+              <Col sm={4} className="text-center">
+                <p className="important-value">1000</p>
+                <p className="">本月新增</p>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        </div>
+        <Row>
+          <Col sm={12} md={{ size: 10, offset: 1 }}>          
+            
+          </Col>
+        </Row>
+      </div>
+    )
+  }
+}
 
 const selector = createStructuredSelector({
-  profile: profileSelector
+  settings: settingsListSelector
 })
 
 const actions = {
-  show
+  getSettings
 }
 
-export default connect(selector, actions)(Dashboard)
+export default compose(
+  connect(selector, actions),
+  withRouter
+)(Dashboard)

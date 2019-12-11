@@ -16,7 +16,42 @@ body {
   box-sizing: border-box;
 }
 .description {
-  color: #797979;
+  color: #B7B7B7;
+}
+
+.card-title {
+  font-size: 18px;
+  color: #B7B7B7;
+  margin: 2px;
+}
+
+.card-value {
+  font-size: 18px;
+  color: #3C3C3C;
+  margin: 2px;
+}
+
+.card-image {
+  font-size: 40px;
+  color: lime;
+  text-align: center;
+}
+
+.title {
+  background-color: #F2F2F2;
+  padding: 10px;
+}
+
+.card-box {
+  border-color: #C6C6C6;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 20px;
+}
+
+.important-value {
+  color: #FD3535;
+  font-size: 20px;
 }
 .editor {
   height: 300px;
