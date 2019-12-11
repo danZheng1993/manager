@@ -34,14 +34,14 @@ const routes = ({ isAuthenticated }) => (
       <Header />
       <div
         style={{
-            position: 'relative',
-            height: 'calc(100vh - 60px)'
+          position: 'relative',
+          height: 'calc(100vh - 60px)',
         }}
-      >
-      {isAuthenticated && <SideBar />}
-
+        >
+        {isAuthenticated && <SideBar />}
         <div style={{marginLeft: '60px'}}>
           { isAuthenticated && <Tab /> }
+          <div style={{overflow : 'auto', height: 'calc(100vh - 120px)',}}>
           <Container className='main-content'>
             <Route exact path='/' render={() => (
               isAuthenticated ? (
@@ -68,6 +68,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/banners' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Banners))} />
             <Route path='/settings' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
           </Container>
+          </div>
         </div>
       </div>
     </div>

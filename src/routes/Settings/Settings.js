@@ -1,191 +1,149 @@
-import { Button, Table, Row, Col, Label} from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { deleteBanner, getBanners, updateBanner } from 'redux/modules/banner'
-import { bannersListSelector, bannersParamsSelector, bannersloadingSelector } from 'redux/selectors'
-import { Link } from 'react-router-dom'
-import Pagination from 'components/Pagination'
-import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
-import ReportModal from 'containers/ReportModal'
-import confirm from 'containers/ConfirmModal'
+import { Button, Col, Form, Row} from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { pick } from 'lodash'
-import { getDateTimeStr, createNotification } from 'helpers'
+import { Field, reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
-import DateTime from 'react-datetime'
-import Switch from 'react-switch'
+import { getSettings, updateSettings } from 'redux/modules/setting'
+import { isFieldRequired, createNotification } from 'helpers'
+import InputField from 'components/InputField'
+import * as selectors from 'redux/selectors'
 import constants from '../../constants'
-class BannersList extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      startDate: '',
-      endDate: '',
-      title: '',
-      filter: {}
-    }
-  }
+
+class Settings extends Component {
   static propTypes = {
-    getBanners: PropTypes.func,
-    bannersList: PropTypes.array,
+    getSettings: PropTypes.func,
+    handleSubmit: PropTypes.func,
     history: PropTypes.object,
-  };
+    initialValues: PropTypes.object,
+    updateSettings: PropTypes.func,
+    settingsState: PropTypes.object
+  }
 
   componentWillMount () {
-    const { getBanners, params } = this.props
-    getBanners({ params })
+    const { getSettings } = this.props
+    getSettings()
   }
 
-  handlePagination = (pagination) => {
-    const { getBanners, params } = this.props
-    const {filter} = this.state
-    getBanners({
-      params: {
-        ...pick(params, ['page', 'page_size', 'count']),
-        ...pagination,
-        filter
-      }
-    })
-  }
-
-  handleFilter = () => {
-    const { getBanners, params } = this.props
-    const { title, checkOption, publicOption, startDate, endDate } = this.state
-    let filter = {}
-    if (title) filter['title'] = title
-    if (startDate) filter['startDate'] = startDate
-    if (endDate) filter['endDate'] = endDate
-    this.setState({filter})
-    getBanners({
-      params: {
-        ...pick(params, ['page', 'page_size', 'count']),
-        filter
-      }
-    })
-  }
-
-  handleSelect =(date)  => {
-    this.setState({selectionRange: date.selection})
-  }
-
-  handleDelete = (id) => () => {
-    const { deleteBanner } = this.props
-    confirm('Are you sure to delete the Banner?').then(
-      () => {
-        deleteBanner({ id, success: () => createNotification('success') , fail: (payload) =>  createNotification('error', payload.data.message) })
-      }
-    )
-  }
-
-  handleChange = (id, value) => {
-    const {updateBanner,} = this.props
-    updateBanner({
-      id,
-      body: {status: !value},
+  handleSave = (values) => {
+    const { updateSettings } = this.props
+    updateSettings({
+      body: values,
       success: () => createNotification('success'),
       fail: (payload) => createNotification('error', payload.data.message)
     })
   }
-
+  
   render() {
-    const { bannersList, params, loading } = this.props
-    const pagination = pick(params, ['page', 'page_size', 'count'])
+    const { handleSubmit, initialValues} = this.props
     return (
-      <div>
-        <Loader active={loading} />
-        <Row className='mb-3'>
-          <Col md={2} xs={12}>
-            <Input
-              label='title'
+      <Row>
+        <Col sm={12} md={{ size: 10, offset: 1 }}>          
+          <h2 className='mb-5'>
+            常规设置
+          </h2>
+          <Form onSubmit={handleSubmit(this.handleSave)}>
+            <Field
+              label='热门搜索关键字'
+              name='popularSearch'
               type='text'
-              placeholder='title'
-              onChange={(e) => this.setState({title: e.target.value})}
-              />
-            </Col>
-            <Col md={2} className="text-left">
-              <Label>StartDate :</Label>
-              <DateTime
-                placeholder='From'
-                dateFormat='YYYY-MM-DD'
-                timeFormat={false}
-                onChange={(startDate) => this.setState({startDate})}
-              />
-            </Col>
-            <Col md={2} className="text-left">
-            <Label>End Date :</Label>
-              <DateTime 
-                placeholder='From'
-                dateFormat='YYYY-MM-DD'
-                timeFormat={false}
-                onChange={(endDate) => this.setState({endDate})}
-              />
-            </Col>
-            <Col md={2}>
-            <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
-          </Col>
-        </Row>
-        <Table striped>
-          <thead>
-            <tr>
-              <th>选择</th>
-              <th>编号</th>
-              <th>广告名称</th>
-              <th>广告图片</th>
-              <th>开始时间</th>
-              <th>到期时间</th>
-              <th>上线/下线</th>
-              <th>操作</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bannersList && bannersList.map((banner, index) => (
-              <tr key={index}>
-                <th scope='row'>{index + 1}</th>
-                <td scope='row'>{index + 1}</td>
-                <td>{banner.title}</td>
-                <td>
-                  <img src={constants.BANNER_BASE_URL + banner.image}    
-                  width="30" height="30" alt="banner" />
-                </td>
-                <td>{getDateTimeStr(banner.from)}</td>
-                <td>{getDateTimeStr(banner.to)}</td>
-                <td><Switch onChange={() => this.handleChange(banner._id, banner.status)} checked={banner.status} /></td>
-                <td>
-                  <Button color='primary' tag={Link} size='sm' to={`/banners/edit/${banner._id}`}>
-                  编辑
-                  </Button>
-                  {' '}
-                  <Button color='danger' size='sm' onClick={this.handleDelete(banner._id)}>
-                  删除
-                  </Button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-        <Pagination pagination={pagination} setPagination={this.handlePagination} />
-        <ReportModal />    
-      </div>
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <p className="description">热门搜索关键字,请用半角逗号(,)分隔多个关键字</p>
+            <Field
+              label='首付款比例设置'
+              name='upfrontRate'
+              type='number'
+              min={0}
+              max={100}
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <Field
+              label='平台提点设置'
+              name='feeRate'
+              type='number'
+              min={0}
+              max={100}
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <h2>发布需求设置</h2>
+            <Field
+              label='服务类别设置'
+              name='type'
+              type='text'
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <p className="description">请用半角逗号(,)分隔多个选项</p>
+            <Field
+              label='拍摄场景设置'
+              name='scene'
+              type='text'
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <p className="description">请用半角逗号(,)分隔多个选项</p>
+            <Field
+              label='行业类别设置'
+              name='subcategory'
+              type='text'
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <p className="description">请用半角逗号(,)分隔多个选项</p>
+            <Field
+              label='全景制作单个镜头预估价格设置'
+              name='panoramaPrice'
+              type='number'
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <Field
+              label='VR直播每小时预估价格设置'
+              name='liveVRHourlyPrice'
+              type='number'
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <Row>
+              <Col>
+                <Button color='primary' type='submit'>Save</Button>
+              </Col>
+            </Row>
+          </Form>
+        </Col>
+      </Row>
     )
   }
 }
 
 const selector = createStructuredSelector({
-  bannersList: bannersListSelector,
-  params: bannersParamsSelector,
-  loading: bannersloadingSelector
+  initialValues: (state) => selectors.settingsListSelector(state),
 })
 
 const actions = {
-  getBanners,
-  deleteBanner,
-  updateBanner
+  getSettings,
+  updateSettings
 }
 
 export default compose(
   connect(selector, actions),
+  reduxForm({
+    form: 'settingsForm',
+    enableReinitialize: true,
+  }),
   withRouter
-)(BannersList)
+)(Settings)
