@@ -14,6 +14,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
+import { getDateTimeStr, createNotification } from '../../helpers'
 
 class UsersList extends Component {
   constructor(props) {
@@ -65,7 +66,9 @@ class UsersList extends Component {
     const { deleteUser } = this.props
     confirm('Are you sure to delete the user?').then(
       () => {
-        deleteUser({ id })
+        deleteUser({ id, 
+          success: () => createNotification('success'),
+          fail: (payload) => createNotification('error', payload.data.message)})
       }
     )
   }
@@ -108,7 +111,7 @@ class UsersList extends Component {
                 <th scope='row'>{index + 1}</th>
                 <th scope='row'>{index + 1}</th>
                 <td>{user.phoneNumber}</td>
-                <td>{user.created}</td>
+                <td>{getDateTimeStr(user.created)}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/clients/view/${user._id}`}>
                   查看

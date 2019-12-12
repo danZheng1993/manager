@@ -8,9 +8,9 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
 import { getUser } from 'redux/modules/user'
-import { getJobs } from 'redux/modules/job'
-import { userDetailSelector, usersloadingSelector, jobsloadingSelector, jobsSearchResultSelector } from '../../redux/selectors'
+import { userDetailSelector, usersloadingSelector } from '../../redux/selectors'
 import ProviderProfile from './ProviderProfile'
+import MyJobsList from '../Jobs/MyJobsList'
 
 class UserView extends Component {
   constructor(props) {
@@ -25,8 +25,8 @@ class UserView extends Component {
   };
 
   componentWillMount () {
-    const { getUser, match: { params }, searchJob } = this.props
-    params.id && getUser({ id: params.id, success: () => getJobs({body: {hired: params.id}}) })
+    const { getUser, match: { params } } = this.props
+    params.id && getUser({ id: params.id})
   }  
   
   toggle = tab => {
@@ -34,9 +34,8 @@ class UserView extends Component {
   }
 
   render() {
-    const { user, loading, jobs} = this.props
+    const { user, loading, match: { params }} = this.props
     const {activeTab} = this.state
-    console.log(jobs)
     return (
       <div>
         <Loader active={loading} />
@@ -64,7 +63,7 @@ class UserView extends Component {
             </Nav>
             <TabContent activeTab={activeTab}>
               <TabPane tabId="1">
-                <p>JobsList</p>
+                <MyJobsList filter={{hired: params.id}}/>
               </TabPane>
               <TabPane tabId="2">
                 <p>Payment History</p>
@@ -80,13 +79,11 @@ class UserView extends Component {
 
 const selector = createStructuredSelector({
   user: userDetailSelector,
-  loading: usersloadingSelector || jobsloadingSelector,
-  jobs: jobsSearchResultSelector,
+  loading: usersloadingSelector,
 })
 
 const actions = {
   getUser,
-  getJobs
 }
 
 export default compose(

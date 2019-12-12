@@ -184,7 +184,7 @@ export default handleActions({
   [requestSuccess(DELETE_USER)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(DELETE_USER),
-    users: reject(state.users, { id: payload.id }),
+    users: reject(state.users, { _id: payload.id }),
     params: {
       ...state.params,
       count: Math.max(state.params.count - 1, 0),

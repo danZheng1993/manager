@@ -78,7 +78,7 @@ class Dashboard extends Component {
           </Col>
         </Row>
         <div className="card-box">
-          <p className="title">用户总览</p>
+          <p className="box-title">用户总览</p>
           <Row>
           <Col sm={6}>
             <p className="text-center">需求方总览</p>
