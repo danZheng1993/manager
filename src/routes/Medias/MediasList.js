@@ -1,7 +1,7 @@
 import { Button, Table, Row, Col, Label} from 'reactstrap'
 import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
-import { deleteMedia, getMedias } from 'redux/modules/media'
+import { updateMedia, getMedias } from 'redux/modules/media'
 import { mediasListSelector, mediasParamsSelector, mediasloadingSelector } from 'redux/selectors'
 import constants from '../../constants'
 import { Link } from 'react-router-dom'
@@ -13,12 +13,12 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
-import { show } from 'redux-modal'
-import { getDateTimeStr } from 'helpers'
+import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
-
+import Switch from 'react-switch'
 import InputField from 'components/InputField'
+
 const checkOptions = [
   {label: '全部', value: '' }, 
   {label: '未审核', value: '未审核' }, 
@@ -51,6 +51,16 @@ class MediasList extends Component {
   componentWillMount () {
     const { getMedias, params } = this.props
     getMedias({ params })
+  }
+  
+  handleChange = (id, value) => {
+    const {updateMedia} = this.props
+    updateMedia({
+      id,
+      body: {recommend: !value},
+      success: () => createNotification('success'),
+      fail: (payload) => createNotification('error', payload.data.message)
+    })
   }
 
   handlePagination = (pagination) => {
@@ -170,7 +180,7 @@ class MediasList extends Component {
                 <td>{media.isPublic ? '是' : '否'}</td>
                 <td>{media.title}</td>
                 <td>{getDateTimeStr(media.created)}</td>
-                <td>{media.title}</td>
+                <td><Switch onChange={() => this.handleChange(media._id, media.recommend)} checked={media.recommend} /></td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/medias/view/${media._id}`}>
                   查看
@@ -199,8 +209,7 @@ const selector = createStructuredSelector({
 
 const actions = {
   getMedias,
-  deleteMedia,
-  show
+  updateMedia,
 }
 
 export default compose(

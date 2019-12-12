@@ -1,11 +1,10 @@
 import { Button, Table, Row, Col} from 'reactstrap'
 import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
-import { deleteJob, getJobs } from 'redux/modules/job'
+import { getJobs } from 'redux/modules/job'
 import { jobsListSelector, jobsParamsSelector, jobsloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
 import Pagination from 'components/Pagination'
-import confirm from 'containers/ConfirmModal'
 import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
@@ -66,7 +65,7 @@ class JobsList extends Component {
   }
 
   handleKeyPress(target) {
-    if(target.charCode==13){
+    if(target.charCode===13){
       this.handleFilter()
     } 
   }

@@ -1,6 +1,7 @@
 import { createAction, handleActions } from 'redux-actions'
 import { requestSuccess, requestFail, requestPending } from '../api/request'
 import { omit, reject } from 'lodash'
+import {refreshResult} from '../api/helpers'
 
 // ------------------------------------
 // Constants
@@ -122,7 +123,7 @@ export default handleActions({
   [requestSuccess(UPDATE_MEDIA)]: (state, { payload }) => ({
     ...state,
     status: requestSuccess(UPDATE_MEDIA),
-    media: payload,
+    medias: refreshResult(state.medias, payload),
     error: null,
     loading: false
   }),
