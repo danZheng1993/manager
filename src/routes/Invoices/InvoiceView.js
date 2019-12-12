@@ -48,7 +48,7 @@ class InvoiceView extends Component {
           </Table>
           <h2 className='text-left mb-5'>发票图片</h2>
           
-          <img src={constants.MEDIA_BASE_URL + invoice.path}    
+          <img src={constants.INVOICE_BASE_URL + invoice.path}    
                   width="100%" height="90%" alt="invoice" />
         </div>
         }

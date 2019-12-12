@@ -11,13 +11,42 @@ import {getSettings} from '../../redux/modules/setting'
 import uploadFile from '../../redux/api/upload'
 import constants from '../../constants'
 import Card from './Card'
+import DateRangePicker from '../../components/DateRangePicker'
+import {
+  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
+} from 'recharts'
 
+const data = [
+  {
+    name: 'Page A', uv: 4000, pv: 2400, amt: 2400,
+  },
+  {
+    name: 'Page B', uv: 3000, pv: 1398, amt: 2210,
+  },
+  {
+    name: 'Page C', uv: 2000, pv: 9800, amt: 2290,
+  },
+  {
+    name: 'Page D', uv: 2780, pv: 3908, amt: 2000,
+  },
+  {
+    name: 'Page E', uv: 1890, pv: 4800, amt: 2181,
+  },
+  {
+    name: 'Page F', uv: 2390, pv: 3800, amt: 2500,
+  },
+  {
+    name: 'Page G', uv: 3490, pv: 4300, amt: 2100,
+  },
+]
 class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
       file: '',
-      imagePreviewUrl: ''
+      imagePreviewUrl: '',
+      startDate: '',
+      endDate: ''
     }
   }
 
@@ -25,6 +54,12 @@ class Dashboard extends Component {
     settings: PropTypes.object,
   }
 
+  onChangeRange = (picker) => {
+    this.setState({
+      startDate: picker.startDate,
+      endDate: picker.endDate,
+    })
+  }
   componentWillMount () {
     const { getSettings } = this.props
     getSettings(
@@ -56,10 +91,10 @@ class Dashboard extends Component {
     console.log(file, reader.result)
   }
 
-
   render() {
     const {settings} = this.props
-    let {imagePreviewUrl} = this.state
+    let {startDate, endDate} = this.state
+    console.log(startDate, endDate)
     console.log("settings", settings)
     return (
       <div>
@@ -116,9 +151,22 @@ class Dashboard extends Component {
           </Col>
         </Row>
         </div>
+        <DateRangePicker startDate={startDate} endDate={endDate} onChangeRange={this.onChangeRange}/>
         <Row>
           <Col sm={12} md={{ size: 10, offset: 1 }}>          
-            
+          <AreaChart
+              width={500}
+              height={400}
+              data={data}
+              margin={{
+                top: 10, right: 30, left: 0, bottom: 0,
+              }}
+            >
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+            </AreaChart>
           </Col>
         </Row>
       </div>

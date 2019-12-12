@@ -9,6 +9,7 @@ const constants = {
     BANNER_BASE_URL: 'http://192.168.0.101:4000/bannersImage/',
     NEWS_BASE_URL: 'http://192.168.0.101:4000/newsImage/',
     MEDIA_BASE_URL: 'http://192.168.0.101:4000/mediaSource/',
+    INVOICE_BASE_URL: 'http://192.168.0.101:4000/invoiceSource/',
 }
 
 export default constants
