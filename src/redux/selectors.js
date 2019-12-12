@@ -229,18 +229,24 @@ export const invoicesParamsSelector = (state) =>
 
 export const bannersParamsSelector = (state) =>
   get(state, 'banner.params', {})
-
-export const usersloadingSelector = (state) =>
-  get(state, 'user.loading', false)
-
+  
 export const myInvoiceSelector = (state) =>
   get(state, 'invoice.myInvoice', false)
-
+  
 export const myJobsSelector = (state) =>
   get(state, 'job.myJobs', false)
-
+  
 export const mediaStatusSelector = (state) =>
   get(state, 'media.status', false)
-
+  
 export const mediaErrorSelector = (state) =>
   get(state, 'media.error', false)
+  
+export const usersloadingSelector = (state) =>
+    get(state, 'user.loading', false)
+  
+export const statisticsloadingSelector = (state) =>
+    get(state, 'statistic.loading', false)
+  
+export const dashboardTransactionSelector = (state) =>
+    get(state, 'statistic.dashboardTransaction', false)

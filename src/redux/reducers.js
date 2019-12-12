@@ -18,6 +18,7 @@ import news from './modules/news'
 import log from './modules/log'
 import media from './modules/media'
 import invoice from './modules/invoice'
+import statistic from './modules/statistic'
 
 export default combineReducers({
   auth,
@@ -37,5 +38,6 @@ export default combineReducers({
   news,
   log,
   media,
-  invoice
+  invoice,
+  statistic
 })

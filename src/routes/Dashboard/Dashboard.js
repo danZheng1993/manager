@@ -5,16 +5,12 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import { createNotification } from 'helpers'
-import {settingsListSelector} from '../../redux/selectors'
-import {getSettings} from '../../redux/modules/setting'
-import uploadFile from '../../redux/api/upload'
-import constants from '../../constants'
+import {getDashboardStatistics} from '../../redux/modules/statistic'
 import Card from './Card'
 import DateRangePicker from '../../components/DateRangePicker'
-import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
-} from 'recharts'
+import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
+import { statisticsloadingSelector, dashboardTransactionSelector } from '../../redux/selectors'
+import Loader from '../../containers/Loader'
 
 const data = [
   {
@@ -51,7 +47,6 @@ class Dashboard extends Component {
   }
 
   static propTypes = {
-    settings: PropTypes.object,
   }
 
   onChangeRange = (picker) => {
@@ -61,18 +56,8 @@ class Dashboard extends Component {
     })
   }
   componentWillMount () {
-    const { getSettings } = this.props
-    getSettings(
-      {success: (payload) => this.setState({imagePreviewUrl: constants.BASE_URL + payload.data.splash})}
-    )
-  }
-
-  handleSave = () => {
-    const {file} = this.state
-    if (!file)  return
-    uploadFile('settings/splash', 'post', file, {})
-      .then(() => createNotification('success'),)
-      .catch(err => createNotification('error', 'Error!'))
+    const {getDashboardStatistics} = this.props
+    getDashboardStatistics()
   }
 
   handleImageChange = (e)  => {
@@ -92,24 +77,25 @@ class Dashboard extends Component {
   }
 
   render() {
-    const {settings} = this.props
+    const {loading, transaction} = this.props
+    console.log(transaction)
     let {startDate, endDate} = this.state
     console.log(startDate, endDate)
-    console.log("settings", settings)
     return (
       <div>
+        <Loader active={loading} />
         <Row>
           <Col sm={3}>
-            <Card title="今日订单总数" value="200" icon="fa-book"/>
+            <Card title="今日订单总数" value={transaction.todayJobs} icon="fa-book"/>
           </Col>
           <Col sm={3}>
-            <Card title="今日交易总额" value="¥999999.00" icon="fa-dollar"/>
+            <Card title="今日交易总额" value={`¥${transaction.todayTransaction}`} icon="fa-dollar"/>
           </Col>
           <Col sm={3}>
-            <Card title="昨日交易总额" value="¥999999.00" icon="fa-database"/>
+            <Card title="昨日交易总额" value={`¥${transaction.yesterdayTransaction}`} icon="fa-database"/>
           </Col>
           <Col sm={3}>
-            <Card title="近7天交易总额" value="¥999999.00" icon="fa-line-chart"/>
+            <Card title="近7天交易总额" value={`¥${transaction.weekTransaction}`} icon="fa-line-chart"/>
           </Col>
         </Row>
         <div className="card-box">
@@ -151,35 +137,43 @@ class Dashboard extends Component {
           </Col>
         </Row>
         </div>
-        <DateRangePicker startDate={startDate} endDate={endDate} onChangeRange={this.onChangeRange}/>
-        <Row>
-          <Col sm={12} md={{ size: 10, offset: 1 }}>          
-          <AreaChart
-              width={500}
-              height={400}
-              data={data}
-              margin={{
-                top: 10, right: 30, left: 0, bottom: 0,
-              }}
-            >
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-            </AreaChart>
-          </Col>
-        </Row>
+        <div className="card-box">
+          <p className="box-title">交易统计</p>
+          <Row>
+            <Col sm={12} className="text-right">
+              <DateRangePicker startDate={startDate} endDate={endDate} onChangeRange={this.onChangeRange}/>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
+              <AreaChart
+                width={1000}
+                height={400}
+                data={data}
+                margin={{
+                  top: 10, right: 30, left: 0, bottom: 0,
+                }}
+              >
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Area type="monotone" dataKey="uv" stroke="#63B6F1" fill="#daedfb" />
+              </AreaChart>
+            </Col>
+          </Row>
+        </div>
       </div>
     )
   }
 }
 
 const selector = createStructuredSelector({
-  settings: settingsListSelector
+  loading: statisticsloadingSelector,
+  transaction : dashboardTransactionSelector
 })
 
 const actions = {
-  getSettings
+  getDashboardStatistics
 }
 
 export default compose(
