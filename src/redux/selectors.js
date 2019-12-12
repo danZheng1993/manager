@@ -243,10 +243,13 @@ export const mediaErrorSelector = (state) =>
   get(state, 'media.error', false)
   
 export const usersloadingSelector = (state) =>
-    get(state, 'user.loading', false)
+  get(state, 'user.loading', false)
   
 export const statisticsloadingSelector = (state) =>
-    get(state, 'statistic.loading', false)
+  get(state, 'statistic.loading', false)
   
 export const dashboardTransactionSelector = (state) =>
-    get(state, 'statistic.dashboardTransaction', false)
+  get(state, 'statistic.dashboardTransaction', false)
+  
+export const createdUsersSelector = (state) =>
+  get(state, 'statistic.createdUsers', false)

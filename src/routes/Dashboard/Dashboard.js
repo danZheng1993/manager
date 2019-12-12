@@ -5,11 +5,11 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import {getDashboardStatistics} from '../../redux/modules/statistic'
+import {getDashboardStatistics, getCreatedUsers} from '../../redux/modules/statistic'
 import Card from './Card'
 import DateRangePicker from '../../components/DateRangePicker'
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip} from 'recharts'
-import { statisticsloadingSelector, dashboardTransactionSelector } from '../../redux/selectors'
+import { statisticsloadingSelector, dashboardTransactionSelector, createdUsersSelector } from '../../redux/selectors'
 import Loader from '../../containers/Loader'
 
 const data = [
@@ -56,8 +56,9 @@ class Dashboard extends Component {
     })
   }
   componentWillMount () {
-    const {getDashboardStatistics} = this.props
+    const {getDashboardStatistics, getCreatedUsers} = this.props
     getDashboardStatistics()
+    getCreatedUsers()
   }
 
   handleImageChange = (e)  => {
@@ -77,10 +78,8 @@ class Dashboard extends Component {
   }
 
   render() {
-    const {loading, transaction} = this.props
-    console.log(transaction)
+    const {loading, transaction, createdUser} = this.props
     let {startDate, endDate} = this.state
-    console.log(startDate, endDate)
     return (
       <div>
         <Loader active={loading} />
@@ -105,15 +104,15 @@ class Dashboard extends Component {
             <p className="text-center">需求方总览</p>
             <Row>
               <Col sm={4} className="text-center">
-                <p className="important-value">100</p>
+                <p className="important-value">{createdUser.todayProvider}</p>
                 <p className="">今日新增</p>
               </Col>
               <Col sm={4} className="text-center">
-                <p className="important-value">200</p>
+                <p className="important-value">{createdUser.yesterdayProvider}</p>
                 <p className="">昨日新增</p>
               </Col>
               <Col sm={4} className="text-center">
-                <p className="important-value">1000</p>
+                <p className="important-value">{createdUser.thismonthProvider}</p>
                 <p className="">本月新增</p>
               </Col>
             </Row>
@@ -122,15 +121,15 @@ class Dashboard extends Component {
             <p className="text-center">服务方总览</p>
             <Row>
               <Col sm={4} className="text-center">
-                <p className="important-value">100</p>
+                <p className="important-value">{createdUser.todayClient}</p>
                 <p className="">今日新增</p>
               </Col>
               <Col sm={4} className="text-center">
-                <p className="important-value">200</p>
+                <p className="important-value">{createdUser.yesterdayClient}</p>
                 <p className="">昨日新增</p>
               </Col>
               <Col sm={4} className="text-center">
-                <p className="important-value">1000</p>
+                <p className="important-value">{createdUser.thismonthClient}</p>
                 <p className="">本月新增</p>
               </Col>
             </Row>
@@ -169,11 +168,13 @@ class Dashboard extends Component {
 
 const selector = createStructuredSelector({
   loading: statisticsloadingSelector,
-  transaction : dashboardTransactionSelector
+  transaction : dashboardTransactionSelector,
+  createdUser: createdUsersSelector
 })
 
 const actions = {
-  getDashboardStatistics
+  getDashboardStatistics,
+  getCreatedUsers
 }
 
 export default compose(
