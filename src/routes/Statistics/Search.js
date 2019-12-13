@@ -11,7 +11,7 @@ import Loader from '../../containers/Loader'
 import moment from 'moment'
 import classnames from 'classnames'
 
-class Transaction extends Component {
+class Chart extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -114,4 +114,4 @@ const actions = {
 export default compose(
   connect(selector, actions),
   withRouter
-)(Transaction)
+)(Chart)

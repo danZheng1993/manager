@@ -188,6 +188,15 @@ export const bannersloadingSelector = (state) =>
 export const bannerStateSelector = (state) =>
   get(state, 'banner', {})
 
+export const databasesListSelector = (state) =>
+  get(state, 'database.databases', [])
+
+export const databasesloadingSelector = (state) =>
+  get(state, 'database.loading', false)
+
+export const databaseStateSelector = (state) =>
+  get(state, 'database', {})
+
 export const subcategoryDetailSelector = (state) =>
   get(state, 'subcategory.subcategory', {})
 
@@ -229,6 +238,9 @@ export const invoicesParamsSelector = (state) =>
 
 export const bannersParamsSelector = (state) =>
   get(state, 'banner.params', {})
+
+export const databasesParamsSelector = (state) =>
+  get(state, 'database.params', {})
   
 export const myInvoiceSelector = (state) =>
   get(state, 'invoice.myInvoice', false)

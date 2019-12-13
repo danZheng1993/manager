@@ -268,7 +268,7 @@ class SideBar extends React.Component {
                 成员管理
                 </NavText>
               </NavItem>    
-              <NavItem eventKey="database">
+              <NavItem eventKey="databases">
                 <NavText>
                 数据库管理
                 </NavText>

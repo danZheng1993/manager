@@ -20,6 +20,7 @@ import Invoices from './Invoices'
 import Banners from './Banners'
 import Settings from './Settings'
 import Statistics from './Statistics'
+import Databases from './Databases'
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
@@ -69,6 +70,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/banners' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Banners))} />
             <Route path='/settings' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
             <Route path='/statistics' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Statistics))} />
+            <Route path='/databases' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Databases))} />
           </Container>
           </div>
         </div>

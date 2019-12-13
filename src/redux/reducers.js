@@ -19,6 +19,7 @@ import log from './modules/log'
 import media from './modules/media'
 import invoice from './modules/invoice'
 import statistic from './modules/statistic'
+import database from './modules/database'
 
 export default combineReducers({
   auth,
@@ -39,5 +40,6 @@ export default combineReducers({
   log,
   media,
   invoice,
+  database,
   statistic
 })

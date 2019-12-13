@@ -17,6 +17,7 @@ import log from './log'
 import subcategory from './subcategory'
 import invoice from './invoice'
 import statistic from './statistic'
+import database from './database'
 
 export default function* rootSaga () {
   yield all([
@@ -37,6 +38,7 @@ export default function* rootSaga () {
     log(),
     media(),
     invoice(),
+    database(),
     statistic()
   ])
 }
