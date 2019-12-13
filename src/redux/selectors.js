@@ -253,3 +253,9 @@ export const dashboardTransactionSelector = (state) =>
   
 export const createdUsersSelector = (state) =>
   get(state, 'statistic.createdUsers', false)
+
+export const jobStatisticSelector = (state) =>
+  get(state, 'statistic.jobStatistics', false)
+
+export const transactionStatisticSelector = (state) =>
+  get(state, 'statistic.transactionStatistics', false)

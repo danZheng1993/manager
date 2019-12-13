@@ -15,8 +15,8 @@ class DateRangePicker extends React.Component {
     this.handleApply = this.handleApply.bind(this)
 
     this.state = {
-      startDate: moment().subtract(29, 'days'),
-      endDate: moment(),
+      start: 'start',
+      end: 'end',
       ranges: {
         'Today': [moment(), moment()],
         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -28,13 +28,24 @@ class DateRangePicker extends React.Component {
     }
   }
 
+  componentWillMount() {
+    const {startDate, endDate} = this.props
+    let start = startDate ? startDate.format('YYYY-MM-DD') : 'start'
+    let end = endDate ? endDate.format('YYYY-MM-DD') : 'end'
+    this.setState({start, end})
+  }
   handleApply(event, picker) {
     this.props.onChangeRange(picker)
+    this.setState({
+      start: picker.startDate.format('YYYY-MM-DD'),
+      end: picker.endDate.format('YYYY-MM-DD')
+    })
   }
 
   render() {
-    let start = this.props.startDate ? this.props.startDate.format('YYYY-MM-DD') : 'start'
-    let end = this.props.endDate ? this.props.endDate.format('YYYY-MM-DD') : 'end'
+    const {startDate, endDate} = this.props
+    let start = startDate ? startDate.format('YYYY-MM-DD') : 'start'
+    let end = endDate ? endDate.format('YYYY-MM-DD') : 'end'
     let label = start + ' ~ ' + end
     if (start === end) {
       label = start
@@ -42,10 +53,9 @@ class DateRangePicker extends React.Component {
 
     return (
       <div className="form-group">
-        <div className="col-md-4">
           <DatetimeRangePicker
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
+            startDate={this.props.startDate}
+            endDate={this.props.endDate}
             onApply={this.handleApply}
           >
             <div className="input-group">
@@ -57,7 +67,6 @@ class DateRangePicker extends React.Component {
                 </span>
             </div>
           </DatetimeRangePicker>
-        </div>
       </div>
     )
   }
