@@ -76,7 +76,7 @@ class Tab extends React.Component {
                   </NavItem>
                 </Nav> 
             }
-            { path[1] === 'providers' && path.length === 3 && 
+            { path[1] === 'providers' && path.length === 3 && path[2] !== 'awards' && 
                 <Nav navbar>
                   <NavItem >
                     <Link to={`/providers/allowed`} className='nav-link' style={this.setActive(`/providers/allowed`)}>

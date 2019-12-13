@@ -95,7 +95,7 @@ class SideBar extends React.Component {
                 需求方管理
                 </NavText>
               </NavItem>   
-              <NavItem eventKey="">
+              <NavItem eventKey="providers/awards">
                 <NavText>
                 红包管理
                 </NavText>
