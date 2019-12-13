@@ -100,7 +100,7 @@ class SideBar extends React.Component {
                 红包管理
                 </NavText>
               </NavItem>   
-              <NavItem eventKey="">
+              <NavItem eventKey="providers/partners">
                 <NavText>
                 合作公司添加
                 </NavText>
