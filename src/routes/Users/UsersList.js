@@ -57,7 +57,6 @@ class UsersList extends Component {
   render() {
     const { usersList, params } = this.props
     const pagination = pick(params, ['page', 'page_size', 'count'])
-    console.log(">>>>>>>>>>>>>",usersList,pagination)
     return (
       <div>
         <h2 className='text-center mb-5'>Manage Users</h2>

@@ -52,14 +52,12 @@ class Splash extends Component {
       })
     }
     file && reader.readAsDataURL(file)
-    console.log(file, reader.result)
   }
 
 
   render() {
     const {settings} = this.props
     let {imagePreviewUrl} = this.state
-    console.log("settings", settings)
     return (
       <Row>
         <Col sm={12} md={{ size: 10, offset: 1 }}>          

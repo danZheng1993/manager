@@ -83,7 +83,6 @@ class BannerEdit extends Component {
       })
     }
     file && reader.readAsDataURL(file)
-    console.log(file, reader.result)
   }
 
 

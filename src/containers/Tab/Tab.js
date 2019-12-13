@@ -57,9 +57,7 @@ class Tab extends React.Component {
   render() {
     const { auth } = this.props
     const { path } = this.state
-    console.log(path[3])
     return (
-      
       <div>
         {auth.me &&
         <Navbar style={{backgroundColor: '#f1f1f1'}} toggleable className="d-flex justify-content-between">
@@ -109,14 +107,15 @@ class Tab extends React.Component {
             <Nav navbar></Nav>
             <Nav navbar>
               <NavItem>
-                <Link to='/records' className='nav-link'>
-                  <i className="fa fa-fw fa-refresh" style={{ fontSize: '1.5em' }} />
-                </Link>
+                <Button onClick={() => window.location.reload()} className='nav-link'>
+                  <i className="fa fa-fw fa-refresh" style={{ fontSize: '1em' }} />
+                </Button>
               </NavItem>
               <NavItem>
                 <Button onClick={() => this.props.history.goBack()} className='nav-link'>
                 返回
                 </Button>
+                
               </NavItem>
             </Nav>
         </Navbar>

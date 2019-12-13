@@ -94,7 +94,6 @@ class MediasList extends Component {
   }
 
   handleSelect =(date)  => {
-    console.log(date)
     this.setState({selectionRange: date.selection})
   }
 

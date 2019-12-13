@@ -96,7 +96,6 @@ class JobsList extends Component {
   }
   render() {
     const { jobsList, params, loading } = this.props
-    console.log(jobsList)
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>

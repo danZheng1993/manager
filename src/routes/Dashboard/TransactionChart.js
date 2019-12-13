@@ -43,7 +43,6 @@ class Chart extends Component {
   setDomain = (startDate, endDate) => {
     const start= startDate.dayOfYear()
     const end= endDate.dayOfYear()
-    console.log(start, end)
     return [start, end]
   }
 
@@ -64,7 +63,6 @@ class Chart extends Component {
     let chartData= [{_id: 0, amount: 0}]
     chartData = [...chartData, ...transactionStatistics]
     let {startDate, endDate} = this.state
-    console.log(compare)
     return (
       <div>
         <Loader active={loading} />

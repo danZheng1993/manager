@@ -17,7 +17,6 @@ const defaultHeaders = () => {
 
 const upload = (uri, method, file, body={}) => {
   const data = new FormData()
-  console.log(file)
   data.append("image", file)
   Object.keys(body).forEach(key => {
     data.append(key, body[key])

@@ -66,7 +66,6 @@ class Profile extends Component {
       })
     }
     file && reader.readAsDataURL(file)
-    console.log(file, reader.result)
   }
 
   render() {

@@ -31,7 +31,6 @@ class JobsList extends Component {
 
   componentWillMount () {
     const { getJobs, params, filter } = this.props
-    console.log("myjobs mount")
     filter && getJobs({ params : {...params, filter} })
   }
 
@@ -72,7 +71,6 @@ class JobsList extends Component {
   
   render() {
     const { jobsList, params, loading } = this.props
-    console.log("MyJobs", jobsList)
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
