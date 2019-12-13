@@ -6,7 +6,7 @@ import apiCall from '../api/apiCall'
 const doLogin = apiCall({
   type: DO_LOGIN,
   method: 'post',
-  path: () => '/auth/login/',
+  path: () => '/auth/admin/login',
   success: (res, action) => {
     localStorage.setItem('hvr_auth', JSON.stringify(res.data))
   }
@@ -51,7 +51,7 @@ const doGetContacts = apiCall({
 const doSaveProfile = apiCall({
   type: SAVE_PROFILE,
   method: 'patch',
-  path: () => '/profile/me/',
+  path: () => '/profile/admin/',
   success: (res, action) => {
     localStorage.setItem('hvr_auth', JSON.stringify({
       info: res.data,

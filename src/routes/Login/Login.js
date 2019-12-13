@@ -44,7 +44,7 @@ class Login extends Component {
       <Row>
         <Col sm={12} md={{ size: 4, offset: 4 }}>
           {auth.status === requestFail(DO_LOGIN) &&
-            <Alert color="danger">Invalid phoneNumber or password!</Alert>
+            <Alert color="danger">Login Failed!</Alert>
           }
           <h2 className='text-center mb-5'>HVI后台业务管理系统</h2>
           <Form onSubmit={handleSubmit(this.handleLogin)}>

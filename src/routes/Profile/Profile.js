@@ -1,16 +1,27 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Alert, Button, Col, Form, Row } from 'reactstrap'
+import { Button, Col, Form, Row, Input } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
-import { saveProfile, SAVE_PROFILE } from 'redux/modules/auth'
-import { requestFail } from 'redux/api/request'
-import { isFieldRequired, ucFirst } from 'helpers'
+import { saveProfile } from 'redux/modules/auth'
+import { isFieldRequired } from 'helpers'
 import InputField from 'components/InputField'
+import { createNotification } from '../../helpers'
+import uploadFile from '../../redux/api/upload'
+import constants from '../../constants'
 
 class Profile extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      image: '',
+      file: '',
+      imagePreviewUrl: ''
+    }
+  }
+
   static propTypes = {
     auth: PropTypes.object,
     handleSubmit: PropTypes.func,
@@ -19,41 +30,67 @@ class Profile extends Component {
   };
 
   handleSave = (values) => {
-    const { history, saveProfile } = this.props
+    const { saveProfile } = this.props
+    const {file} = this.state
+    if (file) {
+      uploadFile('profile/admin', 'post', file)
+      .then(() => console.log("upload avatar success!"))
+      .catch(err => alert(err))
+    }
     saveProfile({
       body: {userName: values.userName, old_password: values.old_password, new_password: values.new_password},
-      success: () => history.push('/dashboard')
+      success: () => this.handleSuccess(),
+      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 
+  handleSuccess = () => {
+    createNotification('success')
+    this.props.history.push('/dashboard')
+  }
   handleCancel = (values) => {
     const { history } = this.props
     history.push('/dashboard')
   }
 
-  get errorText () {
-    const { auth: { error } } = this.props
-    return error
-    ? Object.keys(error.data).map((key) => (
-      <div key={key}>{ucFirst(error.data[key].toString())}</div>
-    ))
-    : ''
+  handleImageChange = (e)  => {
+    e.preventDefault()
+
+    let reader = new FileReader()
+    let file = e.target.files[0]
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      })
+    }
+    file && reader.readAsDataURL(file)
+    console.log(file, reader.result)
   }
 
   render() {
-    const { auth, handleSubmit } = this.props
+    const { handleSubmit, initialValues } = this.props
+    const {imagePreviewUrl} = this.state
     return (
       <Row>
         <Col sm={12} md={{ size: 6, offset: 3 }}>
-          {auth.status === requestFail(SAVE_PROFILE) &&
-            <Alert color='danger'>{this.errorText}</Alert>
-          }
-          <h2 className='text-center mb-5'>Edit Your Profile</h2>
           <Form onSubmit={handleSubmit(this.handleSave)}>
+            <Row>
+              <Col xs={12} className="text-center">    
+                { imagePreviewUrl ? 
+                  <img src={imagePreviewUrl}
+                    className="avatar" alt="avatar" /> :
+                  <img src={constants.BASE_URL + initialValues.photo}
+                    className="avatar" alt="avatar" />
+                }
+                <Input className="choose-file" type="file" onChange={this.handleImageChange} accept=".gif,.jpg,.jpeg,.png"/>
+              </Col>
+            </Row>
             <Row>
               <Col xs={12}>    
                 <Field
-                  label='userName'
+                  label='用户名'
                   name='userName'
                   type='text'
                   required
@@ -68,7 +105,7 @@ class Profile extends Component {
                   label='旧密码'
                   name='old_password'
                   type='password'
-                  placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;'
+                  placeholder='original password'
                   validate={[isFieldRequired]}
                   component={InputField}
                 />
@@ -80,7 +117,7 @@ class Profile extends Component {
                   label='新密码'
                   name='new_password'
                   type='password'
-                  placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;'
+                  placeholder='new password'
                   validate={[isFieldRequired]}
                   component={InputField}
                 />
@@ -92,7 +129,7 @@ class Profile extends Component {
                   label='确认新密码'
                   name='confirm_password'
                   type='password'
-                  placeholder='&#9679;&#9679;&#9679;&#9679;&#9679;'
+                  placeholder='password confirm'
                   validate={[isFieldRequired]}
                   component={InputField}
                 />
@@ -111,7 +148,6 @@ class Profile extends Component {
 }
 
 const selector = (state) => ({
-  auth: state.auth,
   initialValues: state.auth.me
 })
 
