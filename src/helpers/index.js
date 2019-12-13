@@ -60,3 +60,7 @@ export const  createNotification = (type, message = '') => {
     }
 }
 
+export const getPercent = (first, second) => {
+  const percent = Math.abs((first - second) * 100 / (second|| 1))
+  return percent.toFixed(2)
+}

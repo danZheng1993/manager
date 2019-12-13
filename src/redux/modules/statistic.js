@@ -7,6 +7,8 @@ import { requestSuccess, requestFail, requestPending } from '../api/request'
 export const GET_DASHBOARD_STATISTICS = 'GET_DASHBOARD_STATISTICS'
 export const GET_CREATED_USERS = 'GET_CREATED_USERS'
 export const GET_JOB_STATISTICS = 'GET_JOB_STATISTICS'
+export const COMPARE_JOBS = 'COMPARE_JOBS'
+export const COMPARE_TRANSACTIONS = 'COMPARE_TRANSACTIONS'
 export const GET_TRANSACTION_STATISTICS = 'GET_TRANSACTION_STATISTICS'
 
 // ------------------------------------
@@ -16,6 +18,8 @@ export const GET_TRANSACTION_STATISTICS = 'GET_TRANSACTION_STATISTICS'
 export const getDashboardStatistics = createAction(GET_DASHBOARD_STATISTICS)
 export const getCreatedUsers = createAction(GET_CREATED_USERS)
 export const getJobStatistics = createAction(GET_JOB_STATISTICS)
+export const compareJobs = createAction(COMPARE_JOBS)
+export const compareTransactions = createAction(COMPARE_TRANSACTIONS)
 export const getTransactionStatistics = createAction(GET_TRANSACTION_STATISTICS)
 
 const initialState = {
@@ -23,6 +27,8 @@ const initialState = {
   statistics: {},
   dashboardTransaction: {},
   createdUsers: {},
+  jobsCompare: {},
+  transactionsCompare: {},
   jobStatistics: [],
   transactionStatistics: [],
   loading: false,
@@ -72,6 +78,51 @@ export default handleActions({
   [requestFail(GET_JOB_STATISTICS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_JOB_STATISTICS),
+    error: payload,
+    loading: false
+  }),
+  
+  [requestPending(COMPARE_JOBS)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(COMPARE_JOBS),
+    error: null,
+    loading: true,
+  }),
+
+  [requestSuccess(COMPARE_JOBS)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(COMPARE_JOBS),
+    jobsCompare: payload,
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(COMPARE_JOBS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(COMPARE_JOBS),
+    error: payload,
+    loading: false
+  }),
+  
+  
+  [requestPending(COMPARE_TRANSACTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestPending(COMPARE_TRANSACTIONS),
+    error: null,
+    loading: true,
+  }),
+
+  [requestSuccess(COMPARE_TRANSACTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestSuccess(COMPARE_TRANSACTIONS),
+    transactionsCompare: payload,
+    error: null,
+    loading: false
+  }),
+
+  [requestFail(COMPARE_TRANSACTIONS)]: (state, { payload }) => ({
+    ...state,
+    status: requestFail(COMPARE_TRANSACTIONS),
     error: payload,
     loading: false
   }),

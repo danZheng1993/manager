@@ -4,10 +4,11 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import {getJobStatistics} from '../../redux/modules/statistic'
+import {getJobStatistics, compareJobs} from '../../redux/modules/statistic'
 import DateRangePicker from '../../components/DateRangePicker'
 import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts'
-import { statisticsloadingSelector, jobStatisticSelector } from '../../redux/selectors'
+import { statisticsloadingSelector, jobStatisticSelector, jobCompareSelector } from '../../redux/selectors'
+import {getPercent} from '../../helpers'
 import Loader from '../../containers/Loader'
 import moment from 'moment'
 import classnames from 'classnames'
@@ -30,12 +31,13 @@ class Chart extends Component {
       range: null,
     })
     getJobStatistics({params: {startDate: picker.startDate.format('YYYY-MM-DD'), endDate: picker.endDate.format('YYYY-MM-DD')}})
-
   }
+
   componentWillMount () {
-    const { getJobStatistics} = this.props
+    const { getJobStatistics, compareJobs} = this.props
     const {startDate, endDate} = this.state
     getJobStatistics({params: {startDate: startDate.format('YYYY-MM-DD'), endDate: endDate.format('YYYY-MM-DD')}})
+    compareJobs()
   }
 
   setDomain = (startDate, endDate) => {
@@ -58,10 +60,11 @@ class Chart extends Component {
   }
 
   render() {
-    const {loading, jobStatistics} = this.props
+    const {loading, jobStatistics, compare} = this.props
     let chartData= [{_id: 0, amount: 0}]
     chartData = [...chartData, ...jobStatistics]
     let {startDate, endDate} = this.state
+    console.log(compare)
     return (
       <div>
         <Loader active={loading} />
@@ -81,10 +84,34 @@ class Chart extends Component {
             </Col>
           </Row>
           <Row>
-            <Col sm={12}>
-                { jobStatistics.length && <AreaChart
-                  key={jobStatistics.length}
-                  width={1000}
+            <Col sm={2}>
+              <div className="text-center">
+                <p className="description">同比上月</p>
+                <p style={{color: '#3C3C3C', fontSize: '28px'}}>{compare.thismonthAmount}</p>
+                <p className="description">
+                  {compare.thismonthAmount >= compare.lastmonthAmount ?
+                    <span className="plus"><i className="fa fa-fw fa-sort-up"/>{getPercent(compare.thismonthAmount, compare.lastmonthAmount)}%</span> :
+                    <span className="minus"><i className="fa fa-fw fa-sort-desc"/>{getPercent(compare.thismonthAmount, compare.lastmonthAmount)}%</span> 
+                  }
+                   同比上月
+                </p>
+              </div>
+              <div className="text-center">
+                <p className="description">同比上周</p>
+                <p style={{color: '#3C3C3C', fontSize: '28px'}}>{compare.thisweekAmount}</p>
+                <p className="description">
+                  {compare.thisweekAmount > compare.lastweekAmount ?
+                    <span className="plus"><i className="fa fa-fw fa-sort-up"/>{getPercent(compare.thisweekAmount, compare.lastweekAmount)}%</span> :
+                    <span className="minus"><i className="fa fa-fw fa-sort-desc"/>{getPercent(compare.thisweekAmount, compare.lastweekAmount)}%</span> 
+                  }
+                   同比上周
+                </p>
+              </div>
+            </Col>
+            <Col sm={10}>
+                { chartData.length && <AreaChart
+                  key={chartData.length}
+                  width={900}
                   height={400}
                   data={chartData}
                   margin={{
@@ -107,11 +134,13 @@ class Chart extends Component {
 
 const selector = createStructuredSelector({
   loading: statisticsloadingSelector,
-  jobStatistics: jobStatisticSelector
+  jobStatistics: jobStatisticSelector,
+  compare: jobCompareSelector
 })
 
 const actions = {
-  getJobStatistics
+  getJobStatistics,
+  compareJobs
 }
 
 export default compose(

@@ -257,5 +257,11 @@ export const createdUsersSelector = (state) =>
 export const jobStatisticSelector = (state) =>
   get(state, 'statistic.jobStatistics', false)
 
+export const jobCompareSelector = (state) =>
+  get(state, 'statistic.jobsCompare', false)
+
+export const transactionCompareSelector = (state) =>
+  get(state, 'statistic.transactionsCompare', false)
+
 export const transactionStatisticSelector = (state) =>
   get(state, 'statistic.transactionStatistics', false)

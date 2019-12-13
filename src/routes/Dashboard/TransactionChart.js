@@ -4,10 +4,11 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import {getTransactionStatistics} from '../../redux/modules/statistic'
+import {getTransactionStatistics, compareTransactions} from '../../redux/modules/statistic'
 import DateRangePicker from '../../components/DateRangePicker'
-import {AreaChart, Area, XAxis, YAxis, Tooltip} from 'recharts'
-import { statisticsloadingSelector, transactionStatisticSelector } from '../../redux/selectors'
+import {AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer} from 'recharts'
+import { statisticsloadingSelector, transactionStatisticSelector, transactionCompareSelector } from '../../redux/selectors'
+import {getPercent} from '../../helpers'
 import Loader from '../../containers/Loader'
 import moment from 'moment'
 import classnames from 'classnames'
@@ -30,12 +31,13 @@ class Chart extends Component {
       range: null,
     })
     getTransactionStatistics({params: {startDate: picker.startDate.format('YYYY-MM-DD'), endDate: picker.endDate.format('YYYY-MM-DD')}})
-
   }
+
   componentWillMount () {
-    const { getTransactionStatistics} = this.props
+    const { getTransactionStatistics, compareTransactions} = this.props
     const {startDate, endDate} = this.state
     getTransactionStatistics({params: {startDate: startDate.format('YYYY-MM-DD'), endDate: endDate.format('YYYY-MM-DD')}})
+    compareTransactions()
   }
 
   setDomain = (startDate, endDate) => {
@@ -58,10 +60,11 @@ class Chart extends Component {
   }
 
   render() {
-    const {loading, transactionStatistics} = this.props
+    const {loading, transactionStatistics, compare} = this.props
     let chartData= [{_id: 0, amount: 0}]
     chartData = [...chartData, ...transactionStatistics]
     let {startDate, endDate} = this.state
+    console.log(compare)
     return (
       <div>
         <Loader active={loading} />
@@ -81,22 +84,46 @@ class Chart extends Component {
             </Col>
           </Row>
           <Row>
-            <Col sm={12}>
-              { transactionStatistics.length && <AreaChart
-                key={transactionStatistics.length}
-                width={1000}
-                height={400}
-                data={chartData}
-                margin={{
-                  top: 10, right: 30, left: 0, bottom: 0,
-                }}
-              >
-                {/* <XAxis dataKey="date" type="number" domain={this.setDomain(startDate, endDate)}/> */}
-                <XAxis dataKey="_id"/>
-                <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="amount" stroke="#63B6F1" fill="#daedfb" />
-              </AreaChart> }
+            <Col sm={2}>
+              <div className="text-center">
+                <p className="description">同比上月</p>
+                <p style={{color: '#3C3C3C', fontSize: '28px'}}>{compare.thismonthAmount}</p>
+                <p className="description">
+                  {compare.thismonthAmount >= compare.lastmonthAmount ?
+                    <span className="plus"><i className="fa fa-fw fa-sort-up"/>{getPercent(compare.thismonthAmount, compare.lastmonthAmount)}%</span> :
+                    <span className="minus"><i className="fa fa-fw fa-sort-desc"/>{getPercent(compare.thismonthAmount, compare.lastmonthAmount)}%</span> 
+                  }
+                   同比上月
+                </p>
+              </div>
+              <div className="text-center">
+                <p className="description">同比上周</p>
+                <p style={{color: '#3C3C3C', fontSize: '28px'}}>{compare.thisweekAmount}</p>
+                <p className="description">
+                  {compare.thisweekAmount > compare.lastweekAmount ?
+                    <span className="plus"><i className="fa fa-fw fa-sort-up"/>{getPercent(compare.thisweekAmount, compare.lastweekAmount)}%</span> :
+                    <span className="minus"><i className="fa fa-fw fa-sort-desc"/>{getPercent(compare.thisweekAmount, compare.lastweekAmount)}%</span> 
+                  }
+                   同比上周
+                </p>
+              </div>
+            </Col>
+            <Col sm={10}>
+                { chartData.length && <AreaChart
+                  key={chartData.length}
+                  width={900}
+                  height={400}
+                  data={chartData}
+                  margin={{
+                    top: 10, right: 30, left: 0, bottom: 0,
+                  }}
+                >
+                  {/* <XAxis dataKey="date" type="number" domain={this.setDomain(startDate, endDate)}/> */}
+                  <XAxis dataKey="_id"/>
+                  <YAxis />
+                  <Tooltip />
+                  <Area type="monotone" dataKey="amount" stroke="#63B6F1" fill="#daedfb" />
+                </AreaChart> }
             </Col>
           </Row>
         </div>
@@ -107,11 +134,13 @@ class Chart extends Component {
 
 const selector = createStructuredSelector({
   loading: statisticsloadingSelector,
-  transactionStatistics: transactionStatisticSelector
+  transactionStatistics: transactionStatisticSelector,
+  compare: transactionCompareSelector
 })
 
 const actions = {
-  getTransactionStatistics
+  getTransactionStatistics,
+  compareTransactions
 }
 
 export default compose(
