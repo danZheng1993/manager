@@ -6,7 +6,7 @@ import { requestFail, requestPending, requestSuccess } from './request'
 const defaultHeaders = () => {
   const auth = localStorage.getItem('hvr_auth')
   //axios.defaults.baseURL = process.env.API_ROOT + '/'
-  axios.defaults.baseURL = 'http://192.168.0.207:4000/'
+  axios.defaults.baseURL = 'http://123.57.81.103:4000/'
   let headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
