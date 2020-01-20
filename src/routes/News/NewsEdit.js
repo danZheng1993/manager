@@ -16,6 +16,7 @@ import * as selectors from 'redux/selectors'
 import { EditorState, ContentState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import { handleError } from '../../helpers';
 
 class NewsEdit extends Component {
   constructor(props) {
@@ -58,12 +59,10 @@ class NewsEdit extends Component {
       id: params.id,
       body: {...values, content},
       success: () => createNotification('success'),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
     : createNews({
       body: {...values, content},
       success: () => this.handleSuccess(),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 

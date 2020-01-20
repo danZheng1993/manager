@@ -60,7 +60,7 @@ export default handleActions({
     ...state,
     status: requestFail(GET_BANNER),
     banner: null,
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -86,7 +86,7 @@ export default handleActions({
   [requestFail(GET_BANNERS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_BANNERS),
-    error: payload.data.message,
+    error: payload,
     banners: null,
     loading: false
   }),
@@ -109,7 +109,7 @@ export default handleActions({
   [requestFail(CREATE_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_BANNER),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -132,7 +132,7 @@ export default handleActions({
   [requestFail(UPDATE_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_BANNER),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -158,7 +158,7 @@ export default handleActions({
   [requestFail(DELETE_BANNER)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_BANNER),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 

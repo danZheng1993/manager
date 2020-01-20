@@ -67,7 +67,7 @@ class Chart extends Component {
       <div>
         <Loader active={loading} />
         <div className="card-box">
-          <p className="box-title">交易统计</p>
+          <p className="box-title">订单统计</p>
           <Row>
             <Col sm={4}></Col>
             <Col sm={4} >

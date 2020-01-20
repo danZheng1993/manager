@@ -8,7 +8,7 @@ const doLogin = apiCall({
   method: 'post',
   path: () => '/auth/admin/login',
   success: (res, action) => {
-    localStorage.setItem('hvr_auth', JSON.stringify(res.data))
+    localStorage.setItem('hvr_auth', JSON.stringify({...res.data, exp: new Date()}))
   }
 })
 
@@ -55,6 +55,7 @@ const doSaveProfile = apiCall({
   success: (res, action) => {
     localStorage.setItem('hvr_auth', JSON.stringify({
       info: res.data,
+      exp: new Date(),
       token: JSON.parse(localStorage.getItem('hvr_auth')).token
     }))
   }

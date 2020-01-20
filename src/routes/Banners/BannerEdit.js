@@ -14,6 +14,7 @@ import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
 import DateTimeField from 'components/DateTimeField'
 import constants from '../../constants'
+import { handleError } from '../../helpers';
 
 class BannerEdit extends Component {
   constructor(props) {
@@ -53,7 +54,6 @@ class BannerEdit extends Component {
         uploadFile('banners/upload', 'post', file, {id: params.id})
         .then(() => createNotification('success'))
         .catch(err => alert(err)),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
     : createBanner({
       body: {...values, status},
@@ -61,7 +61,6 @@ class BannerEdit extends Component {
         uploadFile('banners/upload', 'post', file, {id: payload.data._id})
         .then(() => this.handleSuccess())
         .catch(err => alert(err)),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 

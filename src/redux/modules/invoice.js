@@ -60,7 +60,7 @@ export default handleActions({
     ...state,
     status: requestFail(GET_INVOICE),
     invoice: null,
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -86,7 +86,7 @@ export default handleActions({
   [requestFail(GET_INVOICES)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_INVOICES),
-    error: payload.data.message,
+    error: payload,
     invoices: null,
     loading: false
   }),
@@ -109,7 +109,7 @@ export default handleActions({
   [requestFail(CREATE_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_INVOICE),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -132,7 +132,7 @@ export default handleActions({
   [requestFail(UPDATE_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_INVOICE),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -158,7 +158,7 @@ export default handleActions({
   [requestFail(DELETE_INVOICE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_INVOICE),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 

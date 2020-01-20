@@ -10,7 +10,7 @@ import { withRouter } from 'react-router'
 import { getMedia, updateMedia } from 'redux/modules/media'
 import confirm from 'containers/ConfirmModal'
 import VrPlayer from 'react-vr-player'
-import { getDateTimeStr, createNotification } from '../../helpers'
+import { getDateTimeStr, createNotification, handleError } from '../../helpers'
 import { mediaDetailSelector, mediasloadingSelector } from '../../redux/selectors'
 
 class MediaEdit extends Component {
@@ -34,7 +34,6 @@ class MediaEdit extends Component {
             id,
             body: {isAllowed},
             success: () => createNotification('success',),
-            fail: (payload) => createNotification('error', payload.data.message) 
            })
         }
       )
@@ -45,7 +44,6 @@ class MediaEdit extends Component {
             id, 
             body: {isAllowed},
             success: () => createNotification('success'),
-            fail: (payload) => createNotification('error', payload.data.message) 
           })
         }
       )

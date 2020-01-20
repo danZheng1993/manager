@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
-import { getDateTimeStr, createNotification } from '../../helpers'
+import { getDateTimeStr, createNotification, handleError } from '../../helpers'
 
 class DatabaseList extends Component {
 
@@ -44,8 +44,8 @@ class DatabaseList extends Component {
     confirm('Are you sure to delete the database?').then(
       () => {
         deleteDatabase({ id, 
-          success: () => createNotification('success'),
-          fail: (payload) => createNotification('error', payload.data.message)})
+          success: () => createNotification('success')
+        })
       }
     )
   }
@@ -54,7 +54,6 @@ class DatabaseList extends Component {
     const {createDatabase} = this.props
     createDatabase({
       success: () => createNotification('success'),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 
@@ -63,7 +62,7 @@ class DatabaseList extends Component {
     restoreDatabase({
       id, 
       success: () => createNotification('success'),
-      fail: (payload) => createNotification('error', payload.data.message)})
+    })
   }
 
   render() {

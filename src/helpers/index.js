@@ -64,3 +64,8 @@ export const getPercent = (first, second) => {
   const percent = Math.abs((first - second) * 100 / (second|| 1))
   return percent.toFixed(2)
 }
+
+export const handleError = (payload) => {
+  if (payload.error) return payload.error.message
+  return 'Network Error'
+}

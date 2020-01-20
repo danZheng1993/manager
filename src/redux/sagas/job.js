@@ -3,11 +3,13 @@ import { get, pick } from 'lodash'
 import { GET_JOB, GET_JOBS, CREATE_JOB, UPDATE_JOB, DELETE_JOB }
   from '../modules/job'
 import apiCall from '../api/apiCall'
+import {handleError, createNotification} from '../../helpers'
 
 const doGetJob = apiCall({
   type: GET_JOB,
   method: 'get',
-  path: ({ payload }) => `/jobs/${payload.id}/`
+  path: ({ payload }) => `/jobs/${payload.id}/`,
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doGetJobs = apiCall({
@@ -17,27 +19,31 @@ const doGetJobs = apiCall({
   payloadOnSuccess: (res, { payload }) => ({
     jobs: res.jobs,
     count: res.count,
-    ...pick(get(payload, 'params', {}), ['page', 'page_size',]),
-  })
+    ...pick(get(payload, 'params', {}), ['page', 'page_size',])
+  }),
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doCreateJob = apiCall({
   type: CREATE_JOB,
   method: 'post',
-  path: () => `/jobs/`
+  path: () => `/jobs/`,
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doUpdateJob = apiCall({
   type: UPDATE_JOB,
   method: 'put',
-  path: ({ payload }) => `/jobs/${payload.id}/`
+  path: ({ payload }) => `/jobs/${payload.id}/`,
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doDeleteJob = apiCall({
   type: DELETE_JOB,
   method: 'delete',
   path: ({ payload }) => `/jobs/${payload.id}`,
-  payloadOnSuccess: (res, { payload }) => ({ id: payload.id })
+  payloadOnSuccess: (res, { payload }) => ({ id: payload.id }),
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 export default function* rootSaga () {

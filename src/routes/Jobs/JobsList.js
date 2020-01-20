@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
-import { getDateTimeStr, createNotification } from '../../helpers'
+import { getDateTimeStr, createNotification, handleError } from '../../helpers'
 
 const statusOptions = [
   {label: '全部', value: '' }, 
@@ -79,7 +79,7 @@ class JobsList extends Component {
     const { deleteJob } = this.props
     confirm('Are you sure to delete the job?').then(
       () => {
-        deleteJob({ id, success: () => createNotification('success') , fail: (payload) =>  createNotification('error', payload.data.message) })
+        deleteJob({ id, success: () => createNotification('success')})
       }
     )
   }

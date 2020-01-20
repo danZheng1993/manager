@@ -18,6 +18,7 @@ import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
 import InputField from 'components/InputField'
+import { handleError } from '../../helpers'
 
 const checkOptions = [
   {label: '全部', value: '' }, 
@@ -59,7 +60,6 @@ class MediasList extends Component {
       id,
       body: {recommend: !value},
       success: () => createNotification('success'),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 

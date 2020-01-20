@@ -62,7 +62,7 @@ export default handleActions({
   [requestFail(GET_DATABASES)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_DATABASES),
-    error: payload.data.message,
+    error: payload,
     databases: null,
     loading: false
   }),
@@ -85,7 +85,7 @@ export default handleActions({
   [requestFail(CREATE_DATABASE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_DATABASE),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -107,7 +107,7 @@ export default handleActions({
   [requestFail(RESTORE_DATABASE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(RESTORE_DATABASE),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -133,7 +133,7 @@ export default handleActions({
   [requestFail(DELETE_DATABASE)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_DATABASE),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 

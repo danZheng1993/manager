@@ -8,7 +8,7 @@ import { withRouter } from 'react-router'
 import { saveProfile } from 'redux/modules/auth'
 import { isFieldRequired } from 'helpers'
 import InputField from 'components/InputField'
-import { createNotification } from '../../helpers'
+import { createNotification, handleError } from '../../helpers'
 import uploadFile from '../../redux/api/upload'
 import constants from '../../constants'
 
@@ -40,7 +40,6 @@ class Profile extends Component {
     saveProfile({
       body: {userName: values.userName, old_password: values.old_password, new_password: values.new_password},
       success: () => this.handleSuccess(),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 

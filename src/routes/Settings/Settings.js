@@ -10,6 +10,7 @@ import { getSettings, updateSettings } from 'redux/modules/setting'
 import { isFieldRequired, createNotification } from 'helpers'
 import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
+import { handleError } from '../../helpers';
 
 class Settings extends Component {
   static propTypes = {
@@ -31,7 +32,6 @@ class Settings extends Component {
     updateSettings({
       body: values,
       success: () => createNotification('success'),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
   

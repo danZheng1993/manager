@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
 import { getInvoice } from 'redux/modules/invoice'
-import constants from 'constants'
+import constants from '../../constants'
 import { invoiceDetailSelector, invoicesloadingSelector } from '../../redux/selectors'
 
 class InvoiceView extends Component {
@@ -49,7 +49,7 @@ class InvoiceView extends Component {
           <h2 className='text-left mb-5'>发票图片</h2>
           
           <img src={constants.INVOICE_BASE_URL + invoice.path}    
-                  width="100%" height="90%" alt="invoice" />
+                  width="50%" alt="invoice" />
         </div>
         }
       </div>

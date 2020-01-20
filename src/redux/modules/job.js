@@ -60,7 +60,7 @@ export default handleActions({
     ...state,
     status: requestFail(GET_JOB),
     job: null,
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -86,7 +86,7 @@ export default handleActions({
   [requestFail(GET_JOBS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_JOBS),
-    error: payload.data.message,
+    error: payload,
     jobs: null,
     loading: false
   }),
@@ -109,7 +109,7 @@ export default handleActions({
   [requestFail(CREATE_JOB)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_JOB),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -131,7 +131,7 @@ export default handleActions({
   [requestFail(UPDATE_JOB)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_JOB),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -157,7 +157,7 @@ export default handleActions({
   [requestFail(DELETE_JOB)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_JOB),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 

@@ -60,7 +60,7 @@ export default handleActions({
     ...state,
     status: requestFail(GET_NEWS),
     news: null,
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -86,7 +86,7 @@ export default handleActions({
   [requestFail(GET_NEWSS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(GET_NEWSS),
-    error: payload.data.message,
+    error: payload,
     newss: null,
     loading: false
   }),
@@ -109,7 +109,7 @@ export default handleActions({
   [requestFail(CREATE_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(CREATE_NEWS),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -132,7 +132,7 @@ export default handleActions({
   [requestFail(UPDATE_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(UPDATE_NEWS),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 
@@ -158,7 +158,7 @@ export default handleActions({
   [requestFail(DELETE_NEWS)]: (state, { payload }) => ({
     ...state,
     status: requestFail(DELETE_NEWS),
-    error: payload.data.message,
+    error: payload,
     loading: false
   }),
 

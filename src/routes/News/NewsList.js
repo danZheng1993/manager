@@ -17,6 +17,7 @@ import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
+import { handleError } from '../../helpers';
 
 class NewssList extends Component {
   constructor(props) {
@@ -75,7 +76,7 @@ class NewssList extends Component {
     const { deleteNews } = this.props
     confirm('Are you sure to delete the News?').then(
       () => {
-        deleteNews({ id, success: () => createNotification('success') , fail: (payload) =>  createNotification('error', payload.data.message) })
+        deleteNews({ id, success: () => createNotification('success')})
       }
     )
   }
@@ -86,7 +87,6 @@ class NewssList extends Component {
       id,
       body: {setBanner: !value},
       success: () => createNotification('success'),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 

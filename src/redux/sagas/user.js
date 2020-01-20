@@ -3,11 +3,12 @@ import { get, pick } from 'lodash'
 import { GET_USER, GET_USERS, CREATE_USER, UPDATE_USER, DELETE_USER, GET_USER_REPORT, SEARCH_USER }
   from '../modules/user'
 import apiCall from '../api/apiCall'
-
+import {createNotification, handleError} from '../../helpers'
 const doGetUser = apiCall({
   type: GET_USER,
   method: 'get',
-  path: ({ payload }) => `/users/${payload.id}/`
+  path: ({ payload }) => `/users/${payload.id}/`,
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doGetUsers = apiCall({
@@ -18,32 +19,37 @@ const doGetUsers = apiCall({
     users: res.users,
     count: res.count,
     ...pick(get(payload, 'params', {}), ['page', 'page_size',]),
-  })
+  }),
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doCreateUser = apiCall({
   type: CREATE_USER,
   method: 'post',
-  path: () => `/users/`
+  path: () => `/users/`,
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doUpdateUser = apiCall({
   type: UPDATE_USER,
   method: 'patch',
-  path: ({ payload }) => `/users/${payload.id}/`
+  path: ({ payload }) => `/users/${payload.id}/`,
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doDeleteUser = apiCall({
   type: DELETE_USER,
   method: 'delete',
   path: ({ payload }) => `/users/${payload.id}`,
-  payloadOnSuccess: (res, { payload }) => ({ id: payload.id })
+  payloadOnSuccess: (res, { payload }) => ({ id: payload.id }),
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doGetUserReport = apiCall({
   type: GET_USER_REPORT,
   method: 'get',
-  path: ({ payload }) => `/users/${payload.id}/report`
+  path: ({ payload }) => `/users/${payload.id}/report`,
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 
 const doSearchUser = apiCall({
@@ -53,7 +59,8 @@ const doSearchUser = apiCall({
   payloadOnSuccess: (res, { payload }) => ({
     ...res,
     ...pick(get(payload, 'params', {}), ['from', 'to', 'page', 'page_size']),
-  })
+  }),
+  fail: (payload) => createNotification('error', handleError(payload)),
 })
 export default function* rootSaga () {
   yield takeLatest(GET_USER, doGetUser)

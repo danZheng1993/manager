@@ -8,7 +8,7 @@ import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
 import { getUser, updateUser } from 'redux/modules/user'
 import confirm from 'containers/ConfirmModal'
-import { createNotification } from '../../helpers'
+import { createNotification, handleError } from '../../helpers'
 import { userDetailSelector, usersloadingSelector } from '../../redux/selectors'
 import ProviderProfile from './ProviderProfile'
 
@@ -38,7 +38,6 @@ class UserEdit extends Component {
             id,
             body: {permission : 'ALLOWED'},
             success: () => this.handleSuccess(),
-            fail: (payload) => createNotification('error', payload.data.message) 
            })
         }
       )
@@ -49,7 +48,6 @@ class UserEdit extends Component {
             id, 
             body: {permission : 'NOT_ALLOWED'},
             success: () => this.handleSuccess(),
-            fail: (payload) => createNotification('error', payload.data.message) 
           })
         }
       )

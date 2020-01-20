@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
-import { createNotification } from '../../helpers'
+import { createNotification, handleError } from '../../helpers'
 
 const typeOptions = [
   {label: '全部', value: '' }, 
@@ -80,8 +80,8 @@ class UsersList extends Component {
     confirm('Are you sure to delete the user?').then(
       () => {
         deleteUser({ id,
-          success: () => createNotification('success'),
-          fail: (payload) => createNotification('error', payload.data.message)})
+          success: () => createNotification('success')
+        })
       }
     )
   }

@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
-import { getDateTimeStr, createNotification } from '../../helpers'
+import { getDateTimeStr, createNotification, handleError } from '../../helpers'
 
 class UsersList extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class UsersList extends Component {
       () => {
         deleteUser({ id, 
           success: () => createNotification('success'),
-          fail: (payload) => createNotification('error', payload.data.message)})
+        })
       }
     )
   }

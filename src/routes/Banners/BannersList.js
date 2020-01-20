@@ -18,6 +18,7 @@ import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
 import constants from '../../constants'
+import { handleError } from '../../helpers';
 class BannersList extends Component {
   constructor(props) {
     super(props)
@@ -75,7 +76,7 @@ class BannersList extends Component {
     const { deleteBanner } = this.props
     confirm('Are you sure to delete the Banner?').then(
       () => {
-        deleteBanner({ id, success: () => createNotification('success') , fail: (payload) =>  createNotification('error', payload.data.message) })
+        deleteBanner({ id, success: () => createNotification('success')})
       }
     )
   }
@@ -86,7 +87,6 @@ class BannersList extends Component {
       id,
       body: {status: !value},
       success: () => createNotification('success'),
-      fail: (payload) => createNotification('error', payload.data.message)
     })
   }
 

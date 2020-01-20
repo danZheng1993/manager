@@ -75,7 +75,6 @@ class UsersList extends Component {
       () => {
       //   deleteUser({ id,
       //     success: () => createNotification('success'),
-      //     fail: (payload) => createNotification('error', payload.data.message)})
       }
     )
   }
