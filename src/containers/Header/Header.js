@@ -39,8 +39,8 @@ class Header extends React.Component {
       <div>
         <Navbar color="primary" inverse toggleable>
           <NavbarToggler right onClick={this.toggle} />
-          <NavbarBrand href="/">HVR后台业务管理系统</NavbarBrand>
            <Collapse isOpen={this.state.isOpen} navbar>
+            <NavbarBrand href="/">HVR后台业务管理系统</NavbarBrand>
             {auth.me && canManageUsers(auth.me)
             && <Nav className="ml-auto" navbar>
               <NavItem>

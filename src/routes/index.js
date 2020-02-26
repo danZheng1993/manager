@@ -26,24 +26,24 @@ import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrMan
   from 'helpers/authHelpers'
 import {NotificationContainer} from 'react-notifications'
 
+import "Vendor";
 import 'styles/core.scss'
-import SideBar from '../containers/SideBar/SideBar'
+import 'styles/bootstrap.scss';
+import 'styles/app.scss'
 
+import SideBar from '../components/Layout/Sidebar'
 const routes = ({ isAuthenticated }) => (
   <Router>
     <div>
       <NotificationContainer />
       <Header />
       <div
-        style={{
-          position: 'relative',
-          height: 'calc(100vh - 60px)',
-        }}
-        >
+        className="wrapper"
+      >
         {isAuthenticated && <SideBar />}
-        <div style={{marginLeft: '60px'}}>
+        <section className="section-container">
           { isAuthenticated && <Tab /> }
-          <div style={{overflow : 'auto', height: 'calc(100vh - 120px)',}}>
+          <div style={{minHeight: 'calc(100vh - 200px)',}}>
           <Container className='main-content'>
             <Route exact path='/' render={() => (
               isAuthenticated ? (
@@ -73,7 +73,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/databases' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Databases))} />
           </Container>
           </div>
-        </div>
+        </section>
       </div>
     </div>
   </Router>
