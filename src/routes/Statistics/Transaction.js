@@ -76,7 +76,7 @@ class Transaction extends Component {
               <DateRangePicker startDate={startDate} endDate={endDate} onChangeRange={this.onChangeRange}/>
             </Col>
           </Row>
-          <Table striped>
+          <Table striped bordered className="text-center">
           <thead>
             <tr>  
               <th>Date</th>

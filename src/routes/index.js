@@ -41,7 +41,7 @@ const routes = ({ isAuthenticated }) => (
         className="wrapper"
       >
         {isAuthenticated && <SideBar />}
-        <section className="section-container">
+        <section className={isAuthenticated ? 'section-container': ''}>
           { isAuthenticated && <Tab /> }
           <div style={{minHeight: 'calc(100vh - 200px)',}}>
           <Container className='main-content'>

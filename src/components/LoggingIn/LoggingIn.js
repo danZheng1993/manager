@@ -1,5 +1,6 @@
 import React from 'react'
-
+import Loader from '../../containers/Loader'
 export default () => (
-  <div>Logging you in...</div>
+
+  <Loader active={true} />
 )

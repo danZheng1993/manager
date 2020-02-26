@@ -156,7 +156,6 @@ const Menu = [
         submenu: [{
                 name: '部门管理',
                 path: 'permissions',
-                label: { value: 10, color: 'success' },
             },
             {
                 name: '成员管理',

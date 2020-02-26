@@ -14,7 +14,7 @@ const SidebarItemHeader = ({item}) => (
 /** Normal items for the sidebar */
 const SidebarItem = ({item, isActive}) => (
     <li className={ isActive ? 'active' : '' }>
-        <Link to={item.path} title={item.name}>
+        <Link to={'/' + item.path} title={item.name}>
             {item.label && <Badge tag="div" className="float-right" color={item.label.color}>{item.label.value}</Badge>}
             {item.icon && <em className={item.icon}></em>}
             <span>{item.name}</span>

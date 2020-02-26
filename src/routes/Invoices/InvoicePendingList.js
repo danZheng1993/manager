@@ -50,7 +50,7 @@ class InvoicesList extends Component {
     return (
       <div>
         <Loader active={loading} />
-        <Table striped>
+        <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>发票类型</th>

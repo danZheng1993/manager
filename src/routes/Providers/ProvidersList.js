@@ -113,7 +113,7 @@ class UsersList extends Component {
               />
             </Col>
         </Row>
-        <Table striped>
+        <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>编号</th>

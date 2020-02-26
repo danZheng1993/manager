@@ -59,7 +59,7 @@ class LogsList extends Component {
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
-        <Table striped>
+        <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>#</th>

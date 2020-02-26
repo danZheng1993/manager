@@ -65,7 +65,7 @@ class UsersList extends Component {
             <MdPersonAdd size='1.2em' /> Add a New User
           </Link>
         </div>
-        <Table striped>
+        <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>#</th>

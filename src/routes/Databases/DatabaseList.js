@@ -76,7 +76,7 @@ class DatabaseList extends Component {
             开始备份
           </Button>
         </div>
-        <Table striped>
+        <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>Name</th>

@@ -127,7 +127,7 @@ class NewssList extends Component {
             <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
           </Col>
         </Row>
-        <Table striped>
+        <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>选择</th>

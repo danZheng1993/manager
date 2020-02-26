@@ -154,7 +154,7 @@ class MediasList extends Component {
             <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
           </Col>
         </Row>
-        <Table striped>
+        <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>编号</th>

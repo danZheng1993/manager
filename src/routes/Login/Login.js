@@ -41,31 +41,44 @@ class Login extends Component {
     const { auth, handleSubmit } = this.props
 
     return (
-      <Row>
-        <Col sm={12} md={{ size: 4, offset: 4 }}>
+      <div className="block-center mt-4 wd-xl">
           {auth.status === requestFail(DO_LOGIN) &&
             <Alert color="danger">Login Failed!</Alert>
           }
-          <h2 className='text-center mb-5'>HVI后台业务管理系统</h2>
-          <Form onSubmit={handleSubmit(this.handleLogin)}>
-            <Field
-              label='请输入用户名称'
-              name='phoneNumber'
-              type='phoneNumber'
-              validate={[isFieldRequired]}
-              component={renderField}
-            />
-            <Field
-              label='请输入密码'
-              name='password'
-              type='password'
-              validate={[isFieldRequired]}
-              component={renderField}
-            />
-            <Button color='primary' type='submit'>登录</Button>
-          </Form>
-        </Col>
-      </Row>
+        <div className="card card-flat">
+            <div className="card-header text-center bg-dark">
+                <a href="">
+                  HVR
+                </a>
+            </div>
+            <div className="card-body">
+                <p className="text-center py-2">HVI后台业务管理系统</p>
+                  <Form onSubmit={handleSubmit(this.handleLogin)}>
+                    <Field
+                      label='请输入用户名称'
+                      name='phoneNumber'
+                      type='phoneNumber'
+                      validate={[isFieldRequired]}
+                      component={renderField}
+                    />
+                    <Field
+                      label='请输入密码'
+                      name='password'
+                      type='password'
+                      validate={[isFieldRequired]}
+                      component={renderField}
+                    />
+                    <Button style={{width: '100%'}} color='primary' type='submit'>登录</Button>
+                  </Form>
+            </div>
+        </div>
+        <div className="p-3 text-center">
+            <span className="mr-2">&copy;</span>
+            <span>{new Date().getFullYear()}</span>
+            <span className="mx-2">-</span>
+            <span>HVR</span>
+        </div>
+    </div>
     )
   }
 }
