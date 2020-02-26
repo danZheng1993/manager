@@ -1,5 +1,5 @@
 import axios from 'axios'
-let baseURL = "http://192.168.1.90:4000/"
+let baseURL = "http://192.168.1.54:4000/"
 const defaultHeaders = () => {
   var auth = localStorage.getItem('hvr_auth')
   //axios.defaults.baseURL = process.env.API_ROOT + '/'
