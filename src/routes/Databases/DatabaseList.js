@@ -13,8 +13,10 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
+import bytes from 'bytes'
 import { withRouter } from 'react-router'
 import { getDateTimeStr, createNotification, handleError } from '../../helpers'
+import { BUTTONS } from '../../constants'
 
 class DatabaseList extends Component {
 
@@ -73,7 +75,7 @@ class DatabaseList extends Component {
         <Loader active={loading} />
         <div className='mb-2' onClick={this.startBackup}>
           <Button color='primary'>
-            开始备份
+            {BUTTONS.BACKUP}
           </Button>
         </div>
         <Table striped bordered className="text-center">
@@ -89,15 +91,15 @@ class DatabaseList extends Component {
             {databasesList && databasesList.map((database, index) => (
               <tr key={index}>
                 <td>{database.name}</td>
-                <td>{database.size}</td>
+                <td>{bytes(database.size)}</td>
                 <td>{getDateTimeStr(database.created)}</td>
                 <td>
                   <Button color='primary' size='sm' onClick={() => this.restoreDatabase(database._id)}>
-                  恢复
+                    {BUTTONS.RESTORE}
                   </Button>
                   {' '}
                   <Button color='danger' size='sm' onClick={this.handleDeleteDatabase(database._id)}>
-                  删除
+                    {BUTTONS.DELETE}
                   </Button>
                 </td>
               </tr>

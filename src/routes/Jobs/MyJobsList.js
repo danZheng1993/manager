@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { withRouter } from 'react-router'
 import { getDateTimeStr } from '../../helpers'
+import { BUTTONS } from '../../constants'
 
 
 class JobsList extends Component {
@@ -110,7 +111,7 @@ class JobsList extends Component {
                 <td>{job.status}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/jobs/view/${job._id}`}>
-                  查看订单
+                    {BUTTONS.VIEW_JOB}
                   </Button>
                 </td>
               </tr>

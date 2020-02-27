@@ -11,6 +11,7 @@ import confirm from 'containers/ConfirmModal'
 import { createNotification, handleError } from '../../helpers'
 import { userDetailSelector, usersloadingSelector } from '../../redux/selectors'
 import ProviderProfile from './ProviderProfile'
+import { BUTTONS } from '../../constants'
 
 class UserEdit extends Component {
   static propTypes = {
@@ -64,8 +65,8 @@ class UserEdit extends Component {
           <ProviderProfile user={user} />
           <Row>
             <Col sm={12} md={{size: 4, offset: 4}}>
-              <Button color='secondary' onClick={(this.handleCheck(user._id, true))}>审核通过</Button>
-              <Button color='secondary' onClick={(this.handleCheck(user._id, false))}>审核不通过</Button>
+              <Button color='secondary' onClick={(this.handleCheck(user._id, true))}>{BUTTONS.ACCEPT}</Button>
+              <Button color='secondary' onClick={(this.handleCheck(user._id, false))}>{BUTTONS.DECLINE}</Button>
             </Col>
           </Row>
         </div>}

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../containers/Loader'
-import constants from '../../constants'
+import { ADDRESS, BUTTONS } from '../../constants'
 import { Col, Row, Button } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -71,7 +71,7 @@ class MediaEdit extends Component {
           <h4 className='text-center mb-5'>VR信息审核</h4>
           <Row>
             <Col sm={12} md={{size: 4, offset: 4}}>
-            <img src={constants.MEDIA_BASE_URL + media.snapshot}    
+            <img src={ADDRESS.MEDIA_BASE_URL + media.snapshot}    
                   width="100%" height="90%" alt="snapshot" />
           </Col>
           </Row>
@@ -81,8 +81,8 @@ class MediaEdit extends Component {
             <p>审核状态 : {media.isAllowed ? '通过' : '未通过' } </p>
             <p>审核时间 : {getDateTimeStr(media.tested)} </p>
             {media.isAllowed ? 
-              <Button color='secondary' onClick={(this.handleCheck(media._id, false))}>不通过</Button> : 
-              <Button color='secondary' onClick={(this.handleCheck(media._id, true))}>审核通过</Button>
+              <Button color='secondary' onClick={(this.handleCheck(media._id, false))}>{BUTTONS.DECLINE}</Button> : 
+              <Button color='secondary' onClick={(this.handleCheck(media._id, true))}>{BUTTONS.ACCEPT}</Button>
             }
             </Col>
           </Row>

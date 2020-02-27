@@ -21,6 +21,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { connectModal } from 'redux-modal'
 import { createStructuredSelector } from 'reselect'
+import { BUTTONS } from '../../constants'
 
 class VIPModal extends React.Component {
 
@@ -53,13 +54,13 @@ class VIPModal extends React.Component {
                   name='location'
                   component={InputField}
                 />
-                <Button color='secondary'>提交</Button>
+                <Button color='secondary'>{BUTTONS.POST}</Button>
               </Form>
             </Col>
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleHide}>取消</Button>
+          <Button color="primary" onClick={handleHide}>{BUTTONS.CANCEL}</Button>
         </ModalFooter>
       </Modal>
     )

@@ -16,6 +16,7 @@ import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 import { createNotification } from '../../helpers'
 import VIPModal from '../../containers/VIPModal'
+import { BUTTONS } from '../../constants'
 
 class UsersList extends Component {
   constructor(props) {
@@ -131,7 +132,7 @@ class UsersList extends Component {
                 <td>¥{user.balance}</td>
                 <td>
                   <Button color='danger' size='sm' onClick={this.handleDeleteVIP(user._id)}>
-                  删除
+                    {BUTTONS.DELETE}
                   </Button>
                 </td>
               </tr>

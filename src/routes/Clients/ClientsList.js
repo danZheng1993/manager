@@ -15,6 +15,7 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 import { getDateTimeStr, createNotification, handleError } from '../../helpers'
+import { BUTTONS } from '../../constants'
 
 class UsersList extends Component {
   constructor(props) {
@@ -114,11 +115,11 @@ class UsersList extends Component {
                 <td>{getDateTimeStr(user.created)}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/clients/view/${user._id}`}>
-                  查看
+                    {BUTTONS.VIEW}
                   </Button>
                   {' '}
                   <Button color='danger' size='sm' onClick={this.handleDeleteUser(user._id)}>
-                  删除
+                    {BUTTONS.DELETE}
                   </Button>
                 </td>
               </tr>

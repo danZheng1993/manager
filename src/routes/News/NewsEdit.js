@@ -17,6 +17,7 @@ import { EditorState, ContentState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import { handleError } from '../../helpers';
+import { BUTTONS } from '../../constants'
 
 class NewsEdit extends Component {
   constructor(props) {
@@ -121,7 +122,7 @@ class NewsEdit extends Component {
                 </Link>
               </Col>
               <Col>
-                <Button color='primary' type='submit'>Save</Button>
+                <Button color='primary' type='submit'>{BUTTONS.SAVE}</Button>
               </Col>
             </Row>
           </Form>

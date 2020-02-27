@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import constants from '../../constants'
+import { ADDRESS } from '../../constants'
 import { Row, Col, Table } from 'reactstrap'
 import { getDateTimeStr } from '../../helpers'
 
@@ -20,7 +20,7 @@ class Profile extends Component {
             <Col sm={4}>
               <div className="text-center">
 
-            <img src={constants.BASE_URL + user.photo}    
+            <img src={ADDRESS.BASE_URL + user.photo}    
                   width="100px" height="90px" alt="avatar" />
               <p>{user.userName} </p>
               </div>

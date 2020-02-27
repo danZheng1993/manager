@@ -1,15 +1,50 @@
-const constants = {
-    SMS_VERIFICATION: 'SMS_VERIFICATION',
-    PASSWORD_VERIFICATION: 'PASSWORD_VERIFICATION',
-    RECOVER_PASSWORD: 'RECOVER_PASSWORD',
-    NORMAL_SIGNUP: 'NORMAL_SIGNUP',
-    SEND_SMS: 'SEND_SMS',
-    CHECK_SMS: 'CHECK_SMS',
-    BASE_URL: 'http://192.168.1.54:4000/',
-    BANNER_BASE_URL: 'http://192.168.1.54:4000/bannersImage/',
-    NEWS_BASE_URL: 'http://192.168.1.54:4000/newsImage/',
-    MEDIA_BASE_URL: 'http://192.168.1.54:4000/mediaSource/',
-    INVOICE_BASE_URL: 'http://192.168.1.54:4000/invoiceImage/',
+const IP = "192.168.1.54"
+const PORT = 4000
+const SITE_ADDRESS = `http://${IP}:${PORT}/`
+
+export const BUTTONS = {
+    ADD: 'ADD',
+    EDIT: 'EDIT', // 审核, 编辑
+    VIEW: '查看',
+    DELETE: '删除',
+    CANCEL: '取消',
+    OK: 'OK',
+    YES: '是',
+    NO: '不',
+    FILTER: 'FILTER',
+    POST: '提交',
+    CLOSE: 'CLOSE',
+    SAVE: 'SAVE',
+    RESTORE: '恢复',
+    BACKUP: '开始备份',
+    UPLOAD: '上传',
+    VIEW_JOB: '查看订单',
+    LOGIN: '登录',
+    ACCEPT: '审核通过',
+    DECLINE: '不通过',
 }
 
-export default constants
+export const cnLocale = {
+    format: 'YYYY年 M月 D日',
+    separator: ' - ',
+    applyLabel: '확인',
+    cancelLabel: '取消',
+    fromLabel: '언제부터',
+    toLabel: '언제까지',
+    customRangeLabel: '사용자정의',
+    daysOfWeek: ['日', '月', '火', '水', '木', '金','土'],
+    monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+    firstDay: 1
+};
+
+export const ERR_MSGS = {
+
+}
+
+export const ADDRESS = {
+    BASE_URL: SITE_ADDRESS,
+    BANNER_BASE_URL: `${SITE_ADDRESS}/bannersImage/`,
+    NEWS_BASE_URL: `${SITE_ADDRESS}/newsImage/`,
+    MEDIA_BASE_URL: `${SITE_ADDRESS}/mediaSource/`,
+    INVOICE_BASE_URL: `${SITE_ADDRESS}/invoiceImage/`,
+}

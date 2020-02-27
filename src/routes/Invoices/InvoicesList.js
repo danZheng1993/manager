@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { withRouter } from 'react-router'
 import { getDateTimeStr } from '../../helpers'
+import { BUTTONS } from '../../constants'
 
 class InvoicesList extends Component {
   constructor(props) {
@@ -107,7 +108,7 @@ class InvoicesList extends Component {
                 <td>{invoice.status}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/invoices/view/${invoice._id}`}>
-                  查看
+                    {BUTTONS.VIEW}
                   </Button>
                 </td>
               </tr>

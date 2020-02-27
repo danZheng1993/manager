@@ -15,6 +15,7 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 import { createNotification, handleError } from '../../helpers'
+import { BUTTONS } from '../../constants'
 
 const typeOptions = [
   {label: '全部', value: '' }, 
@@ -138,11 +139,11 @@ class UsersList extends Component {
                 <td>¥{user.balance}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/providers/view/${user._id}`}>
-                  查看
+                    {BUTTONS.VIEW}
                   </Button>
                   {' '}
                   <Button color='danger' size='sm' onClick={this.handleDeleteUser(user._id)}>
-                  删除
+                    {BUTTONS.DELETE}
                   </Button>
                 </td>
               </tr>

@@ -17,7 +17,7 @@ import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
-import constants from '../../constants'
+import { ADDRESS, BUTTONS } from '../../constants'
 import { handleError } from '../../helpers';
 class BannersList extends Component {
   constructor(props) {
@@ -124,7 +124,7 @@ class BannersList extends Component {
               />
             </Col>
             <Col md={2}>
-            <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
+            <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
           </Col>
         </Row>
         <Table striped bordered className="text-center">
@@ -147,7 +147,7 @@ class BannersList extends Component {
                 <td scope='row'>{index + 1}</td>
                 <td>{banner.title}</td>
                 <td>
-                  <img src={constants.BANNER_BASE_URL + banner.image}    
+                  <img src={ADDRESS.BANNER_BASE_URL + banner.image}    
                   width="30" height="30" alt="banner" />
                 </td>
                 <td>{getDateTimeStr(banner.from)}</td>
@@ -155,11 +155,11 @@ class BannersList extends Component {
                 <td><Switch onChange={() => this.handleChange(banner._id, banner.status)} checked={banner.status} /></td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/banners/edit/${banner._id}`}>
-                  编辑
+                    {BUTTONS.EDIT}
                   </Button>
                   {' '}
                   <Button color='danger' size='sm' onClick={this.handleDelete(banner._id)}>
-                  删除
+                    {BUTTONS.DELETE}
                   </Button>
                 </td>
               </tr>

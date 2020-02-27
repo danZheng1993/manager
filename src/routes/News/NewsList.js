@@ -18,6 +18,7 @@ import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
 import { handleError } from '../../helpers';
+import { BUTTONS } from '../../constants'
 
 class NewssList extends Component {
   constructor(props) {
@@ -124,7 +125,7 @@ class NewssList extends Component {
               />
             </Col>
             <Col md={2}>
-            <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
+            <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
           </Col>
         </Row>
         <Table striped bordered className="text-center">
@@ -150,11 +151,11 @@ class NewssList extends Component {
                 <td><Switch onChange={() => this.handleChange(news._id, news.setBanner)} checked={news.setBanner} /></td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/news/edit/${news._id}`}>
-                  编辑
+                    {BUTTONS.EDIT}
                   </Button>
                   {' '}
                   <Button color='danger' size='sm' onClick={this.handleDelete(news._id)}>
-                  删除
+                    {BUTTONS.DELETE}
                   </Button>
                 </td>
               </tr>

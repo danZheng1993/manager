@@ -6,6 +6,7 @@ import 'bootstrap-daterangepicker/daterangepicker.css'
 import {
   Button,
 } from 'reactstrap'
+import { cnLocale } from '../../constants'
 
 class DateRangePicker extends React.Component {
 
@@ -57,6 +58,7 @@ class DateRangePicker extends React.Component {
             startDate={this.props.startDate}
             endDate={this.props.endDate}
             onApply={this.handleApply}
+            locale={cnLocale}
           >
             <div className="input-group">
               <input type="text" className="form-control" value={label} placeholder="Select Date..."/>

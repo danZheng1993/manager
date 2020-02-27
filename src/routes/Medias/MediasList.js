@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
 import { updateMedia, getMedias } from 'redux/modules/media'
 import { mediasListSelector, mediasParamsSelector, mediasloadingSelector } from 'redux/selectors'
-import constants from '../../constants'
+import { ADDRESS, BUTTONS } from '../../constants'
 import { Link } from 'react-router-dom'
 import Pagination from 'components/Pagination'
 import Input from 'components/InputField/InputComponent'
@@ -151,7 +151,7 @@ class MediasList extends Component {
               />
             </Col>
             <Col md={2}>
-            <Button color='secondary' onClick={this.handleFilter}>Filter</Button>
+            <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
           </Col>
         </Row>
         <Table striped bordered className="text-center">
@@ -172,7 +172,7 @@ class MediasList extends Component {
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
                 <td>
-                  <img src={constants.MEDIA_BASE_URL + media.snapshot}    
+                  <img src={ADDRESS.MEDIA_BASE_URL + media.snapshot}    
                   width="30" height="30" alt="snapshot" />
                 </td>
                 <td>{media.title}</td>
@@ -182,11 +182,11 @@ class MediasList extends Component {
                 <td><Switch onChange={() => this.handleChange(media._id, media.recommend)} checked={media.recommend} /></td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/medias/view/${media._id}`}>
-                  查看
+                    {BUTTONS.VIEW}
                   </Button>
                   {' '}
-                  <Button color='primary' tag={Link} size='sm' to={`/medias/edit/${media._id}`}>
-                  审核
+                  <Button color='info' tag={Link} size='sm' to={`/medias/edit/${media._id}`}>
+                    {BUTTONS.EDIT}
                   </Button>
                 </td>
               </tr>

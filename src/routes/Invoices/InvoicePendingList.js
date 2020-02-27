@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { withRouter } from 'react-router'
+import { BUTTONS } from '../../constants'
 
 class InvoicesList extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class InvoicesList extends Component {
                 <td>{invoice.mailAddress}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/invoices/view/${invoice._id}`}>
-                  上传
+                    {BUTTONS.UPLOAD}
                   </Button>
                 </td>
               </tr>

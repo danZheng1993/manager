@@ -9,6 +9,7 @@ import { authStateSelector } from 'redux/selectors'
 import { isFieldRequired } from 'helpers'
 import { login, DO_LOGIN } from 'redux/modules/auth'
 import { requestFail } from 'redux/api/request'
+import { BUTTONS } from '../../constants'
 
 const renderField = ({
   input,
@@ -68,7 +69,7 @@ class Login extends Component {
                       validate={[isFieldRequired]}
                       component={renderField}
                     />
-                    <Button style={{width: '100%'}} color='primary' type='submit'>登录</Button>
+                    <Button style={{width: '100%'}} color='primary' type='submit'>{BUTTONS.LOGIN}</Button>
                   </Form>
             </div>
         </div>

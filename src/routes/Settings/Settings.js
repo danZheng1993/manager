@@ -11,6 +11,7 @@ import { isFieldRequired, createNotification } from 'helpers'
 import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
 import { handleError } from '../../helpers';
+import { BUTTONS } from '../../constants'
 
 class Settings extends Component {
   static propTypes = {
@@ -119,7 +120,7 @@ class Settings extends Component {
             />
             <Row>
               <Col>
-                <Button color='primary' type='submit'>Save</Button>
+                <Button color='primary' type='submit'>{BUTTONS.SAVE}</Button>
               </Col>
             </Row>
           </Form>

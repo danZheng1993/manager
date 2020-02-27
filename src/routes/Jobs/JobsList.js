@@ -15,6 +15,7 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 import { getDateTimeStr, createNotification, handleError } from '../../helpers'
+import { BUTTONS } from '../../constants'
 
 const statusOptions = [
   {label: '全部', value: '' }, 
@@ -147,11 +148,11 @@ class JobsList extends Component {
                 <td>{job.status}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/jobs/view/${job._id}`}>
-                  查看
+                    {BUTTONS.VIEW}
                   </Button>
                   {' '}
                   <Button color='danger' size='sm' onClick={this.handleDeleteJob(job._id)}>
-                  删除
+                    {BUTTONS.DELETE}
                   </Button>
                 </td>
               </tr>

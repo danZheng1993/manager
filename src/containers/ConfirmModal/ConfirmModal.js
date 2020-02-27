@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { confirmable } from 'react-confirm'
 import { Button, Modal, ModalHeader, ModalFooter } from 'reactstrap'
+import { BUTTONS } from '../../constants'
 
 const ConfirmModal = ({show, proceed, dismiss, cancel, confirmation, options}) => (
   <Modal isOpen={show} toggle={dismiss}>
@@ -9,8 +10,8 @@ const ConfirmModal = ({show, proceed, dismiss, cancel, confirmation, options}) =
       {confirmation}
     </ModalHeader>
     <ModalFooter>
-      <Button color="primary" onClick={() => proceed()}>Yes</Button>{' '}
-      <Button color="secondary" onClick={() => cancel()}>Cancel</Button>
+      <Button color="primary" onClick={() => proceed()}>{BUTTONS.YES}</Button>{' '}
+      <Button color="secondary" onClick={() => cancel()}>{BUTTONS.CANCEL}</Button>
     </ModalFooter>
   </Modal>
 )

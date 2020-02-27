@@ -21,6 +21,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { connectModal } from 'redux-modal'
 import { createStructuredSelector } from 'reselect'
+import { BUTTONS } from '../../constants'
 
 class AwardModal extends React.Component {
 
@@ -70,13 +71,13 @@ class AwardModal extends React.Component {
                   timeFormat={false}
                   component={DateTimeField}
                 />
-                <Button color='secondary'>提交</Button>
+                <Button color='secondary'>{BUTTONS.POST}</Button>
               </Form>
             </Col>
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleHide}>Close</Button>
+          <Button color="primary" onClick={handleHide}>{BUTTONS.CLOSE}</Button>
         </ModalFooter>
       </Modal>
     )

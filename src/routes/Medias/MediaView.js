@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Loader from '../../containers/Loader'
-import constants from '../../constants'
+import { ADDRESS } from '../../constants'
 import { Col, Row, Table } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -44,7 +44,7 @@ class MediaView extends Component {
         <div>
           <Row>
             <Col sm={3}>
-            <img src={constants.MEDIA_BASE_URL + media.snapshot}    
+            <img src={ADDRESS.MEDIA_BASE_URL + media.snapshot}    
                   width="100%" height="90%" alt="snapshot" />
               {/* <VrPlayer
                 sources={[ // Declare an array of video sources

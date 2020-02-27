@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import constants from '../../constants'
 import { Collapse, Container, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem }
   from 'reactstrap'
 import { canManageUsers } from 'helpers/roleHelpers'
 import { logout } from 'redux/modules/auth'
+import { ADDRESS } from '../../constants'
 
 class Header extends React.Component {
   static propTypes = {
@@ -45,7 +45,7 @@ class Header extends React.Component {
             && <Nav className="ml-auto" navbar>
               <NavItem>
                 <Link to='/profile' className='nav-link'>
-                  <img src={constants.BASE_URL + auth.me.photo} 
+                  <img src={ADDRESS.BASE_URL + auth.me.photo} 
                   width="28" height="28" style={{borderRadius: '50%'}} alt="avatar" />
                   {auth.me.userName}
                 </Link>

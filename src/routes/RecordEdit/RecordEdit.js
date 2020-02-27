@@ -18,6 +18,7 @@ import DateTimeField from 'components/DateTimeField'
 import DurationField from 'components/DurationField'
 import InputField from 'components/InputField'
 import InputGroupField from 'components/InputGroupField'
+import { BUTTONS } from '../../constants'
 
 const getUserOptions = (userList) => {
   const userOptions = (userList ? userList.map((user, index) => ({
@@ -153,7 +154,7 @@ class RecordEdit extends Component {
                 </Link>
               </Col>
               <Col>
-                <Button color='primary' type='submit'>Save</Button>
+                <Button color='primary' type='submit'>{BUTTONS.SAVE}</Button>
               </Col>
             </Row>
           </Form>

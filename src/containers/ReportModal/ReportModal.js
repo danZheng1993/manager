@@ -24,6 +24,7 @@ import { connectModal } from 'redux-modal'
 import { createStructuredSelector } from 'reselect'
 import { getReport } from 'redux/modules/user'
 import { reportSelector } from 'redux/selectors'
+import { BUTTONS } from '../../constants'
 
 class ReportModal extends React.Component {
   static propTypes = {
@@ -97,7 +98,7 @@ class ReportModal extends React.Component {
                   component={DateTimeField}
                 />
                 {' '}
-                <Button color='secondary'>Filter</Button>
+                <Button color='secondary'>{BUTTONS.FILTER}</Button>
               </Form>
             </Col>
           </Row>
@@ -147,7 +148,7 @@ class ReportModal extends React.Component {
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleHide}>Close</Button>
+          <Button color="primary" onClick={handleHide}>{BUTTONS.CLOSE}</Button>
         </ModalFooter>
       </Modal>
     )

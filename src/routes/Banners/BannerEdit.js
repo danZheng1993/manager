@@ -13,8 +13,8 @@ import uploadFile from '../../redux/api/upload'
 import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
 import DateTimeField from 'components/DateTimeField'
-import constants from '../../constants'
 import { handleError } from '../../helpers';
+import { ADDRESS, BUTTONS } from '../../constants'
 
 class BannerEdit extends Component {
   constructor(props) {
@@ -39,7 +39,7 @@ class BannerEdit extends Component {
 
   componentWillMount () {
     const { getBanner, match: { params } } = this.props
-    params.id && getBanner({ id: params.id,  success: (payload) => this.setState({status: payload.data.status, imagePreviewUrl: constants.BANNER_BASE_URL + payload.data.image})})
+    params.id && getBanner({ id: params.id,  success: (payload) => this.setState({status: payload.data.status, imagePreviewUrl: ADDRESS.BANNER_BASE_URL + payload.data.image})})
   }
 
   handleSave = (values) => {
@@ -180,7 +180,7 @@ class BannerEdit extends Component {
                 </Link>
               </Col>
               <Col>
-                <Button color='primary' type='submit'>Save</Button>
+                <Button color='primary' type='submit'>{BUTTONS.SAVE}</Button>
               </Col>
             </Row>
           </Form>

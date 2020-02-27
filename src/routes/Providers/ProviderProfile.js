@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import constants from '../../constants'
+import { ADDRESS } from '../../constants'
 import { Row, Col, Table } from 'reactstrap'
 import { getDateTimeStr } from '../../helpers'
 
@@ -20,7 +20,7 @@ class Profile extends Component {
             <Col sm={4}>
               <div className="text-center">
 
-            <img src={constants.BASE_URL + user.photo}    
+            <img src={ADDRESS.BASE_URL + user.photo}    
                   width="100px" height="90px" alt="avatar" />
               <p>{user.userName} </p>
               </div>
@@ -73,17 +73,17 @@ class Profile extends Component {
           <Row>
             <Col sm={4} className="text-center">
               <p>身份证正面</p>
-              <img src={constants.BASE_URL + user.frontID}    
+              <img src={ADDRESS.BASE_URL + user.frontID}    
                   width="80%" height="50%" alt="avatar" />
             </Col>
             <Col sm={4} className="text-center">
               <p>身份证反面</p>
-              <img src={constants.BASE_URL + user.backID}    
+              <img src={ADDRESS.BASE_URL + user.backID}    
                   width="80%" height="50%" alt="avatar" />
             </Col>
             <Col sm={4} className="text-center">
               <p>营业执照</p>
-              <img src={constants.BASE_URL + user.companyLicense}    
+              <img src={ADDRESS.BASE_URL + user.companyLicense}    
                   width="80%" height="50%" alt="avatar" />
             </Col>
           </Row>
