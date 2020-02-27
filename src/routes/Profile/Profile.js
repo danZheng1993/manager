@@ -10,7 +10,8 @@ import { isFieldRequired } from 'helpers'
 import InputField from 'components/InputField'
 import { createNotification, handleError } from '../../helpers'
 import uploadFile from '../../redux/api/upload'
-import constants from '../../constants'
+import { ADDRESS, BUTTONS } from '../../constants'
+import Dropzone from 'react-dropzone';
 
 class Profile extends Component {
   constructor(props) {
@@ -52,11 +53,9 @@ class Profile extends Component {
     history.push('/dashboard')
   }
 
-  handleImageChange = (e)  => {
-    e.preventDefault()
-
+  handleImageChange = (files)  => {
     let reader = new FileReader()
-    let file = e.target.files[0]
+    let file = files[0]
 
     reader.onloadend = () => {
       this.setState({
@@ -75,14 +74,15 @@ class Profile extends Component {
         <Col sm={12} md={{ size: 6, offset: 3 }}>
           <Form onSubmit={handleSubmit(this.handleSave)}>
             <Row>
-              <Col xs={12} className="text-center">    
-                { imagePreviewUrl ? 
-                  <img src={imagePreviewUrl}
-                    className="avatar" alt="avatar" /> :
-                  <img src={constants.BASE_URL + initialValues.photo}
-                    className="avatar" alt="avatar" />
-                }
-                <Input className="choose-file" type="file" onChange={this.handleImageChange} accept=".gif,.jpg,.jpeg,.png"/>
+              <Col xs={12} className="text-center">
+                <Dropzone className="card p-3 d-flex justify-content-center align-items-center" ref="dropzone" onDrop={this.handleImageChange} >
+                  { imagePreviewUrl ? 
+                    <img src={imagePreviewUrl}
+                      className="avatar" alt="avatar" /> :
+                    <img src={ADDRESS.BASE_URL + initialValues.photo}
+                      className="avatar" alt="avatar" />
+                  }
+                </Dropzone>
               </Col>
             </Row>
             <Row>
@@ -134,9 +134,9 @@ class Profile extends Component {
               </Col>
             </Row>
             <div className='text-center'>
-              <Button color='primary' type='submit'>Save Profile</Button>
+              <Button color='primary' type='submit'>{BUTTONS.SAVE}</Button>
               {' '}
-              <Button color='default' type='button' onClick={this.handleCancel}>Cancel</Button>
+              <Button color='default' type='button' onClick={this.handleCancel}>{BUTTONS.CANCEL}</Button>
             </div>
           </Form>
         </Col>

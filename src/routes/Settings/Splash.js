@@ -9,7 +9,8 @@ import { createNotification } from 'helpers'
 import {settingsListSelector} from '../../redux/selectors'
 import {getSettings} from '../../redux/modules/setting'
 import uploadFile from '../../redux/api/upload'
-import constants from '../../constants'
+import { ADDRESS, BUTTONS } from '../../constants'
+import Dropzone from 'react-dropzone';
 
 class Splash extends Component {
   constructor(props) {
@@ -27,7 +28,7 @@ class Splash extends Component {
   componentWillMount () {
     const { getSettings } = this.props
     getSettings(
-      {success: (payload) => this.setState({imagePreviewUrl: constants.BASE_URL + payload.data.splash})}
+      {success: (payload) => this.setState({imagePreviewUrl: ADDRESS.BASE_URL + payload.data.splash})}
     )
   }
 
@@ -39,11 +40,9 @@ class Splash extends Component {
       .catch(err => createNotification('error', 'Error!'))
   }
 
-  handleImageChange = (e)  => {
-    e.preventDefault()
-
+  handleImageChange = (files)  => {
     let reader = new FileReader()
-    let file = e.target.files[0]
+    let file = files[0]
 
     reader.onloadend = () => {
       this.setState({
@@ -66,14 +65,16 @@ class Splash extends Component {
           </h2>
           <Row>
               <Col md={6}>
+              <Dropzone className="card p-3 d-flex justify-content-center align-items-center" ref="dropzone" onDrop={this.handleImageChange} >
                 { imagePreviewUrl ? <img src={imagePreviewUrl}
                   width='50%' alt="snapshot" />
                   : <div style={{width: '100%', height: '100%', background: 'black'}}></div>
                 }
+              </Dropzone>
+
               </Col>
               <Col md={4}>
-                <Button color='primary' style={{margin: '5px'}} onClick={this.handleSave}>Save</Button>
-                <Input type="file" onChange={this.handleImageChange} accept=".gif,.jpg,.jpeg,.png"/>
+                <Button color='primary' style={{margin: '5px'}} onClick={this.handleSave}>{BUTTONS.SAVE}</Button>
               </Col>
           </Row>
          </Col>
