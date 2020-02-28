@@ -13,7 +13,6 @@ import uploadFile from '../../redux/api/upload'
 import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
 import DateTimeField from 'components/DateTimeField'
-import { handleError } from '../../helpers';
 import { ADDRESS, BUTTONS } from '../../constants'
 
 class BannerEdit extends Component {
@@ -43,7 +42,7 @@ class BannerEdit extends Component {
   }
 
   handleSave = (values) => {
-    const { createBanner, updateBanner, match: { params }, history } = this.props
+    const { createBanner, updateBanner, match: { params } } = this.props
     const {status, file} = this.state
     if (!file)  return
     params.id
@@ -65,7 +64,7 @@ class BannerEdit extends Component {
   }
 
   handleSuccess = () => {
-    createNotification('success'),
+    createNotification('success')
     this.props.history.push('/banners')
   }
 
@@ -86,7 +85,7 @@ class BannerEdit extends Component {
 
 
   render() {
-    const { handleSubmit, match: { params }, initialValues} = this.props
+    const { handleSubmit, match: { params } } = this.props
     let {imagePreviewUrl} = this.state
 
     return (

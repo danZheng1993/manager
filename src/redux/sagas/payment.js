@@ -1,5 +1,4 @@
 import { takeLatest } from 'redux-saga/effects'
-import { get, pick } from 'lodash'
 import { GET_PAYMENT, GET_PAYMENTS, PAY_UPFRONT, FINAL_PAY }
   from '../modules/payment'
 import apiCall from '../api/apiCall'

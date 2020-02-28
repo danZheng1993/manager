@@ -32,7 +32,7 @@ class JobView extends Component {
   }
 
   render() {
-    const { job, loading, jobs} = this.props
+    const { job, loading} = this.props
     return (
       <div>
         <Loader active={loading} />

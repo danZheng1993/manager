@@ -10,7 +10,6 @@ import { getSettings, updateSettings } from 'redux/modules/setting'
 import { isFieldRequired, createNotification } from 'helpers'
 import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
-import { handleError } from '../../helpers';
 import { BUTTONS } from '../../constants'
 
 class Settings extends Component {
@@ -37,7 +36,7 @@ class Settings extends Component {
   }
   
   render() {
-    const { handleSubmit, initialValues} = this.props
+    const { handleSubmit} = this.props
     return (
       <Row>
         <Col sm={12} md={{ size: 10, offset: 1 }}>          

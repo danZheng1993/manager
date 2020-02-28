@@ -1,5 +1,4 @@
 import { takeLatest } from 'redux-saga/effects'
-import { get, pick } from 'lodash'
 import { GET_SCENE, GET_SCENES, CREATE_SCENE, UPDATE_SCENE, DELETE_SCENE }
   from '../modules/scene'
 import apiCall from '../api/apiCall'

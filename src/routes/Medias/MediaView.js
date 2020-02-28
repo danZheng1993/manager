@@ -8,7 +8,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
 import { getMedia } from 'redux/modules/media'
-import VrPlayer from 'react-vr-player'
+// import VrPlayer from 'react-vr-player'
 import { getDateTimeStr } from '../../helpers'
 import { mediaDetailSelector, mediasloadingSelector } from '../../redux/selectors'
 
@@ -26,17 +26,17 @@ class MediaView extends Component {
 
   render() {
     const { media, loading} = this.props
-    const keys = { // If you want to re-define the keys, here are the defaults
-        left: 'A',
-        right: 'D',
-        up: 'W',
-        down: 'S',
-        rotateLeft: 'Q',
-        rotateRight: 'E',
-        fullScreen: 'F',
-        zeroSensor: 'Z',
-        playPause: ' '
-    }
+    // const keys = { // If you want to re-define the keys, here are the defaults
+    //     left: 'A',
+    //     right: 'D',
+    //     up: 'W',
+    //     down: 'S',
+    //     rotateLeft: 'Q',
+    //     rotateRight: 'E',
+    //     fullScreen: 'F',
+    //     zeroSensor: 'Z',
+    //     playPause: ' '
+    // }
     return (
       <div>
         <Loader active={loading} />

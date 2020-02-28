@@ -62,7 +62,7 @@ class InvoicesList extends Component {
   }
 
   handleKeyPress(target) {
-    if(target.charCode==13){
+    if(target.charCode === 13){
       this.handleFilter()
     } 
   }

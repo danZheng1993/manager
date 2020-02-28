@@ -1,6 +1,5 @@
 import { createAction, handleActions } from 'redux-actions'
 import { requestSuccess, requestFail, requestPending } from '../api/request'
-import { omit, reject } from 'lodash'
 
 // ------------------------------------
 // Constants

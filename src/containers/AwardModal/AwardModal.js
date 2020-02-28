@@ -10,7 +10,6 @@ import {
   ModalFooter,
   ModalHeader,
   Row,
-  Table
 } from 'reactstrap'
 import { Field, reduxForm } from 'redux-form'
 
@@ -30,7 +29,7 @@ class AwardModal extends React.Component {
   }
 
   render() {
-    const { show, handleHide, handleSubmit, award, user } = this.props
+    const { show, handleHide, handleSubmit } = this.props
 
     return (
       <Modal isOpen={show} toggle={handleHide} size='sm'>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Col, Row, Input } from 'reactstrap'
+import { Button, Col, Row } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -55,7 +55,6 @@ class Splash extends Component {
 
 
   render() {
-    const {settings} = this.props
     let {imagePreviewUrl} = this.state
     return (
       <Row>

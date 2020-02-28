@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { Collapse, Container, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem }
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem }
   from 'reactstrap'
 import { canManageUsers } from 'helpers/roleHelpers'
 import { logout } from 'redux/modules/auth'

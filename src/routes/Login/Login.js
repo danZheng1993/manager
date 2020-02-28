@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Alert, Button, Col, Form, FormFeedback, FormGroup, Label, Row } from 'reactstrap'
+import { Alert, Button, Form, FormFeedback, FormGroup, Label } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'

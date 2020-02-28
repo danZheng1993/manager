@@ -2,7 +2,7 @@ import {findIndex} from 'lodash'
 
 export const refreshResult = (list, update) => {
     let index = findIndex(list, {_id: update._id})
-    if (index != -1) {
+    if (index !== -1) {
         list.splice(index, 1, update)
     } else {
         list.push(update)

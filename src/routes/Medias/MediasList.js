@@ -18,7 +18,6 @@ import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
 import InputField from 'components/InputField'
-import { handleError } from '../../helpers'
 
 const checkOptions = [
   {label: '全部', value: '' }, 
@@ -81,7 +80,7 @@ class MediasList extends Component {
     let filter = {}
     if (title) filter['title'] = title
     if (checkOption) filter['checkOption'] = checkOption
-    if (publicOption != '') filter['publicOption'] = publicOption
+    if (publicOption !== '') filter['publicOption'] = publicOption
     if (startDate) filter['startDate'] = startDate
     if (endDate) filter['endDate'] = endDate
     this.setState({filter})

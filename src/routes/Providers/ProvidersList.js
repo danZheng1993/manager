@@ -14,7 +14,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
-import { createNotification, handleError } from '../../helpers'
+import { createNotification } from '../../helpers'
 import { BUTTONS } from '../../constants'
 
 const typeOptions = [
@@ -83,7 +83,7 @@ class UsersList extends Component {
   }
 
   handleKeyPress(target) {
-    if(target.charCode==13){
+    if(target.charCode === 13){
       this.handleFilter()
     } 
   }

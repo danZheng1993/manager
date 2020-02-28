@@ -2,19 +2,12 @@ import {
   Button,
   Col,
   Form,
-  FormGroup,
-  Input,
-  Label,
   Modal,
   ModalBody,
   ModalFooter,
-  ModalHeader,
   Row,
-  Table
 } from 'reactstrap'
 import { Field, reduxForm } from 'redux-form'
-
-import DateTimeField from 'components/DateTimeField'
 import InputField from 'components/InputField'
 import React from 'react'
 import { compose } from 'redux'
@@ -30,7 +23,7 @@ class VIPModal extends React.Component {
   }
 
   render() {
-    const { show, handleHide, handleSubmit, award, user } = this.props
+    const { show, handleHide, handleSubmit } = this.props
 
     return (
       <Modal isOpen={show} toggle={handleHide} size='sm'>

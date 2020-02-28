@@ -1,10 +1,7 @@
-import { Button, Table } from 'reactstrap'
+import { Table } from 'reactstrap'
 import React, { Component } from 'react'
 import { deleteLog, getLogs } from 'redux/modules/log'
 import { logsListSelector, logsParamsSelector } from 'redux/selectors'
-
-import { Link } from 'react-router-dom'
-import MdPersonAdd from 'react-icons/lib/md/person-add'
 import Pagination from 'components/Pagination'
 import PropTypes from 'prop-types'
 import ReportModal from 'containers/ReportModal'

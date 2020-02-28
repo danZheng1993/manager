@@ -1,5 +1,4 @@
 import { takeLatest } from 'redux-saga/effects'
-import { get, pick } from 'lodash'
 import { GET_CHAT, GET_CHATS, CREATE_CHAT, UPDATE_CHAT, DELETE_CHAT }
   from '../modules/chat'
 import apiCall from '../api/apiCall'

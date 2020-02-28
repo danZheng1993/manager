@@ -1,5 +1,4 @@
 import { takeLatest } from 'redux-saga/effects'
-import { get, pick } from 'lodash'
 import { GET_SETTINGS, UPDATE_SETTINGS }
   from '../modules/setting'
 import apiCall from '../api/apiCall'

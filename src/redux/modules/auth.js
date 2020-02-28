@@ -43,7 +43,6 @@ export const pushNotification = createAction(PUSH_NOTIFICATION)
 export const pushUnreadMessages = createAction(PUSH_UNREAD_MESSAGES)
 
 const getInitialState = () => {
-  const now = new Date()
   let authRestore = JSON.parse(localStorage.getItem('hvr_auth') || null)
   return (authRestore && (moment().diff(moment(authRestore.exp)) < 7200000)) ? { // limit 2 hours
     token: authRestore.token,

@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
 import { deleteUser, getUsers } from 'redux/modules/user'
 import { usersListSelector, usersParamsSelector, usersloadingSelector } from 'redux/selectors'
-import AwardModal from 'containers/AwardModal'
 import Pagination from 'components/Pagination'
 import confirm from 'containers/ConfirmModal'
 import Input from 'components/InputField/InputComponent'
@@ -14,7 +13,6 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
-import { createNotification } from '../../helpers'
 import VIPModal from '../../containers/VIPModal'
 import { BUTTONS } from '../../constants'
 
@@ -71,17 +69,16 @@ class UsersList extends Component {
   }
 
   handleDeleteVIP = (id) => () => {
-    const { deleteUser } = this.props
     confirm('Are you sure to delete the VIP?').then(
       () => {
-      //   deleteUser({ id,
+      //   this.props.deleteUser({ id,
       //     success: () => createNotification('success'),
       }
     )
   }
 
   handleKeyPress(target) {
-    if(target.charCode==13){
+    if(target.charCode === 13){
       this.handleFilter()
     } 
   }

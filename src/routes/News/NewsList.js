@@ -17,7 +17,6 @@ import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
-import { handleError } from '../../helpers';
 import { BUTTONS } from '../../constants'
 
 class NewssList extends Component {
@@ -55,7 +54,7 @@ class NewssList extends Component {
 
   handleFilter = () => {
     const { getNewss, params } = this.props
-    const { title, checkOption, publicOption, startDate, endDate } = this.state
+    const { title, startDate, endDate } = this.state
     let filter = {}
     if (title) filter['title'] = title
     if (startDate) filter['startDate'] = startDate
@@ -132,7 +131,6 @@ class NewssList extends Component {
           <thead>
             <tr>
               <th>选择</th>
-              <th>编号</th>
               <th>标题</th>
               <th>发布时间</th>
               <th>阅读数量</th>
@@ -144,7 +142,6 @@ class NewssList extends Component {
             {newssList && newssList.map((news, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
-                <td scope='row'>{index + 1}</td>
                 <td>{news.title}</td>
                 <td>{getDateTimeStr(news.created)}</td>
                 <td>{news.visits}</td>

@@ -16,7 +16,6 @@ import * as selectors from 'redux/selectors'
 import { EditorState, ContentState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import { handleError } from '../../helpers';
 import { BUTTONS } from '../../constants'
 
 class NewsEdit extends Component {
@@ -53,7 +52,7 @@ class NewsEdit extends Component {
     }
   }
   handleSave = (values) => {
-    const { createNews, updateNews, match: { params }, history } = this.props
+    const { createNews, updateNews, match: { params } } = this.props
     const {content} = this.state
     params.id
     ? updateNews({
@@ -68,7 +67,7 @@ class NewsEdit extends Component {
   }
 
   handleSuccess = () => {
-    createNotification('success'),
+    createNotification('success')
     this.props.history.push('/news')
   }
 
@@ -81,7 +80,7 @@ class NewsEdit extends Component {
   };
 
   render() {
-    const { handleSubmit, match: { params }, initialValues} = this.props
+    const { handleSubmit, match: { params } } = this.props
     return (
       <Row>
         <Col sm={12} md={{ size: 10, offset: 1 }}>          

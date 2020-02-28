@@ -18,7 +18,7 @@ class InvoiceView extends Component {
   };
 
   componentWillMount () {
-    const { getInvoice, match: { params }, getJobs } = this.props
+    const { getInvoice, match: { params } } = this.props
     params.id && getInvoice({ id: params.id })
   }  
 

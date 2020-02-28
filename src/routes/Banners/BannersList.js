@@ -18,7 +18,6 @@ import { withRouter } from 'react-router'
 import DateTime from 'react-datetime'
 import Switch from 'react-switch'
 import { ADDRESS, BUTTONS } from '../../constants'
-import { handleError } from '../../helpers';
 class BannersList extends Component {
   constructor(props) {
     super(props)
@@ -54,7 +53,7 @@ class BannersList extends Component {
 
   handleFilter = () => {
     const { getBanners, params } = this.props
-    const { title, checkOption, publicOption, startDate, endDate } = this.state
+    const { title, startDate, endDate } = this.state
     let filter = {}
     if (title) filter['title'] = title
     if (startDate) filter['startDate'] = startDate
@@ -131,7 +130,6 @@ class BannersList extends Component {
           <thead>
             <tr>
               <th>选择</th>
-              <th>编号</th>
               <th>广告名称</th>
               <th>广告图片</th>
               <th>开始时间</th>
@@ -144,7 +142,6 @@ class BannersList extends Component {
             {bannersList && bannersList.map((banner, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
-                <td scope='row'>{index + 1}</td>
                 <td>{banner.title}</td>
                 <td>
                   <img src={ADDRESS.BANNER_BASE_URL + banner.image}    

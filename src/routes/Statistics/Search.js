@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import {getTransactionStatistics, compareTransactions} from '../../redux/modules/statistic'
+import { getTransactionStatistics } from '../../redux/modules/statistic'
 import DateRangePicker from '../../components/DateRangePicker'
 import { statisticsloadingSelector, transactionStatisticSelector } from '../../redux/selectors'
 import Loader from '../../containers/Loader'
@@ -56,7 +56,7 @@ class Chart extends Component {
   }
 
   render() {
-    const {loading, transactionStatistics, compare} = this.props
+    const { loading, transactionStatistics } = this.props
     let {startDate, endDate} = this.state
     return (
       <div>
