@@ -10,7 +10,7 @@ import { withRouter } from 'react-router'
 import { getMedia, updateMedia } from 'redux/modules/media'
 import confirm from 'containers/ConfirmModal'
 // import VrPlayer from 'react-vr-player'
-import { getDateTimeStr, createNotification } from '../../helpers'
+import { getDateTimeStr, createNotification, showTestStatus } from '../../helpers'
 import { mediaDetailSelector, mediasloadingSelector } from '../../redux/selectors'
 
 class MediaEdit extends Component {
@@ -33,7 +33,10 @@ class MediaEdit extends Component {
           updateMedia({ 
             id,
             body: {isAllowed},
-            success: () => createNotification('success',),
+            success: () => {
+              this.props.history.goBack()
+              createNotification('success')
+            },
            })
         }
       )
@@ -43,7 +46,10 @@ class MediaEdit extends Component {
           updateMedia({ 
             id, 
             body: {isAllowed},
-            success: () => createNotification('success'),
+            success: () => {
+              this.props.history.goBack()
+              createNotification('success')
+            },
           })
         }
       )
@@ -78,12 +84,10 @@ class MediaEdit extends Component {
           <Row>
           <Col sm={12} md={{size: 4, offset: 4}}>
             <p>视频标题 : {media.title} </p>
-            <p>审核状态 : {media.isAllowed ? '通过' : '未通过' } </p>
+            <p>审核状态 : {showTestStatus(media.isAllowed)} </p>
             <p>审核时间 : {getDateTimeStr(media.tested)} </p>
-            {media.isAllowed ? 
-              <Button color='secondary' onClick={(this.handleCheck(media._id, false))}>{BUTTONS.DECLINE}</Button> : 
-              <Button color='secondary' onClick={(this.handleCheck(media._id, true))}>{BUTTONS.ACCEPT}</Button>
-            }
+            <Button color='secondary' onClick={(this.handleCheck(media._id, false))}>{BUTTONS.DECLINE}</Button>
+            <Button color='secondary' onClick={(this.handleCheck(media._id, true))}>{BUTTONS.ACCEPT}</Button>
             </Col>
           </Row>
         </div>}

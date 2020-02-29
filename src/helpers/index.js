@@ -65,6 +65,14 @@ export const getPercent = (first, second) => {
   return percent.toFixed(2)
 }
 
+export const showTestStatus = (status) => {
+  if (status === null)
+    return '未通过'
+  if (status === true)
+    return '通过'
+  return '------'
+}
+
 export const handleError = (payload) => {
   if (payload.error) return payload.error.message
   return 'Network Error'

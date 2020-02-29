@@ -30,7 +30,7 @@ const Menu = [
         icon: 'icon-user',
         submenu: [{
                 name: '服务方管理',
-                path: 'providers',
+                path: 'providers/allowed',
             },
             {
                 name: '需求方管理',

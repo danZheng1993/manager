@@ -110,11 +110,11 @@ class MediaView extends Component {
             <tbody>
               <tr>
                 <th scope="row">项目首付款(20%)</th>
-                <td>{media.jobID.price}</td>
+                <td>{media.jobID.upfront}</td>
               </tr>
               <tr>
                 <th scope="row">项目尾款(80%)</th>
-                <td>{media.jobID.price}</td>
+                <td>{media.jobID.price - media.jobID.upfront}</td>
               </tr>
               <tr>
                 <th scope="row">项目总金额</th>

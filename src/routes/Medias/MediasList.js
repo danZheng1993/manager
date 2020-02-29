@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import Loader from '../../containers/Loader'
 import { updateMedia, getMedias } from 'redux/modules/media'
 import { mediasListSelector, mediasParamsSelector, mediasloadingSelector } from 'redux/selectors'
-import { ADDRESS, BUTTONS } from '../../constants'
+import { ADDRESS, BUTTONS, LABEL } from '../../constants'
 import { Link } from 'react-router-dom'
 import Pagination from 'components/Pagination'
 import Input from 'components/InputField/InputComponent'
@@ -15,15 +15,16 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
-import DateTime from 'react-datetime'
 import Switch from 'react-switch'
 import InputField from 'components/InputField'
+import DateRangePicker from '../../components/DateRangePicker'
+import { showTestStatus } from '../../helpers'
 
 const checkOptions = [
   {label: '全部', value: '' }, 
-  {label: '未审核', value: '未审核' }, 
-  {label: '审核通过', value: '审核通过' }, 
-  {label: '审核未通过', value: '审核未通过' }, 
+  {label: '未审核', value: 'null' }, 
+  {label: '审核通过', value: true }, 
+  {label: '审核未通过', value: false }, 
 ]
 const publicOptions = [
   {label: '全部', value: '' }, 
@@ -79,7 +80,7 @@ class MediasList extends Component {
     const { title, checkOption, publicOption, startDate, endDate } = this.state
     let filter = {}
     if (title) filter['title'] = title
-    if (checkOption) filter['checkOption'] = checkOption
+    if (checkOption !== '') filter['checkOption'] = checkOption
     if (publicOption !== '') filter['publicOption'] = publicOption
     if (startDate) filter['startDate'] = startDate
     if (endDate) filter['endDate'] = endDate
@@ -96,8 +97,16 @@ class MediasList extends Component {
     this.setState({selectionRange: date.selection})
   }
 
+  onChangeRange = (picker) => {
+    this.setState({
+      startDate: picker.startDate,
+      endDate: picker.endDate,
+    })
+  }
+
   render() {
     const { mediasList, params, loading } = this.props
+    const { startDate, endDate } = this.state
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
@@ -105,15 +114,15 @@ class MediasList extends Component {
         <Row className='mb-3'>
           <Col md={2} xs={12}>
             <Input
-              label='title'
+              label={LABEL.TITLE}
               type='text'
-              placeholder='title'
+              placeholder={LABEL.TITLE}
               onChange={(e) => this.setState({title: e.target.value})}
               />
             </Col>
             <Col md={2}>
               <Input
-                label='审核状态 : '
+                label={LABEL.CHECK_OPTION}
                 name='checkOption'
                 type='select'
                 options={checkOptions}
@@ -123,7 +132,7 @@ class MediasList extends Component {
             </Col>
             <Col md={2}>
               <Input
-                label='审核状态 : '
+                label={LABEL.ISPUBLIC}
                 name='publicOption'
                 type='select'
                 options={publicOptions}
@@ -131,27 +140,17 @@ class MediasList extends Component {
                 onChange={(e) => this.setState({publicOption: e.target.value})}
                 />
             </Col>
-            <Col md={2} className="text-left">
-              <Label>StartDate :</Label>
-              <DateTime
-                placeholder='From'
-                dateFormat='YYYY-MM-DD'
-                timeFormat={false}
-                onChange={(startDate) => this.setState({startDate})}
-              />
+            <Col md={6}>
+            <Label>{LABEL.DATE}</Label>
+            <Row>
+              <Col md={8}>
+                <DateRangePicker startDate={startDate} endDate={endDate} onChangeRange={this.onChangeRange}/>
+              </Col>
+              <Col>
+                <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
+              </Col>
+            </Row>
             </Col>
-            <Col md={2} className="text-left">
-            <Label>End Date :</Label>
-              <DateTime 
-                placeholder='From'
-                dateFormat='YYYY-MM-DD'
-                timeFormat={false}
-                onChange={(endDate) => this.setState({endDate})}
-              />
-            </Col>
-            <Col md={2}>
-            <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
-          </Col>
         </Row>
         <Table striped bordered className="text-center">
           <thead>
@@ -176,7 +175,7 @@ class MediasList extends Component {
                 </td>
                 <td>{media.title}</td>
                 <td>{media.isPublic ? '是' : '否'}</td>
-                <td>{media.title}</td>
+                <td>{showTestStatus(media.isAllowed)}</td>
                 <td>{getDateTimeStr(media.created)}</td>
                 <td><Switch onChange={() => this.handleChange(media._id, media.recommend)} checked={media.recommend} /></td>
                 <td>
@@ -185,7 +184,7 @@ class MediasList extends Component {
                   </Button>
                   {' '}
                   <Button color='info' tag={Link} size='sm' to={`/medias/edit/${media._id}`}>
-                    {BUTTONS.EDIT}
+                    {BUTTONS.TEST}
                   </Button>
                 </td>
               </tr>

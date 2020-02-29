@@ -4,7 +4,8 @@ const SITE_ADDRESS = `http://${IP}:${PORT}/`
 
 export const BUTTONS = {
     ADD: 'ADD',
-    EDIT: 'EDIT', // 审核, 编辑
+    TEST: '审核',
+    EDIT: '编辑',
     VIEW: '查看',
     DELETE: '删除',
     CANCEL: '取消',
@@ -22,6 +23,17 @@ export const BUTTONS = {
     LOGIN: '登录',
     ACCEPT: '审核通过',
     DECLINE: '不通过',
+}
+
+export const LABEL = {
+    DATE: 'DATE',
+    TITLE: 'TITLE',
+    ISPUBLIC: '是否公开',
+    CHECK_OPTION: '审核状态',
+}
+
+export const PLACEHOLDER = {
+    DATE: 'Select date...',
 }
 
 export const cnLocale = {

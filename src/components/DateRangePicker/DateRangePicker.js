@@ -6,7 +6,7 @@ import 'bootstrap-daterangepicker/daterangepicker.css'
 import {
   Button,
 } from 'reactstrap'
-import { cnLocale } from '../../constants'
+import { cnLocale, PLACEHOLDER } from '../../constants'
 
 class DateRangePicker extends React.Component {
 
@@ -45,8 +45,8 @@ class DateRangePicker extends React.Component {
 
   render() {
     const {startDate, endDate} = this.props
-    let start = startDate ? startDate.format('YYYY-MM-DD') : 'start'
-    let end = endDate ? endDate.format('YYYY-MM-DD') : 'end'
+    let start = startDate ? startDate.format('YYYY-MM-DD') : ''
+    let end = endDate ? endDate.format('YYYY-MM-DD') : ''
     let label = start + ' ~ ' + end
     if (start === end) {
       label = start
@@ -61,7 +61,7 @@ class DateRangePicker extends React.Component {
             locale={cnLocale}
           >
             <div className="input-group">
-              <input type="text" className="form-control" value={label} placeholder="Select Date..."/>
+              <input type="text" className="form-control" value={label} placeholder={PLACEHOLDER.DATE}/>
                 <span className="input-group-btn">
                     <Button className="default date-range-toggle">
                       <i className="fa fa-calendar"/>
