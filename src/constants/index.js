@@ -53,6 +53,17 @@ export const ERR_MSGS = {
 
 }
 
+export const TABLE_HEADERS = {
+    INDEX: '编号',
+    SNAPSHOT: '封面',
+    TITLE: '标题',
+    CLIENT: '需求方',
+    PROVIDER: '服务方',
+    CREATED: '发布时间',
+    TEST_STATUS: '审核状态',
+    ACTION: '操作',
+}
+
 export const ADDRESS = {
     BASE_URL: SITE_ADDRESS,
     BANNER_BASE_URL: `${SITE_ADDRESS}/bannersImage/`,

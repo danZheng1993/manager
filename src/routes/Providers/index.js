@@ -6,6 +6,7 @@ import ProvidersList from './ProvidersList'
 import ProvidersPendingList from './ProvidersPendingList'
 import ProviderView from './ProviderView'
 import ProviderEdit from './ProviderEdit'
+import MyMediaList from '../Medias/MyMediaList'
 
 export default () => (
   <div>
@@ -16,6 +17,6 @@ export default () => (
     <Route path='/providers/pending' exact component={ProvidersPendingList} />
     <Route path='/providers/pending/check/:id' component={ProviderEdit} />
     <Route path='/providers/view/:id' component={ProviderView} />
-    <Route path='/providers/edit/:id' component={ProviderEdit} />
+    <Route path='/providers/medias/:id' component={MyMediaList} />
   </div>
 )

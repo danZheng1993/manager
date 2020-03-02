@@ -98,7 +98,7 @@ class Tab extends React.Component {
                   </Link>
                 </NavItem>
                 <NavItem style={{backgroundColor: '#f1f1ff'}}>
-                  <Link to={`/providers/edit/${path[3]}`} className='nav-link' style={this.setActive(`/providers/edit/${path[3]}`)}>
+                  <Link to={`/providers/medias/${path[3]}`} className='nav-link' style={this.setActive(`/providers/medias/${path[3]}`)}>
                   发布的视频
                   </Link>
                 </NavItem>
