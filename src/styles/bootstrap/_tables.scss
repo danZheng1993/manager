@@ -17,6 +17,9 @@
   thead th {
     vertical-align: bottom;
     border-bottom: (2 * $table-border-width) solid $table-border-color;
+    @include hover {
+      cursor: pointer;
+    }
   }
 
   tbody + tbody {

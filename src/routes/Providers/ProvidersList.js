@@ -16,6 +16,7 @@ import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 import { createNotification } from '../../helpers'
 import { BUTTONS } from '../../constants'
+import _ from 'lodash'
 
 const typeOptions = [
   {label: '全部', value: '' }, 
@@ -29,6 +30,8 @@ class UsersList extends Component {
     this.state = {
       phoneNumber: '',
       typeOption: '',
+      sort: '',
+      direction: false,
       filter : {permission: 'ALLOWED', role: 'provider'}
     }
   }
@@ -42,6 +45,15 @@ class UsersList extends Component {
     const { getUsers, params } = this.props
     const {filter} = this.state
     getUsers({ params : {...params, filter} })
+  }
+
+  sort = (value) => () => {
+    const { sort, direction } = this.state
+    if (value === sort) {
+      this.setState({ direction: !direction})
+    } else {
+      this.setState({ sort: value})
+    }
   }
 
   handlePagination = (pagination) => {
@@ -90,6 +102,8 @@ class UsersList extends Component {
 
   render() {
     const { usersList, params, loading } = this.props
+    const { sort, direction } = this.state
+    let sortedList = _.orderBy(usersList, sort, direction ? 'asc' : 'desc')
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
@@ -123,12 +137,12 @@ class UsersList extends Component {
               <th>服务商类型</th>
               <th>所在城市</th>
               <th>公司名称</th>
-              <th>总收入</th>
+              <th onClick={this.sort('balance')}>总收入</th>
               <th>操作</th>
             </tr>
           </thead>
           <tbody>
-            {usersList && usersList.map((user, index) => (
+            {sortedList && sortedList.map((user, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
                 <td>{user.userName}</td>
