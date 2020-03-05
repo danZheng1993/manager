@@ -13,6 +13,7 @@ import {
 } from 'reactstrap'
 import { Field, reduxForm } from 'redux-form'
 
+import { isFieldRequired } from 'helpers'
 import DateTimeField from 'components/DateTimeField'
 import InputField from 'components/InputField'
 import React from 'react'
@@ -20,20 +21,51 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { connectModal } from 'redux-modal'
 import { createStructuredSelector } from 'reselect'
-import { BUTTONS } from '../../constants'
-
+import { BUTTONS, PLACEHOLDER } from '../../constants'
+import Dropzone from 'react-dropzone';
+import upload from '../../redux/api/upload'
+import { createNotification } from '../../helpers'
 class AwardModal extends React.Component {
 
-  handleFilter = (values) => {
+  constructor(props) {
+    super(props)
+    this.state = {
+      file: '',
+      imagePreviewUrl: ''
+    }
+  }
 
+  handleFilter = (values) => {
+    const { users } = this.props
+    const { file } = this.state
+    if (!file || !users) return;
+    upload('awards/upload', 'post', file, {...values, users})
+    .then(() => createNotification('success'))
+    .catch(err => alert(err))
+    this.props.handleHide()
+  }
+
+  handleImageChange = (files)  => {
+    let reader = new FileReader()
+    let file = files[0]
+
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      })
+    }
+    file && reader.readAsDataURL(file)
   }
 
   render() {
-    const { show, handleHide, handleSubmit } = this.props
-
+    const { show, handleHide, handleSubmit, users } = this.props
+    const { imagePreviewUrl } = this.state
     return (
       <Modal isOpen={show} toggle={handleHide} size='sm'>
-        <ModalHeader toggle={this.toggle} className="text-center">红包设置</ModalHeader>
+        <ModalHeader toggle={this.toggle} className="text-center">
+          红包设置
+        </ModalHeader>
         <ModalBody>
           <Row>
             <Col sm={12}>
@@ -42,7 +74,7 @@ class AwardModal extends React.Component {
                   <Label sm={4}>发放人数</Label>
                   <Col sm={8}>
                     <Input static>
-                      共选中768798人
+                      共选中{users.length}人
                     </Input>
                   </Col>
                 </FormGroup>
@@ -52,6 +84,7 @@ class AwardModal extends React.Component {
                   dateFormat='YYYY-MM-DD'
                   type="number"
                   timeFormat={false}
+                  validate={[isFieldRequired]}
                   component={InputField}
                 />
                 <Field
@@ -60,6 +93,7 @@ class AwardModal extends React.Component {
                   name='from'
                   dateFormat='YYYY-MM-DD'
                   timeFormat={false}
+                  validate={[isFieldRequired]}
                   component={DateTimeField}
                 />
                 <Field
@@ -68,15 +102,27 @@ class AwardModal extends React.Component {
                   name='to'
                   dateFormat='YYYY-MM-DD'
                   timeFormat={false}
+                  validate={[isFieldRequired]}
                   component={DateTimeField}
                 />
-                <Button color='secondary'>{BUTTONS.POST}</Button>
+                <Dropzone
+                  className="card p-3 d-flex justify-content-center align-items-center"
+                  ref="dropzone"
+                  onDrop={this.handleImageChange}
+                  style={{borderWidth: 1, borderColor: '#dde6e9'}}
+                >
+                  { imagePreviewUrl ? 
+                    <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} /> :
+                    <p>{PLACEHOLDER.IMAGE}</p>
+                  }
+                </Dropzone>
               </Form>
             </Col>
           </Row>
         </ModalBody>
         <ModalFooter>
-          <Button color="primary" onClick={handleHide}>{BUTTONS.CLOSE}</Button>
+          <Button color='primary' onClick={handleSubmit(this.handleFilter)} >{BUTTONS.POST}</Button>
+          <Button style={{float: 'right'}} color="danger" onClick={handleHide}>{BUTTONS.CLOSE}</Button>
         </ModalFooter>
       </Modal>
     )

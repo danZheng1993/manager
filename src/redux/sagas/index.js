@@ -11,6 +11,7 @@ import job from './job'
 import chat from './chat'
 import payment from './payment'
 import banner from './banner'
+import award from './award'
 import news from './news'
 import media from './media'
 import log from './log'
@@ -34,6 +35,7 @@ export default function* rootSaga () {
     chat(),
     payment(),
     banner(),
+    award(),
     news(),
     log(),
     media(),

@@ -5,7 +5,7 @@ import { deleteUser, getUsers } from 'redux/modules/user'
 import { usersListSelector, usersParamsSelector, usersloadingSelector } from 'redux/selectors'
 import AwardModal from 'containers/AwardModal'
 import Pagination from 'components/Pagination'
-import confirm from 'containers/ConfirmModal'
+import SelectAllCheckBox from 'components/SelectAllCheckBox'
 import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
@@ -14,7 +14,6 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
-import { createNotification } from '../../helpers'
 
 const typeOptions = [
   {label: '全部', value: '' }, 
@@ -26,6 +25,7 @@ class UsersList extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      users: {},
       phoneNumber: '',
       typeOption: '',
       filter : {permission: 'ALLOWED', role: 'provider'},
@@ -57,7 +57,14 @@ class UsersList extends Component {
   }
   createAward = (user) => () => {
     const { show } = this.props
-    show('awardModal', { user })
+    const { users } = this.state
+    if (user) {
+      show('awardModal', { users: [user] })
+    } else {
+      let result = []
+      for (let i in users) users[i] && result.push(i)
+      show('awardModal', { users: result })
+    }
   }
 
   handleFilter = () => {
@@ -75,15 +82,10 @@ class UsersList extends Component {
     })
   }
 
-  handleDeleteUser = (id) => () => {
-    const { deleteUser } = this.props
-    confirm('Are you sure to delete the user?').then(
-      () => {
-        deleteUser({ id,
-          success: () => createNotification('success')
-        })
-      }
-    )
+  onSelectUser = (id) => () => {
+    let { users } = this.state;
+    users[id] = !users[id]
+    this.setState({ users })
   }
 
   handleKeyPress(target) {
@@ -94,6 +96,7 @@ class UsersList extends Component {
 
   render() {
     const { usersList, params, loading } = this.props
+    const { users } = this.state
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
@@ -121,6 +124,7 @@ class UsersList extends Component {
         <Table striped bordered className="text-center">
           <thead>
             <tr>
+              <th><SelectAllCheckBox onSelect = {(users) => this.setState({users})} list={usersList} /></th>
               <th>编号</th>
               <th>名称</th>
               <th>手机号</th>
@@ -134,6 +138,7 @@ class UsersList extends Component {
           <tbody>
             {usersList && usersList.map((user, index) => (
               <tr key={index}>
+                <td><input type="checkbox" onClick={this.onSelectUser(user._id)} checked={users[user._id]} /></td>
                 <th scope='row'>{index + 1}</th>
                 <td>{user.userName}</td>
                 <td>{user.phoneNumber}</td>
@@ -142,7 +147,7 @@ class UsersList extends Component {
                 <td>{user.companyName}</td>
                 <td>¥{user.balance}</td>
                 <td>
-                  <Button color='primary' size='sm' onClick={this.createAward()}>
+                  <Button color='primary' size='sm' onClick={this.createAward(user._id)}>
                   发红包
                   </Button>
                 </td>
@@ -150,7 +155,16 @@ class UsersList extends Component {
             ))}
           </tbody>
         </Table>
-        <Pagination pagination={pagination} setPagination={this.handlePagination} />
+        <Row>
+          <Col width={1}>
+            <Button color='success' size='sm' onClick={this.createAward()}>
+              发红包
+            </Button>
+          </Col>
+          <Col width={11}>
+            <Pagination pagination={pagination} setPagination={this.handlePagination} />
+          </Col>
+        </Row>
         <AwardModal />
       </div>
     )

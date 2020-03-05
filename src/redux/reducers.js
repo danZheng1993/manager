@@ -14,6 +14,7 @@ import user from './modules/user'
 import job from './modules/job'
 import chat from './modules/chat'
 import banner from './modules/banner'
+import award from './modules/award'
 import news from './modules/news'
 import log from './modules/log'
 import media from './modules/media'
@@ -36,6 +37,7 @@ export default combineReducers({
   subcategory,
   chat,
   banner,
+  award,
   news,
   log,
   media,

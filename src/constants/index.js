@@ -34,6 +34,7 @@ export const LABEL = {
 
 export const PLACEHOLDER = {
     DATE: 'Select date...',
+    IMAGE: 'Select image...',
 }
 
 export const cnLocale = {
