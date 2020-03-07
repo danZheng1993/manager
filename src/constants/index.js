@@ -35,6 +35,7 @@ export const LABEL = {
 export const PLACEHOLDER = {
     DATE: 'Select date...',
     IMAGE: 'Select image...',
+    TITLE: 'Input title',
 }
 
 export const cnLocale = {
@@ -45,13 +46,15 @@ export const cnLocale = {
     fromLabel: '언제부터',
     toLabel: '언제까지',
     customRangeLabel: '사용자정의',
-    daysOfWeek: ['日', '月', '火', '水', '木', '金','土'],
+    daysOfWeek: ['日', '一', '二', '三', '四', '五','六'],
     monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     firstDay: 1
 };
 
-export const ERR_MSGS = {
-
+export const MSGS = {
+    NETWORK_ERROR: 'NETWORK ERROR',
+    REQUIRED: 'THIS FEILD IS REQUIRED',
+    SUCCESS: 'SUCCESS',
 }
 
 export const TABLE_HEADERS = {

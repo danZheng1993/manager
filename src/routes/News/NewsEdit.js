@@ -116,8 +116,8 @@ class NewsEdit extends Component {
             />
             <Row>
               <Col xs={6}>
-                <Link to='/newss' className='btn btn-secondary'>
-                  Cancel
+                <Link to='/news' className='btn btn-secondary'>
+                  {BUTTONS.CANCEL}
                 </Link>
               </Col>
               <Col>

@@ -2,9 +2,10 @@ import moment from 'moment'
 import { requestFail, requestSuccess } from '../redux/api/request'
 import 'react-notifications/lib/notifications.css'
 import {NotificationManager} from 'react-notifications'
+import { MSGS } from '../constants'
 
 export const isFieldRequired = value =>
-  value ? undefined : 'This Field is Required.'
+  value ? undefined : MSGS.REQUIRED
 
 export const ucFirst = (str) =>
   str.charAt(0).toUpperCase() + str.slice(1)
@@ -47,7 +48,7 @@ export const  createNotification = (type, message = '') => {
         NotificationManager.info('message')
         break
       case 'success':
-        NotificationManager.success(message, 'Success!', 3000)
+        NotificationManager.success(message, MSGS.SUCCESS, 3000)
         break
       case 'warning':
         NotificationManager.warning('Warning message', 'Close after 3000ms', 3000)
@@ -75,5 +76,5 @@ export const showTestStatus = (status) => {
 
 export const handleError = (payload) => {
   if (payload.error) return payload.error.message
-  return 'Network Error'
+  return MSGS.NETWORK_ERROR
 }

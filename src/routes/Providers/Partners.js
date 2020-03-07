@@ -103,7 +103,7 @@ class UsersList extends Component {
         </Row>
         <div className='mb-2' onClick={this.createVIP()}>
           <Button color='primary'>
-            开始备份
+            添加合作公司
           </Button>
         </div>
         <Table striped bordered className="text-center">

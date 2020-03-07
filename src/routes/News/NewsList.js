@@ -15,9 +15,9 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
-import DateTime from 'react-datetime'
 import Switch from 'react-switch'
-import { BUTTONS } from '../../constants'
+import { BUTTONS, LABEL, PLACEHOLDER } from '../../constants'
+import DateRangePicker from '../../components/DateRangePicker'
 
 class NewssList extends Component {
   constructor(props) {
@@ -90,8 +90,16 @@ class NewssList extends Component {
     })
   }
 
+  onChangeRange = (picker) => {
+    this.setState({
+      startDate: picker.startDate,
+      endDate: picker.endDate,
+    })
+  }
+
   render() {
     const { newssList, params, loading } = this.props
+    const { startDate, endDate } = this.state
     const pagination = pick(params, ['page', 'page_size', 'count'])
     return (
       <div>
@@ -99,33 +107,23 @@ class NewssList extends Component {
         <Row className='mb-3'>
           <Col md={2} xs={12}>
             <Input
-              label='title'
+              label={LABEL.TITLE}
               type='text'
-              placeholder='title'
+              placeholder={PLACEHOLDER.TITLE}
               onChange={(e) => this.setState({title: e.target.value})}
               />
             </Col>
-            <Col md={2} className="text-left">
-              <Label>StartDate :</Label>
-              <DateTime
-                placeholder='From'
-                dateFormat='YYYY-MM-DD'
-                timeFormat={false}
-                onChange={(startDate) => this.setState({startDate})}
-              />
+            <Col md={6}>
+              <Label>{LABEL.DATE}</Label>
+              <Row>
+                <Col md={8}>
+                  <DateRangePicker startDate={startDate} endDate={endDate} onChangeRange={this.onChangeRange}/>
+                </Col>
+                <Col>
+                  <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
+                </Col>
+              </Row>
             </Col>
-            <Col md={2} className="text-left">
-            <Label>End Date :</Label>
-              <DateTime 
-                placeholder='From'
-                dateFormat='YYYY-MM-DD'
-                timeFormat={false}
-                onChange={(endDate) => this.setState({endDate})}
-              />
-            </Col>
-            <Col md={2}>
-            <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
-          </Col>
         </Row>
         <Table striped bordered className="text-center">
           <thead>
