@@ -13,6 +13,7 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { getDateTimeStr } from 'helpers'
 import { withRouter } from 'react-router'
+import { CONFIRM } from '../../constants'
 
 class LogsList extends Component {
   static propTypes = {
@@ -29,7 +30,7 @@ class LogsList extends Component {
 
   handleDeleteLog = (id) => () => {
     const { deleteLog } = this.props
-    confirm('Are you sure to delete the log?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteLog({ id })
       }

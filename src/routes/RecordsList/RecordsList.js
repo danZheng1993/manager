@@ -15,6 +15,7 @@ import MdAddCircleOutline from 'react-icons/lib/md/add-circle-outline'
 import confirm from 'containers/ConfirmModal'
 import DateTimeField from 'components/DateTimeField'
 import Pagination from 'components/Pagination'
+import { CONFIRM } from '../../constants'
 
 class RecordsList extends Component {
   static propTypes = {
@@ -33,7 +34,7 @@ class RecordsList extends Component {
 
   handleDeleteRecord = (id) => () => {
     const { deleteRecord } = this.props
-    confirm('Are you sure to delete the record?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteRecord({ id })
       }

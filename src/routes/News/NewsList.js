@@ -16,7 +16,7 @@ import { pick } from 'lodash'
 import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import Switch from 'react-switch'
-import { BUTTONS, LABEL, PLACEHOLDER } from '../../constants'
+import { BUTTONS, LABEL, PLACEHOLDER, CONFIRM } from '../../constants'
 import DateRangePicker from '../../components/DateRangePicker'
 
 class NewssList extends Component {
@@ -74,7 +74,7 @@ class NewssList extends Component {
 
   handleDelete = (id) => () => {
     const { deleteNews } = this.props
-    confirm('Are you sure to delete the News?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteNews({ id, success: () => createNotification('success')})
       }

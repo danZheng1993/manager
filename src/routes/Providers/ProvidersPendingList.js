@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
+import { CONFIRM } from '../../constants'
 
 class UsersList extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class UsersList extends Component {
 
   handleDeleteUser = (id) => () => {
     const { deleteUser } = this.props
-    confirm('Are you sure to delete the user?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteUser({ id })
       }

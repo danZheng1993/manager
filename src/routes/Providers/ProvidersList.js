@@ -15,7 +15,7 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 import { createNotification } from '../../helpers'
-import { BUTTONS } from '../../constants'
+import { BUTTONS, CONFIRM } from '../../constants'
 import _ from 'lodash'
 
 const typeOptions = [
@@ -85,7 +85,7 @@ class UsersList extends Component {
 
   handleDeleteUser = (id) => () => {
     const { deleteUser } = this.props
-    confirm('Are you sure to delete the user?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteUser({ id,
           success: () => createNotification('success')

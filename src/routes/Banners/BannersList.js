@@ -16,7 +16,7 @@ import { pick } from 'lodash'
 import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import Switch from 'react-switch'
-import { ADDRESS, BUTTONS, LABEL, PLACEHOLDER } from '../../constants'
+import { ADDRESS, BUTTONS, LABEL, PLACEHOLDER, CONFIRM } from '../../constants'
 import DateRangePicker from '../../components/DateRangePicker'
 class BannersList extends Component {
   constructor(props) {
@@ -73,7 +73,7 @@ class BannersList extends Component {
 
   handleDelete = (id) => () => {
     const { deleteBanner } = this.props
-    confirm('Are you sure to delete the Banner?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteBanner({ id, success: () => createNotification('success')})
       }

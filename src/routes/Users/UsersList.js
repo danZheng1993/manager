@@ -16,6 +16,7 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { ucFirst } from 'helpers'
 import { withRouter } from 'react-router'
+import { CONFIRM } from '../../constants'
 
 class UsersList extends Component {
   static propTypes = {
@@ -32,7 +33,7 @@ class UsersList extends Component {
 
   handleDeleteUser = (id) => () => {
     const { deleteUser } = this.props
-    confirm('Are you sure to delete the user?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteUser({ id })
       }

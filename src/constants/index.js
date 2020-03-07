@@ -57,6 +57,10 @@ export const MSGS = {
     SUCCESS: 'SUCCESS',
 }
 
+export const CONFIRM = {
+    DELETE: 'ARE YOU SURE TO DELETE?',
+}
+
 export const TABLE_HEADERS = {
     INDEX: '编号',
     SNAPSHOT: '封面',

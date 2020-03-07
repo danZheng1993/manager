@@ -14,7 +14,7 @@ import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
 import VIPModal from '../../containers/VIPModal'
-import { BUTTONS } from '../../constants'
+import { BUTTONS, CONFIRM } from '../../constants'
 
 class UsersList extends Component {
   constructor(props) {
@@ -69,7 +69,7 @@ class UsersList extends Component {
   }
 
   handleDeleteVIP = (id) => () => {
-    confirm('Are you sure to delete the VIP?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
       //   this.props.deleteUser({ id,
       //     success: () => createNotification('success'),

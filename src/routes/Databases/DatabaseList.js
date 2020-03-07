@@ -13,7 +13,7 @@ import { pick } from 'lodash'
 import bytes from 'bytes'
 import { withRouter } from 'react-router'
 import { getDateTimeStr, createNotification } from '../../helpers'
-import { BUTTONS } from '../../constants'
+import { BUTTONS, CONFIRM } from '../../constants'
 
 class DatabaseList extends Component {
 
@@ -40,7 +40,7 @@ class DatabaseList extends Component {
 
   handleDeleteDatabase = (id) => () => {
     const { deleteDatabase } = this.props
-    confirm('Are you sure to delete the database?').then(
+    confirm(CONFIRM.DELETE).then(
       () => {
         deleteDatabase({ id, 
           success: () => createNotification('success')
