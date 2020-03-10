@@ -21,7 +21,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { connectModal } from 'redux-modal'
 import { createStructuredSelector } from 'reselect'
-import { BUTTONS, PLACEHOLDER } from '../../constants'
+import { BUTTONS, PLACEHOLDER, RULES } from '../../constants'
 import Dropzone from 'react-dropzone';
 import upload from '../../redux/api/upload'
 import { createNotification } from '../../helpers'
@@ -108,6 +108,7 @@ class AwardModal extends React.Component {
                 <Dropzone
                   className="card p-3 d-flex justify-content-center align-items-center"
                   ref="dropzone"
+                  accept={RULES.IMAGE}
                   onDrop={this.handleImageChange}
                   style={{borderWidth: 1, borderColor: '#dde6e9'}}
                 >

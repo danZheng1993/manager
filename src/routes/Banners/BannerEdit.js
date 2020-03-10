@@ -13,7 +13,8 @@ import uploadFile from '../../redux/api/upload'
 import InputField from 'components/InputField'
 import * as selectors from 'redux/selectors'
 import DateTimeField from 'components/DateTimeField'
-import { ADDRESS, BUTTONS } from '../../constants'
+import { ADDRESS, BUTTONS, RULES, PLACEHOLDER } from '../../constants'
+import Dropzone from 'react-dropzone';
 
 class BannerEdit extends Component {
   constructor(props) {
@@ -68,11 +69,9 @@ class BannerEdit extends Component {
     this.props.history.push('/banners')
   }
 
-  handleImageChange = (e)  => {
-    e.preventDefault()
-
+  handleImageChange = (files)  => {
     let reader = new FileReader()
-    let file = e.target.files[0]
+    let file = files[0]
 
     reader.onloadend = () => {
       this.setState({
@@ -148,14 +147,20 @@ class BannerEdit extends Component {
               </Col>
             </Row>
             <Row>
-              <Col md={4}>
+              <Col md={12}>
                 <Label >广告图片 :</Label>
-                <Input type="file" onChange={this.handleImageChange} accept=".gif,.jpg,.jpeg,.png"/>
-              </Col>
-              <Col md={8}>
-                { imagePreviewUrl && <img src={imagePreviewUrl}
-                  width="100" height="100" alt="snapshot" />
-                }
+                <Dropzone
+                  className="card p-3 d-flex justify-content-center align-items-center"
+                  ref="dropzone"
+                  accept={RULES.IMAGE}
+                  onDrop={this.handleImageChange}
+                  style={{borderWidth: 1, borderColor: '#dde6e9'}}
+                >
+                  { imagePreviewUrl ? 
+                    <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} /> :
+                    <p>{PLACEHOLDER.IMAGE}</p>
+                  }
+                </Dropzone>
               </Col>
             </Row>
             <Field

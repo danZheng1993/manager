@@ -86,7 +86,6 @@ class InvoicesList extends Component {
         <Table striped bordered className="text-center">
           <thead>
             <tr>
-              <th>选择</th>
               <th>编号</th>
               <th>发票金额</th>
               <th>申请时间</th>
@@ -99,7 +98,6 @@ class InvoicesList extends Component {
           <tbody>
             {invoicesList && invoicesList.map((invoice, index) => (
               <tr key={index}>
-                <th scope='row'>{index + 1}</th>
                 <th scope='row'>{index + 1}</th>
                 <td>{invoice.price}</td>
                 <td>{getDateTimeStr(invoice.created)}</td>

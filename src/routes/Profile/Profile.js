@@ -10,7 +10,7 @@ import { isFieldRequired } from 'helpers'
 import InputField from 'components/InputField'
 import { createNotification } from '../../helpers'
 import uploadFile from '../../redux/api/upload'
-import { ADDRESS, BUTTONS } from '../../constants'
+import { ADDRESS, BUTTONS, RULES } from '../../constants'
 import Dropzone from 'react-dropzone';
 
 class Profile extends Component {
@@ -75,7 +75,13 @@ class Profile extends Component {
           <Form onSubmit={handleSubmit(this.handleSave)}>
             <Row>
               <Col xs={12} className="text-center">
-                <Dropzone className="card p-3 d-flex justify-content-center align-items-center" ref="dropzone" onDrop={this.handleImageChange} >
+                <Dropzone
+                  className="card p-3 d-flex justify-content-center align-items-center"
+                  ref="dropzone"
+                  accept={RULES.IMAGE}
+                  onDrop={this.handleImageChange}
+                  style={{borderWidth: 1, borderColor: '#dde6e9'}}
+                >
                   { imagePreviewUrl ? 
                     <img src={imagePreviewUrl}
                       className="avatar" alt="avatar" /> :
