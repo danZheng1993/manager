@@ -19,6 +19,7 @@ import subcategory from './subcategory'
 import invoice from './invoice'
 import statistic from './statistic'
 import database from './database'
+import contract from './contract'
 
 export default function* rootSaga () {
   yield all([
@@ -41,6 +42,7 @@ export default function* rootSaga () {
     media(),
     invoice(),
     database(),
+    contract(),
     statistic()
   ])
 }

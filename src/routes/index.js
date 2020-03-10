@@ -21,6 +21,7 @@ import Banners from './Banners'
 import Settings from './Settings'
 import Statistics from './Statistics'
 import Databases from './Databases'
+import Contracts from './Contracts'
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from 'helpers/authHelpers'
@@ -71,6 +72,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/settings' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
             <Route path='/statistics' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Statistics))} />
             <Route path='/databases' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Databases))} />
+            <Route path='/contracts' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Contracts))} />
           </Container>
           </div>
         </section>

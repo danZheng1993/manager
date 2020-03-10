@@ -1,12 +1,12 @@
 import React from 'react'
 import { Modal, } from 'reactstrap'
-import Spinner from 'react-spinkit'
 
 const ConfirmModal = ({active}) => (
     active &&
     <div style={{width: '100%', height: '100vh', flex: 1, justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-        <Spinner name='double-bounce' />
-        <Modal isOpen={active}>
+        <div className="whirl double-up">
+        </div>
+        <Modal isOpen={active} backdropClassName="bg-gray">
         </Modal>
     </div>
 )

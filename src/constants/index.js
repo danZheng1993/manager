@@ -30,12 +30,14 @@ export const LABEL = {
     TITLE: 'TITLE',
     ISPUBLIC: '是否公开',
     CHECK_OPTION: '审核状态',
+    KEYWORD: '输入搜索',
 }
 
 export const PLACEHOLDER = {
     DATE: 'Select date...',
     IMAGE: 'Select image...',
     TITLE: 'Input title',
+    CONTRACT_PERSON: '输入甲方名称、乙方名称',
 }
 
 export const cnLocale = {
@@ -70,6 +72,9 @@ export const TABLE_HEADERS = {
     CREATED: '发布时间',
     TEST_STATUS: '审核状态',
     ACTION: '操作',
+    CONTRACT_TIME: '签订时间',
+    CONTRACT_ONE: '甲方',
+    CONTRACT_TWO: '乙方',
 }
 
 export const ADDRESS = {
