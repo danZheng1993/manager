@@ -1,4 +1,4 @@
-const IP = "192.168.1.54"
+const IP = "192.168.1.86"
 const PORT = 4000
 const SITE_ADDRESS = `http://${IP}:${PORT}/`
 
@@ -48,7 +48,7 @@ export const cnLocale = {
     fromLabel: '언제부터',
     toLabel: '언제까지',
     customRangeLabel: '사용자정의',
-    daysOfWeek: ['日', '一', '二', '三', '四', '五','六'],
+    daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
     monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
     firstDay: 1
 };

@@ -1,12 +1,21 @@
 import axios from 'axios'
-import { call, put } from 'redux-saga/effects'
-import { get } from 'lodash'
-import { requestFail, requestPending, requestSuccess } from './request'
+import {
+  call,
+  put
+} from 'redux-saga/effects'
+import {
+  get
+} from 'lodash'
+import {
+  requestFail,
+  requestPending,
+  requestSuccess
+} from './request'
 
 const defaultHeaders = () => {
   const auth = localStorage.getItem('hvr_auth')
   //axios.defaults.baseURL = process.env.API_ROOT + '/'
-  axios.defaults.baseURL = 'http://192.168.1.54:4000/'
+  axios.defaults.baseURL = 'http://192.168.1.86:4000/'
   let headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
