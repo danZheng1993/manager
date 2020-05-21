@@ -1,4 +1,4 @@
-import 'whirl/dist/whirl.css';
+import '@jh3y/whirl/css/whirl.css';
 // Font Awesome
 import '@fortawesome/fontawesome-free-webfonts/css/fa-brands.css';
 import '@fortawesome/fontawesome-free-webfonts/css/fa-regular.css';
