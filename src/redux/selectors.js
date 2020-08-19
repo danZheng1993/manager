@@ -176,6 +176,21 @@ export const newsStateSelector = (state) =>
 export const newsSearchResultSelector = (state) =>
   get(state, 'news.searchResult', [])
 
+export const messageDetailSelector = (state) =>
+  get(state, 'message.message', {})
+
+export const messagesListSelector = (state) =>
+  get(state, 'message.messages', [])
+
+export const messagesloadingSelector = (state) =>
+  get(state, 'messages.loading', false)
+
+export const messageStateSelector = (state) =>
+  get(state, 'message', {})
+
+export const messageSearchResultSelector = (state) =>
+  get(state, 'message.searchResult', [])
+
 export const bannerDetailSelector = (state) =>
   get(state, 'banner.banner', {})
 

@@ -22,6 +22,7 @@ import invoice from './modules/invoice'
 import statistic from './modules/statistic'
 import database from './modules/database'
 import contract from './modules/contract'
+import message from './modules/messages'
 
 export default combineReducers({
   auth,
@@ -45,5 +46,6 @@ export default combineReducers({
   invoice,
   contract,
   database,
-  statistic
+  statistic,
+  message,
 })

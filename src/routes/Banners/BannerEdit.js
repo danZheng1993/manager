@@ -82,7 +82,6 @@ class BannerEdit extends Component {
     file && reader.readAsDataURL(file)
   }
 
-
   render() {
     const { handleSubmit, match: { params } } = this.props
     let {imagePreviewUrl} = this.state
@@ -156,10 +155,16 @@ class BannerEdit extends Component {
                   onDrop={this.handleImageChange}
                   style={{borderWidth: 1, borderColor: '#dde6e9'}}
                 >
-                  { imagePreviewUrl ? 
-                    <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} /> :
-                    <p>{PLACEHOLDER.IMAGE}</p>
-                  }
+                  {({getRootProps, getInputProps}) => (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {imagePreviewUrl ?
+                        <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} />
+                      :
+                        <p>{PLACEHOLDER.IMAGE}</p>
+                      }
+                    </div>
+                  )}
                 </Dropzone>
               </Col>
             </Row>

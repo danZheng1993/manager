@@ -20,6 +20,7 @@ import invoice from './invoice'
 import statistic from './statistic'
 import database from './database'
 import contract from './contract'
+import message from './messages'
 
 export default function* rootSaga () {
   yield all([
@@ -43,6 +44,7 @@ export default function* rootSaga () {
     invoice(),
     database(),
     contract(),
-    statistic()
+    statistic(),
+    message(),
   ])
 }
