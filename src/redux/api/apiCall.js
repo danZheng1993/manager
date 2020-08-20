@@ -16,7 +16,8 @@ const defaultHeaders = () => {
   const auth = localStorage.getItem('hvr_auth')
   //axios.defaults.baseURL = process.env.API_ROOT + '/'
   // axios.defaults.baseURL = 'http://192.168.1.86:4000/'
-  axios.defaults.baseURL = 'http://localhost:4000/'
+  axios.defaults.baseURL = 'https://dry-dawn-50400.herokuapp.com/'
+  // axios.defaults.baseURL = 'http://localhost:4000/'
   let headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
