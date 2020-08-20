@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import NewMessage from './NewsEdit'
+import NewMessage from './NewMessage'
 import MessageList from './MessageList'
 
 export default () => (

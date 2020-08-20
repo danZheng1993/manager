@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { createMessage, getMessage, updateMessage } from 'redux/modules/message'
+import { createMessage,  } from 'redux/modules/messages'
 import { isFieldRequired, createNotification } from 'helpers'
 import InputField from 'components/InputField'
 import draftToHtml from 'draftjs-to-html'
@@ -16,7 +16,7 @@ import * as selectors from 'redux/selectors'
 import { EditorState, ContentState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import { BUTTONS } from '../../constants'
+import { BUTTONS, TARGET_AUDIENCE } from '../../constants'
 
 class MessageEdit extends Component {
   constructor(props) {
@@ -28,19 +28,12 @@ class MessageEdit extends Component {
   }
   static propTypes = {
     createMessage: PropTypes.func,
-    getMessage: PropTypes.func,
     handleSubmit: PropTypes.func,
     history: PropTypes.object,
     initialValues: PropTypes.object,
     profile: PropTypes.object,
-    updateMessage: PropTypes.func,
     messageState: PropTypes.object
   };
-
-  componentWillMount () {
-    const { getMessage, match: { params } } = this.props
-    params.id && getMessage({ id: params.id , success: (payload) => this.initEditorState(payload.data)})
-  }
 
   initEditorState = (message) => {
     if (message.content) {
@@ -52,16 +45,9 @@ class MessageEdit extends Component {
     }
   }
   handleSave = (values) => {
-    const { createMessage, updateMessage, match: { params } } = this.props
-    const {content} = this.state
-    params.id
-    ? updateMessage({
-      id: params.id,
-      body: {...values, content},
-      success: () => createNotification('success'),
-    })
-    : createMessage({
-      body: {...values, content},
+    const { createMessage, match: { type } } = this.props
+    createMessage({
+      body: {...values, type},
       success: () => this.handleSuccess(),
     })
   }
@@ -89,30 +75,21 @@ class MessageEdit extends Component {
           </h2>
           <Form onSubmit={handleSubmit(this.handleSave)}>
             <Field
-              label='标题'
-              name='title'
+              label='Message Content'
+              name='content'
               type='text'
               required
               validate={[isFieldRequired]}
               component={InputField}
             />
             <Field
-              label='新闻来源'
-              name='source'
-              type='text'
+              label='Target Group'
+              name='target'
+              type='select'
               required
               validate={[isFieldRequired]}
               component={InputField}
-            />
-            <Editor
-              onEditorStateChange={this.onEditorStateChange}
-              editorState = {this.state.editorState}
-            />
-            <Field
-              label='添加新闻链接'
-              name='path'
-              type='text'
-              component={InputField}
+              options={TARGET_AUDIENCE}
             />
             <Row>
               <Col xs={6}>
@@ -136,11 +113,7 @@ const selector = createStructuredSelector({
     props.match.params.id ?  selectors.messageDetailSelector(state) : {},
 })
 
-const actions = {
-  createMessage,
-  getMessage,
-  updateMessage
-}
+const actions = { createMessage }
 
 export default compose(
   connect(selector, actions),

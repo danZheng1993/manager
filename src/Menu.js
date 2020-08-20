@@ -87,7 +87,7 @@ const Menu = [
         icon: 'icon-bell',
         submenu: [{
                 name: '通知消息',
-                path: '',
+                path: 'message?type=notification',
             },
             {
                 name: '短信消息',
@@ -95,7 +95,7 @@ const Menu = [
             },
             {
                 name: '活动消息',
-                path: '',
+                path: 'message?type=event',
             },
             {
                 name: '广告列表',

@@ -88,3 +88,9 @@ export const ADDRESS = {
     MEDIA_BASE_URL: `${SITE_ADDRESS}/mediaSource/`,
     INVOICE_BASE_URL: `${SITE_ADDRESS}/invoiceImage/`,
 }
+
+export const TARGET_AUDIENCE = [
+  { label: 'All', value: 'all' },
+  { label: 'Client', value: 'client' },
+  { label: 'Provider', value: 'provider' },
+]
