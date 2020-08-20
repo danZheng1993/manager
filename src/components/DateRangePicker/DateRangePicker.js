@@ -1,7 +1,9 @@
 import React from 'react'
-import DatetimeRangePicker from 'react-bootstrap-datetimerangepicker'
 import moment from 'moment'
+
 import 'bootstrap-daterangepicker/daterangepicker.css'
+
+import DatetimeRangePicker from './bootstrapDatetimerangepicker/src'
 
 import {
   Button,
