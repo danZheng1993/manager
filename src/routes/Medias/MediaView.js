@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../containers/Loader'
-import { ADDRESS } from '../../constants'
 import { Col, Row, Table } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import { getMedia } from 'redux/modules/media'
 // import VrPlayer from 'react-vr-player'
 import { getDateTimeStr } from '../../helpers'
 import { mediaDetailSelector, mediasloadingSelector } from '../../redux/selectors'
+import { getMedia } from '../../redux/modules/media'
+import Loader from '../../containers/Loader'
+import { ADDRESS } from '../../constants'
 
 class MediaView extends Component {
   static propTypes = {

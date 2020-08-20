@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Redirect, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Container } from 'reactstrap'
 import Dashboard from './Dashboard'
-import Header from 'containers/Header'
+import Header from '../containers/Header'
 import Login from './Login'
 import Profile from './Profile'
 import Records from './Records'
@@ -25,13 +25,13 @@ import Contracts from './Contracts'
 import Messages from './Messages'
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
-  from 'helpers/authHelpers'
+  from '../helpers/authHelpers'
 import {NotificationContainer} from 'react-notifications'
 
-import "Vendor";
-import 'styles/core.scss'
-import 'styles/bootstrap.scss';
-import 'styles/app.scss'
+import '../Vendor';
+import '../styles/core.scss'
+import '../styles/bootstrap.scss';
+import '../styles/app.scss'
 
 import SideBar from '../components/Layout/Sidebar'
 const routes = ({ isAuthenticated }) => (

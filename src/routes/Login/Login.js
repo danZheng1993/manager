@@ -5,10 +5,11 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { Field, reduxForm } from 'redux-form'
-import { authStateSelector } from 'redux/selectors'
-import { isFieldRequired } from 'helpers'
-import { login, DO_LOGIN } from 'redux/modules/auth'
-import { requestFail } from 'redux/api/request'
+
+import { authStateSelector } from '../../redux/selectors'
+import { isFieldRequired } from '../../helpers'
+import { login, DO_LOGIN } from '../../redux/modules/auth'
+import { requestFail } from '../../redux/api/request'
 import { BUTTONS } from '../../constants'
 
 const renderField = ({

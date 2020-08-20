@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ADDRESS } from '../../constants'
 import { Row, Col, Table } from 'reactstrap'
+
+import { ADDRESS } from '../../constants'
 import { getDateTimeStr } from '../../helpers'
 
 class Profile extends Component {

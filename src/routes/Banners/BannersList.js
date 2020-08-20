@@ -1,23 +1,25 @@
 import { Button, Table, Row, Col, Label} from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { deleteBanner, getBanners, updateBanner } from 'redux/modules/banner'
-import { bannersListSelector, bannersParamsSelector, bannersloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
-import Pagination from 'components/Pagination'
-import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
-import ReportModal from 'containers/ReportModal'
-import confirm from 'containers/ConfirmModal'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
-import { getDateTimeStr, createNotification } from 'helpers'
 import { withRouter } from 'react-router'
 import Switch from 'react-switch'
+
+import ReportModal from '../../containers/ReportModal'
+import confirm from '../../containers/ConfirmModal'
+import { getDateTimeStr, createNotification } from '../../helpers'
 import { ADDRESS, BUTTONS, LABEL, PLACEHOLDER, CONFIRM } from '../../constants'
 import DateRangePicker from '../../components/DateRangePicker'
+import Pagination from '../../components/Pagination'
+import Input from '../../components/InputField/InputComponent'
+import Loader from '../../containers/Loader'
+import { deleteBanner, getBanners, updateBanner } from '../../redux/modules/banner'
+import { bannersListSelector, bannersParamsSelector, bannersloadingSelector } from '../../redux/selectors'
+
 class BannersList extends Component {
   constructor(props) {
     super(props)

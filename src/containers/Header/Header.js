@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem }
   from 'reactstrap'
-import { canManageUsers } from 'helpers/roleHelpers'
-import { logout } from 'redux/modules/auth'
+import { canManageUsers } from '../../helpers/roleHelpers'
+import { logout } from '../../redux/modules/auth'
 import { ADDRESS } from '../../constants'
 
 class Header extends React.Component {

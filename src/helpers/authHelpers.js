@@ -1,10 +1,10 @@
 import locationHelperBuilder from 'redux-auth-wrapper/history4/locationHelper'
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect'
 import connectedAuthWrapper from 'redux-auth-wrapper/connectedAuthWrapper'
-import { DO_LOGIN } from 'redux/modules/auth'
-import { requestPending } from 'redux/api/request'
+import { DO_LOGIN } from '../redux/modules/auth'
+import { requestPending } from '../redux/api/request'
 import { isAdmin, isManager } from './roleHelpers'
-import LoggingIn from 'components/LoggingIn'
+import LoggingIn from '../components/LoggingIn'
 
 const locationHelper = locationHelperBuilder({})
 

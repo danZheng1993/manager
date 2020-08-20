@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ButtonDropdown, Col, DropdownToggle, DropdownItem, DropdownMenu,
   PaginationLink, PaginationItem, Pagination as BSPagination, Row } from 'reactstrap'
-import { getPageCount } from 'helpers'
+import { getPageCount } from '../../helpers'
 
 export default class Pagination extends Component {
   static propTypes = {

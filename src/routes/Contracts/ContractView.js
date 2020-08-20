@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../containers/Loader'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import { getContract } from 'redux/modules/contract'
+
+import Loader from '../../containers/Loader'
+import { getContract } from '../../redux/modules/contract'
 import { contractDetailSelector, contractsloadingSelector } from '../../redux/selectors'
 
 class ContractView extends Component {

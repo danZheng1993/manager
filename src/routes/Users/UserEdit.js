@@ -8,12 +8,12 @@ import { Field, reduxForm } from 'redux-form'
 import { filter } from 'lodash'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { createUser, getUser, updateUser, CREATE_USER, UPDATE_USER } from 'redux/modules/user'
-import { isAdmin, isManager } from 'helpers/roleHelpers'
-import { isFieldRequired, ucFirst } from 'helpers'
-import { requestFail, requestSuccess } from 'redux/api/request'
-import * as selectors from 'redux/selectors'
-import InputField from 'components/InputField'
+import { createUser, getUser, updateUser, CREATE_USER, UPDATE_USER } from '../../redux/modules/user'
+import { isAdmin, isManager } from '../../helpers/roleHelpers'
+import { isFieldRequired, ucFirst } from '../../helpers'
+import { requestFail, requestSuccess } from '../../redux/api/request'
+import * as selectors from '../../redux/selectors'
+import InputField from '../../components/InputField'
 
 const roleOptions = [
   {

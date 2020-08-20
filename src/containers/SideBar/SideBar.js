@@ -5,8 +5,8 @@ import { compose } from 'redux'
 import { withRouter } from 'react-router'
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav'
 import '@trendmicro/react-sidenav/dist/react-sidenav.css'
-import { logout } from 'redux/modules/auth'
 
+import { logout } from '../../redux/modules/auth'
 
 class SideBar extends React.Component {
   static propTypes = {

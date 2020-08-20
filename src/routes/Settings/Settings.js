@@ -6,10 +6,11 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { Field, reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
-import { getSettings, updateSettings } from 'redux/modules/setting'
-import { isFieldRequired, createNotification } from 'helpers'
-import InputField from 'components/InputField'
-import * as selectors from 'redux/selectors'
+
+import { getSettings, updateSettings } from '../../redux/modules/setting'
+import { isFieldRequired, createNotification } from '../../helpers'
+import InputField from '../../components/InputField'
+import * as selectors from '../../redux/selectors'
 import { BUTTONS } from '../../constants'
 
 class Settings extends Component {

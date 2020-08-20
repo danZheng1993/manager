@@ -4,14 +4,15 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
+import {AreaChart, Area, XAxis, YAxis, Tooltip} from 'recharts'
+import moment from 'moment'
+import classnames from 'classnames'
+
 import {getTransactionStatistics, compareTransactions} from '../../redux/modules/statistic'
 import DateRangePicker from '../../components/DateRangePicker'
-import {AreaChart, Area, XAxis, YAxis, Tooltip} from 'recharts'
 import { statisticsloadingSelector, transactionStatisticSelector, transactionCompareSelector } from '../../redux/selectors'
 import {getPercent} from '../../helpers'
 import Loader from '../../containers/Loader'
-import moment from 'moment'
-import classnames from 'classnames'
 
 class Chart extends Component {
   constructor(props) {

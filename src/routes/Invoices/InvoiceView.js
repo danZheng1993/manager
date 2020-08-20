@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../containers/Loader'
 import { Table } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import { getInvoice } from 'redux/modules/invoice'
+
+import Loader from '../../containers/Loader'
+import { getInvoice } from '../../redux/modules/invoice'
 import { ADDRESS } from '../../constants'
 import { invoiceDetailSelector, invoicesloadingSelector } from '../../redux/selectors'
 

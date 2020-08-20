@@ -5,12 +5,12 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { Field, reduxForm } from 'redux-form'
-import { authStateSelector } from 'redux/selectors'
-import { isFieldRequired, ucFirst } from 'helpers'
+import { authStateSelector } from '../../redux/selectors'
+import { isFieldRequired, ucFirst } from '../../helpers'
 import { pick } from 'lodash'
-import { requestFail } from 'redux/api/request'
-import { signup, DO_SIGNUP, login } from 'redux/modules/auth'
-import InputField from 'components/InputField'
+import { requestFail } from '../../redux/api/request'
+import { signup, DO_SIGNUP, login } from '../../redux/modules/auth'
+import InputField from '../../components/InputField'
 
 class Signup extends Component {
   static propTypes = {

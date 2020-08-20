@@ -1,12 +1,5 @@
 import { Button, Table, Row, Col} from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { deleteUser, getUsers } from 'redux/modules/user'
-import { usersListSelector, usersParamsSelector, usersloadingSelector } from 'redux/selectors'
-import AwardModal from 'containers/AwardModal'
-import Pagination from 'components/Pagination'
-import SelectAllCheckBox from 'components/SelectAllCheckBox'
-import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -14,6 +7,14 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
+
+import Loader from '../../containers/Loader'
+import { deleteUser, getUsers } from '../../redux/modules/user'
+import { usersListSelector, usersParamsSelector, usersloadingSelector } from '../../redux/selectors'
+import AwardModal from '../../containers/AwardModal'
+import Pagination from '../../components/Pagination'
+import SelectAllCheckBox from '../../components/SelectAllCheckBox'
+import Input from '../../components/InputField/InputComponent'
 
 const typeOptions = [
   {label: '全部', value: '' }, 

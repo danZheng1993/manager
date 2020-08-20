@@ -1,3 +1,8 @@
+import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { connectModal } from 'redux-modal'
+import { createStructuredSelector } from 'reselect'
 import {
   Button,
   Col,
@@ -13,17 +18,12 @@ import {
   Table
 } from 'reactstrap'
 import { Field, reduxForm } from 'redux-form'
-import { distanceUnit, getDateStr } from 'helpers'
-
-import DateTimeField from 'components/DateTimeField'
 import PropTypes from 'prop-types'
-import React from 'react'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { connectModal } from 'redux-modal'
-import { createStructuredSelector } from 'reselect'
-import { getReport } from 'redux/modules/user'
-import { reportSelector } from 'redux/selectors'
+
+import { distanceUnit, getDateStr } from '../../helpers'
+import DateTimeField from '../../components/DateTimeField'
+import { getReport } from '../../redux/modules/user'
+import { reportSelector } from '../../redux/selectors'
 import { BUTTONS } from '../../constants'
 
 class ReportModal extends React.Component {

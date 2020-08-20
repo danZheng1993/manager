@@ -8,14 +8,15 @@ import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { pick } from 'lodash'
 import { withRouter } from 'react-router'
-import { getRecords, deleteRecord } from 'redux/modules/tracking'
-import { recordsListSelector, recordsParamsSelector } from 'redux/selectors'
-import { distanceUnit, getDateStr, hhmmss } from 'helpers'
 import MdAddCircleOutline from 'react-icons/lib/md/add-circle-outline'
-import confirm from 'containers/ConfirmModal'
-import DateTimeField from 'components/DateTimeField'
-import Pagination from 'components/Pagination'
+
+import confirm from '../../containers/ConfirmModal'
+import DateTimeField from '../../components/DateTimeField'
+import Pagination from '../../components/Pagination'
 import { CONFIRM } from '../../constants'
+import { getRecords, deleteRecord } from '../../redux/modules/tracking'
+import { recordsListSelector, recordsParamsSelector } from '../../redux/selectors'
+import { distanceUnit, getDateStr, hhmmss } from '../../helpers'
 
 class RecordsList extends Component {
   static propTypes = {

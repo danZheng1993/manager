@@ -5,13 +5,14 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { Field, reduxForm } from 'redux-form'
 import { withRouter } from 'react-router'
-import { saveProfile } from 'redux/modules/auth'
-import { isFieldRequired } from 'helpers'
-import InputField from 'components/InputField'
+import Dropzone from 'react-dropzone';
+
+import { saveProfile } from '../../redux/modules/auth'
+import { isFieldRequired } from '../../helpers'
+import InputField from '../../components/InputField'
 import { createNotification } from '../../helpers'
 import uploadFile from '../../redux/api/upload'
 import { ADDRESS, BUTTONS, RULES } from '../../constants'
-import Dropzone from 'react-dropzone';
 
 class Profile extends Component {
   constructor(props) {

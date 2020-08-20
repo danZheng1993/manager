@@ -1,3 +1,10 @@
+import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { connectModal } from 'redux-modal'
+import { createStructuredSelector } from 'reselect'
+import Dropzone from 'react-dropzone';
+
 import {
   Button,
   Col,
@@ -13,18 +20,13 @@ import {
 } from 'reactstrap'
 import { Field, reduxForm } from 'redux-form'
 
-import { isFieldRequired } from 'helpers'
-import DateTimeField from 'components/DateTimeField'
-import InputField from 'components/InputField'
-import React from 'react'
-import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { connectModal } from 'redux-modal'
-import { createStructuredSelector } from 'reselect'
+import { isFieldRequired, createNotification } from '../../helpers'
+import DateTimeField from '../../components/DateTimeField'
+import InputField from '../../components/InputField'
 import { BUTTONS, PLACEHOLDER, RULES } from '../../constants'
-import Dropzone from 'react-dropzone';
 import upload from '../../redux/api/upload'
-import { createNotification } from '../../helpers'
+
+
 class AwardModal extends React.Component {
 
   constructor(props) {

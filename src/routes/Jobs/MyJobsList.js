@@ -1,19 +1,20 @@
 import { Button, Table, Row, Col} from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { getJobs } from 'redux/modules/job'
-import { jobsListSelector, jobsParamsSelector, jobsloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
-import Pagination from 'components/Pagination'
-import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { withRouter } from 'react-router'
+
 import { getDateTimeStr } from '../../helpers'
 import { BUTTONS } from '../../constants'
+import Pagination from '../../components/Pagination'
+import Input from '../../components/InputField/InputComponent'
+import Loader from '../../containers/Loader'
+import { getJobs } from '../../redux/modules/job'
+import { jobsListSelector, jobsParamsSelector, jobsloadingSelector } from '../../redux/selectors'
 
 
 class JobsList extends Component {

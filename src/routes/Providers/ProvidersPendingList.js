@@ -1,11 +1,7 @@
 import { Button, Table} from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { deleteUser, getUsers } from 'redux/modules/user'
-import { usersListSelector, usersParamsSelector, usersloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
-import Pagination from 'components/Pagination'
-import confirm from 'containers/ConfirmModal'
+
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -13,7 +9,13 @@ import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { show } from 'redux-modal'
 import { withRouter } from 'react-router'
+
 import { CONFIRM } from '../../constants'
+import Pagination from '../../components/Pagination'
+import confirm from '../../containers/ConfirmModal'
+import Loader from '../../containers/Loader'
+import { deleteUser, getUsers } from '../../redux/modules/user'
+import { usersListSelector, usersParamsSelector, usersloadingSelector } from '../../redux/selectors'
 
 class UsersList extends Component {
   constructor(props) {

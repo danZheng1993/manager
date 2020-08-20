@@ -1,11 +1,6 @@
 import { Button, Table, Row, Col} from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { getContracts } from 'redux/modules/contract'
-import { contractsListSelector, contractsParamsSelector, contractsloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
-import Pagination from 'components/Pagination'
-import Input from 'components/InputField/InputComponent'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -14,6 +9,12 @@ import { pick } from 'lodash'
 import { withRouter } from 'react-router'
 import { getDateTimeStr } from '../../helpers'
 import { BUTTONS, TABLE_HEADERS, PLACEHOLDER, LABEL } from '../../constants'
+import Pagination from '../../components/Pagination'
+import Input from '../../components/InputField/InputComponent'
+import Loader from '../../containers/Loader'
+import { getContracts } from '../../redux/modules/contract'
+import { contractsListSelector, contractsParamsSelector, contractsloadingSelector } from '../../redux/selectors'
+
 class ContractsList extends Component {
   constructor(props) {
     super(props)

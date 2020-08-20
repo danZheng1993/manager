@@ -1,16 +1,17 @@
 import { Button, Table} from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { getInvoices } from 'redux/modules/invoice'
-import { invoicesListSelector, invoicesParamsSelector, invoicesloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
-import Pagination from 'components/Pagination'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { pick } from 'lodash'
 import { withRouter } from 'react-router'
+
+import Pagination from '../../components/Pagination'
+import Loader from '../../containers/Loader'
+import { getInvoices } from '../../redux/modules/invoice'
+import { invoicesListSelector, invoicesParamsSelector, invoicesloadingSelector } from '../../redux/selectors'
 import { BUTTONS } from '../../constants'
 
 class InvoicesList extends Component {

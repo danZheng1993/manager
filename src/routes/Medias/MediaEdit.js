@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../containers/Loader'
-import { ADDRESS, BUTTONS } from '../../constants'
 import { Col, Row, Button } from 'reactstrap'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import { getMedia, updateMedia } from 'redux/modules/media'
-import confirm from 'containers/ConfirmModal'
-// import VrPlayer from 'react-vr-player'
+import Loader from '../../containers/Loader'
+import confirm from '../../containers/ConfirmModal'
+import { ADDRESS, BUTTONS } from '../../constants'
 import { getDateTimeStr, createNotification, showTestStatus } from '../../helpers'
 import { mediaDetailSelector, mediasloadingSelector } from '../../redux/selectors'
+import { getMedia, updateMedia } from '../../redux/modules/media'
+// import VrPlayer from 'react-vr-player'
 
 class MediaEdit extends Component {
   static propTypes = {

@@ -8,12 +8,13 @@ import {
   Row,
 } from 'reactstrap'
 import { Field, reduxForm } from 'redux-form'
-import InputField from 'components/InputField'
 import React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { connectModal } from 'redux-modal'
 import { createStructuredSelector } from 'reselect'
+
+import InputField from '../../components/InputField'
 import { BUTTONS } from '../../constants'
 
 class VIPModal extends React.Component {

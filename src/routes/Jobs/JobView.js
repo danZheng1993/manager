@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Loader from '../../containers/Loader'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { withRouter } from 'react-router'
-import { getJob } from 'redux/modules/job'
 import {Col, Row} from 'reactstrap'
+
 import {getDateTimeStr} from '../../helpers'
 import { jobsloadingSelector, jobDetailSelector } from '../../redux/selectors'
+import { getJob } from '../../redux/modules/job'
+import Loader from '../../containers/Loader'
+
 
 class JobView extends Component {
   constructor(props) {

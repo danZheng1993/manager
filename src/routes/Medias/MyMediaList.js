@@ -1,10 +1,6 @@
 import { Button, Table } from 'reactstrap'
 import React, { Component } from 'react'
-import Loader from '../../containers/Loader'
-import { getMedias } from 'redux/modules/media'
-import { mediasListSelector, mediasParamsSelector, mediasloadingSelector } from 'redux/selectors'
 import { Link } from 'react-router-dom'
-import Pagination from 'components/Pagination'
 import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -13,6 +9,10 @@ import { pick } from 'lodash'
 import { withRouter } from 'react-router'
 import { getDateTimeStr, showTestStatus } from '../../helpers'
 import { BUTTONS, TABLE_HEADERS } from '../../constants'
+import Pagination from '../../components/Pagination'
+import Loader from '../../containers/Loader'
+import { getMedias } from '../../redux/modules/media'
+import { mediasListSelector, mediasParamsSelector, mediasloadingSelector } from '../../redux/selectors'
 
 class MediasList extends Component {
   constructor(props) {

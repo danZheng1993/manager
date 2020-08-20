@@ -4,9 +4,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Navbar, NavbarToggler, Nav, NavItem, Button }
   from 'reactstrap'
-import { logout } from 'redux/modules/auth'
 import { withRouter } from 'react-router'
 import { compose } from 'redux'
+
+import { logout } from '../../redux/modules/auth'
 
 class Tab extends React.Component {
   static propTypes = {

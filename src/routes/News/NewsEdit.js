@@ -7,16 +7,17 @@ import { createStructuredSelector } from 'reselect'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { createNews, getNews, updateNews } from 'redux/modules/news'
-import { isFieldRequired, createNotification } from 'helpers'
-import InputField from 'components/InputField'
 import draftToHtml from 'draftjs-to-html'
 import htmlToDraft from 'html-to-draftjs'
-import * as selectors from 'redux/selectors'
 import { EditorState, ContentState, convertToRaw } from 'draft-js'
 import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+
 import { BUTTONS } from '../../constants'
+import * as selectors from '../../redux/selectors'
+import { createNews, getNews, updateNews } from '../../redux/modules/news'
+import { isFieldRequired, createNotification } from '../../helpers'
+import InputField from '../../components/InputField'
 
 class NewsEdit extends Component {
   constructor(props) {

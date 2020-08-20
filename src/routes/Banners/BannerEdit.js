@@ -7,14 +7,15 @@ import { createStructuredSelector } from 'reselect'
 import { Field, reduxForm } from 'redux-form'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
-import { createBanner, getBanner, updateBanner } from 'redux/modules/banner'
-import { isFieldRequired, createNotification } from 'helpers'
-import uploadFile from '../../redux/api/upload'
-import InputField from 'components/InputField'
-import * as selectors from 'redux/selectors'
-import DateTimeField from 'components/DateTimeField'
-import { ADDRESS, BUTTONS, RULES, PLACEHOLDER } from '../../constants'
 import Dropzone from 'react-dropzone';
+
+import { createBanner, getBanner, updateBanner } from '../../redux/modules/banner'
+import { isFieldRequired, createNotification } from '../../helpers'
+import uploadFile from '../../redux/api/upload'
+import InputField from '../../components/InputField'
+import * as selectors from '../../redux/selectors'
+import DateTimeField from '../../components/DateTimeField'
+import { ADDRESS, BUTTONS, RULES, PLACEHOLDER } from '../../constants'
 
 class BannerEdit extends Component {
   constructor(props) {
