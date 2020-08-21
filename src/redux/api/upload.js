@@ -1,5 +1,5 @@
 import axios from 'axios'
-let baseURL = "https://dry-dawn-50400.herokuapp.com/"
+const baseURL = "https://dry-dawn-50400.herokuapp.com/"
 // const baseURL = "http://localhost:4000/"
 const defaultHeaders = () => {
   var auth = localStorage.getItem('hvr_auth')
