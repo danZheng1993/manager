@@ -1,6 +1,6 @@
 // const IP = "192.168.1.86"
-// const SITE_ADDRESS = `https://dry-dawn-50400.herokuapp.com/`
-const SITE_ADDRESS = `http://localhost:4000`
+const SITE_ADDRESS = `https://dry-dawn-50400.herokuapp.com/`
+// const SITE_ADDRESS = `http://localhost:4000`
 
 export const BUTTONS = {
     ADD: 'Add',
