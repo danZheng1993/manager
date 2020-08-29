@@ -1,6 +1,7 @@
 import axios from 'axios'
-const baseURL = "https://dry-dawn-50400.herokuapp.com/"
-// const baseURL = "http://localhost:4000/"
+
+import { ADDRESS } from '../../constants';
+
 const defaultHeaders = () => {
   var auth = localStorage.getItem('hvr_auth')
   //axios.defaults.baseURL = process.env.API_ROOT + '/'
@@ -24,7 +25,7 @@ const upload = (uri, method, file, body = {}) => {
   })
 
   return axios.request({
-    url: baseURL + uri,
+    url: ADDRESS.BASE_URL + uri,
     method,
     headers: Object.assign({}, defaultHeaders()),
     data: data,
