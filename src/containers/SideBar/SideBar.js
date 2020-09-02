@@ -235,7 +235,7 @@ class SideBar extends React.Component {
               <NavText>
               设置
               </NavText>        
-              <NavItem eventKey="settings">
+              <NavItem eventKey="settings/splash">
                 <NavText>
                 启动页设置
                 </NavText>

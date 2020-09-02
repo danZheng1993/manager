@@ -71,7 +71,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/message' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Messages))} />
             <Route path='/invoices' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Invoices))} />
             <Route path='/banners' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Banners))} />
-            <Route path='/settings' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Splash))} />
+            <Route path='/settings/splash' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Splash))} />
             <Route path='/settings/main' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
             <Route path='/statistics' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Statistics))} />
             <Route path='/databases' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Databases))} />
