@@ -228,7 +228,7 @@ class SideBar extends React.Component {
                 </NavText>
               </NavItem>    
             </NavItem>
-            <NavItem eventKey="settings">
+            <NavItem eventKey="settings/splash">
               <NavIcon>
                 <i className="fa fa-fw fa-gear" style={{ fontSize: '1.75em' }} />
               </NavIcon>
