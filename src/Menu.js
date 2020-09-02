@@ -138,7 +138,7 @@ const Menu = [
         icon: 'icon-settings',
         submenu: [{
                 name: '启动页设置',
-                path: 'settings'
+                path: 'settings/splash'
             },
             {
                 name: '基本设置',
