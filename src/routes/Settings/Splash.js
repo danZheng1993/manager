@@ -28,7 +28,7 @@ class Splash extends Component {
   componentWillMount () {
     const { getSettings } = this.props
     getSettings(
-      {success: (payload) => this.setState({imagePreviewUrl: ADDRESS.BASE_URL + '/public/splashImage/' + payload.data.splash})}
+      {success: (payload) => this.setState({imagePreviewUrl: ADDRESS.BASE_URL + 'splashImage/' + payload.data.splash})}
     )
   }
 
