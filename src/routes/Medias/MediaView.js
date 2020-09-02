@@ -46,14 +46,6 @@ class MediaView extends Component {
             <Col sm={3}>
             <img src={ADDRESS.MEDIA_BASE_URL + media.snapshot}    
                   width="100%" height="90%" alt="snapshot" />
-              {/* <VrPlayer
-                sources={[ // Declare an array of video sources
-                  { url: 'localhost:4000/mediaSource/media3.mp4', type: 'video/mp4' },
-                ]}
-                brand="Some Brand Name"
-                title="Some Video Title"
-                style={{width: '200px', height: '200px'}}
-                keys={keys} /> */}
             </Col>
             <Col sm={6} >
               <p>标题 : {media.title} </p>
