@@ -37,7 +37,11 @@ class Splash extends Component {
     if (!file)  return
     uploadFile('settings/splash', 'post', file, {})
       .then(() => createNotification('success'),)
-      .catch(err => createNotification('error', 'Error!'))
+      .catch(err => {
+        console.log('error occured');
+        console.log({ err });
+        createNotification('error', 'Error!');
+      })
   }
 
   handleImageChange = (files)  => {
@@ -64,18 +68,24 @@ class Splash extends Component {
           </h2>
           <Row>
               <Col md={6}>
-              <Dropzone
+
+                <Dropzone
                   className="card p-3 d-flex justify-content-center align-items-center"
                   ref="dropzone"
                   accept={RULES.IMAGE}
                   onDrop={this.handleImageChange}
                   style={{borderWidth: 1, borderColor: '#dde6e9'}}
                 >
-                  { imagePreviewUrl ? 
-                    <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} /> :
-                    <p>{PLACEHOLDER.IMAGE}</p>
-                  }
-                </Dropzone>
+                  {({getRootProps, getInputProps}) => (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      { imagePreviewUrl ? 
+                        <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} /> :
+                        <p>{PLACEHOLDER.IMAGE}</p>
+                      }
+                    </div>
+                  )}
+                </Dropzone>  
               </Col>
               <Col md={4}>
                 <Button color='primary' style={{margin: '5px'}} onClick={this.handleSave}>{BUTTONS.SAVE}</Button>

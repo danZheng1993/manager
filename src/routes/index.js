@@ -18,7 +18,7 @@ import Jobs from './Jobs'
 import News from './News'
 import Invoices from './Invoices'
 import Banners from './Banners'
-import Settings from './Settings'
+import { Splash, Settings } from './Settings'
 import Statistics from './Statistics'
 import Databases from './Databases'
 import Contracts from './Contracts'
@@ -71,7 +71,8 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/message' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Messages))} />
             <Route path='/invoices' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Invoices))} />
             <Route path='/banners' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Banners))} />
-            <Route path='/settings' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
+            <Route path='/settings' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Splash))} />
+            <Route path='/settings/main' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
             <Route path='/statistics' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Statistics))} />
             <Route path='/databases' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Databases))} />
             <Route path='/contracts' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Contracts))} />

@@ -14,9 +14,8 @@ import {
 
 const defaultHeaders = () => {
   const auth = localStorage.getItem('hvr_auth')
-  //axios.defaults.baseURL = process.env.API_ROOT + '/'
-  axios.defaults.baseURL = 'http://47.105.53.235/api/'
-  // axios.defaults.baseURL = 'http://localhost:4000/'
+  // axios.defaults.baseURL = 'http://47.105.53.235/api/'
+  axios.defaults.baseURL = 'http://localhost:4000/'
   let headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
