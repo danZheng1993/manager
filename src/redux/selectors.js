@@ -203,6 +203,18 @@ export const bannersloadingSelector = (state) =>
 export const bannerStateSelector = (state) =>
   get(state, 'banner', {})
 
+export const supportItemDetailSelector = (state) =>
+  get(state, 'customerSupport.supportItem', {})
+
+export const supportItemListSelector = (state) =>
+  get(state, 'customerSupport.supportItems', [])
+
+export const supportItemLoadingSelector = (state) =>
+  get(state, 'customerSupport.loading', false)
+
+export const supportItemStateSelector = (state) =>
+  get(state, 'customerSupport', {})
+
 export const contractDetailSelector = (state) =>
   get(state, 'contract.contract', {})
 
@@ -268,6 +280,9 @@ export const invoicesParamsSelector = (state) =>
 
 export const bannersParamsSelector = (state) =>
   get(state, 'banner.params', {})
+
+export const supportItemParamsSelector = (state) =>
+  get(state, 'customerSupport.params', {})
 
 export const databasesParamsSelector = (state) =>
   get(state, 'database.params', {})

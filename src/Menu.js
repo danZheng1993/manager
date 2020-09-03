@@ -83,6 +83,15 @@ const Menu = [
         ]
     },
     {
+      name: '客服',
+      icon: 'icon-user',
+      path: 'customer_support',
+      submenu: [
+        { name: '添加工单', path: 'customer_support/new' },
+        { name: '工单列表', path: 'customer_support' },
+      ]
+    },
+    {
         name: '运营',
         icon: 'icon-bell',
         submenu: [{
@@ -125,7 +134,7 @@ const Menu = [
         icon: 'icon-wallet',
         submenu: [{
                 name: '综合统计',
-                path: 'financial',
+                path: 'financial/main',
             },
             {
                 name: '对账列表',

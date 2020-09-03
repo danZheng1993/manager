@@ -1,5 +1,4 @@
-const SITE_ADDRESS = `http://47.105.53.235/api/`
-// const SITE_ADDRESS = `http://localhost:4000/`
+const SITE_ADDRESS = process.env.NODE_ENV === 'production' ? `http://47.105.53.235/api/` : `http://localhost:4000/`;
 
 export const BUTTONS = {
     ADD: 'Add',
@@ -91,4 +90,9 @@ export const TARGET_AUDIENCE = [
   { label: 'All', value: 'all' },
   { label: 'Client', value: 'client' },
   { label: 'Provider', value: 'provider' },
+]
+
+export const CUSTOMER_TYPE = [
+  { label: '服务方', value: 'client' },
+  { label: '需求方', value: 'provider' },
 ]

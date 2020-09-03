@@ -11,11 +11,11 @@ import {
   requestPending,
   requestSuccess
 } from './request'
+import { ADDRESS } from '../../constants';
 
 const defaultHeaders = () => {
   const auth = localStorage.getItem('hvr_auth')
-  axios.defaults.baseURL = 'http://47.105.53.235/api/'
-  // axios.defaults.baseURL = 'http://localhost:4000/'
+  axios.defaults.baseURL = ADDRESS.BASE_URL;
   let headers = {
     'Accept': 'application/json',
     'Content-Type': 'application/json'

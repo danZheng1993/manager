@@ -23,6 +23,7 @@ import Statistics from './Statistics'
 import Databases from './Databases'
 import Contracts from './Contracts'
 import Messages from './Messages'
+import CustomerSupport from './CustomerSupport';
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from '../helpers/authHelpers'
@@ -71,6 +72,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/message' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Messages))} />
             <Route path='/invoices' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Invoices))} />
             <Route path='/banners' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Banners))} />
+            <Route path='/customer_support' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(CustomerSupport))} />
             <Route path='/settings/splash' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Splash))} />
             <Route path='/settings/main' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Settings))} />
             <Route path='/statistics' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Statistics))} />
