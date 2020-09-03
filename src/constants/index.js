@@ -1,4 +1,4 @@
-const SITE_ADDRESS = process.env.NODE_ENV === 'production' ? `http://47.105.53.235/api/` : `http://localhost:4000/`;
+const SITE_ADDRESS = process.env.NODE_ENV === 'development' ? `http://localhost:4000/` : `http://47.105.53.235/api/`;
 
 export const BUTTONS = {
     ADD: 'Add',
