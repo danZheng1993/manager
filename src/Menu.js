@@ -160,21 +160,22 @@ const Menu = [
         ]
     },
     {
-        name: '权限管理',
-        icon: 'icon-lock',
-        submenu: [{
-                name: '部门管理',
-                path: 'permissions',
-            },
-            {
-                name: '成员管理',
-                path: ''
-            },
-            {
-                name: '数据库管理',
-                path: 'databases'
-            },
-        ]
+      name: '权限管理',
+      icon: 'icon-lock',
+      submenu: [
+        {
+          name: '部门管理',
+          path: 'permissions/departments'
+        },
+        {
+          name: '成员管理',
+          path: 'permissions/staffs'
+        },
+        {
+          name: '数据库管理',
+          path: 'databases'
+        },
+      ]
     },
 ];
 
