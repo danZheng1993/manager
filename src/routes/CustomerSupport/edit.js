@@ -33,12 +33,12 @@ class SupportItemEdit extends Component {
     ? updateSupportItem({
       id: params.id,
       body: {...values, solved},
-      success: () => createNotification('success'),
+      success: this.handleSuccess,
       fail: err => alert(err)
     })
     : createSupportItem({
       body: {...values, solved},
-      success: () => this.handleSuccess(),
+      success: this.handleSuccess,
       fail: err => alert(err)
     })
   }
@@ -86,7 +86,7 @@ class SupportItemEdit extends Component {
               </Col>
               <Col md={8}>
                 <FormGroup check>
-                  <Label check>
+                  <Label check style={{ marginRight: 10 }}>
                     <Input type="radio" name="solved" checked={this.state.solved} onChange={() => this.setState({solved : true})}/>是
                   </Label>
                   <Label check>
