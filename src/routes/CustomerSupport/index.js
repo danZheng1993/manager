@@ -1,12 +1,15 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import SupportItemEdit from './edit';
 import SupportItemList from './list';
+import { CustomRoute } from '../CustomRoute';
 
-export default () => (
-  <div>
-    <Route path='/customer_support' exact component={SupportItemList} />
-    <Route path='/customer_support/edit/:id' component={SupportItemEdit} />
-    <Route path='/customer_support/new' component={SupportItemEdit} />
-  </div>
-)
+export default () => {
+  return (
+    <div>
+      <CustomRoute path='/customer_support' exact component={SupportItemList} checkPath='/customer_support' />
+      <CustomRoute path='/customer_support/edit/:id' component={SupportItemEdit} checkPath='/customer_support' />
+      <CustomRoute path='/customer_support/new' component={SupportItemEdit} checkPath='/customer_support' />
+    </div>
+  );
+}

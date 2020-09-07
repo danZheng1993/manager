@@ -1,13 +1,15 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import InvoicesList from './InvoicesList'
 import InvoiceView from './InvoiceView'
 import InvoicePendingList from './InvoicePendingList'
+import { CustomRoute } from '../CustomRoute';
 
 export default () => (
   <div>
-    <Route path='/invoices' exact component={InvoicesList} />
-    <Route path='/invoices/pending' component={InvoicePendingList} />
-    <Route path='/invoices/view/:id' component={InvoiceView} />
+    <CustomRoute path='/invoices' exact component={InvoicesList} checkPath='/invoices' />
+    <CustomRoute path='/invoices/view/:id' component={InvoiceView} checkPath='/invoices' />
+    <CustomRoute path='/invoices/pending' component={InvoicePendingList} checkPath='/invoices/pending' />
   </div>
 )
+

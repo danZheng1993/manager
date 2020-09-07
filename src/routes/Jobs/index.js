@@ -1,11 +1,11 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
 import JobsList from './JobsList'
 import JobView from './JobView'
+import { CustomRoute } from '../CustomRoute';
 
 export default () => (
   <div>
-    <Route path='/jobs' exact component={JobsList} />
-    <Route path='/jobs/view/:id' component={JobView} />
+    <CustomRoute path='/jobs' exact component={JobsList} checkPath='/jobs' />
+    <CustomRoute path='/jobs/view/:id' component={JobView} checkPath='/jobs' />
   </div>
-)
+);

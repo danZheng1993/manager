@@ -1,9 +1,12 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import DataBaseList from './DatabaseList'
+import { CustomRoute } from '../CustomRoute';
 
-export default () => (
-  <div>
-    <Route path='/databases' exact component={DataBaseList} />
-  </div>
-)
+export default () => {
+  return (
+    <div>
+      <CustomRoute path='/databases' exact component={DataBaseList} checkPath='/databases' />
+    </div>
+  );
+}

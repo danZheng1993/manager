@@ -1,12 +1,12 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
 import NewsEdit from './NewsEdit'
 import NewsList from './NewsList'
+import { CustomRoute } from '../CustomRoute';
 
 export default () => (
   <div>
-    <Route path='/news' exact component={NewsList} />
-    <Route path='/news/edit/:id' component={NewsEdit} />
-    <Route path='/news/new' component={NewsEdit} />
+    <CustomRoute path='/news' exact component={NewsList} checkPath='/news' />
+    <CustomRoute path='/news/edit/:id' component={NewsEdit} checkPath='/news' />
+    <CustomRoute path='/news/new' component={NewsEdit} checkPath='/news/new' />
   </div>
 )

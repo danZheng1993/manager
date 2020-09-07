@@ -1,11 +1,11 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
 import NewMessage from './NewMessage'
 import MessageList from './MessageList'
+import { CustomRoute } from '../CustomRoute';
 
 export default () => (
   <div>
-    <Route path='/message' exact component={MessageList} />
-    <Route path='/message/new' component={NewMessage} />
+    <CustomRoute path='/message' exact component={MessageList} checkPath='/message' />
+    <CustomRoute path='/message/new' component={NewMessage} checkPath='/message' />
   </div>
-)
+);

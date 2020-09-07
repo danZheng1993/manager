@@ -1,11 +1,14 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
 import ClientsList from './ClientsList'
 import ClientView from './ClientView'
+import { CustomRoute } from '../CustomRoute'
 
-export default () => (
-  <div>
-    <Route path='/clients' exact component={ClientsList} />
-    <Route path='/clients/view/:id' component={ClientView} />
-  </div>
-)
+export default () => {
+  return (
+    <div>
+      <CustomRoute path='/clients' exact component={ClientsList} checkPath='/clients' />
+      <CustomRoute path='/clients/view/:id' component={ClientView} />
+    </div>
+  );
+}
+
