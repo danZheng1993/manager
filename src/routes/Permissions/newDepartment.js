@@ -26,7 +26,7 @@ class DepartmentEdit extends Component {
 
   componentWillMount () {
     const { getDepartment, match: { params } } = this.props
-    params.id && getDepartment({ id: params.id,  success: (payload) => this.setState({solved: payload.data.active, permissions: JSON.parse(payload.data.permissions)})})
+    params.id && getDepartment({ id: params.id,  success: (payload) => this.setState({active: payload.data.active, permissions: JSON.parse(payload.data.permissions)})})
   }
 
   handleSave = (values) => {
