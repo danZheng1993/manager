@@ -25,6 +25,7 @@ import contract from './modules/contract'
 import message from './modules/messages'
 import customerSupport from './modules/customerSupport'
 import department from './modules/department';
+import staff from './modules/staff';
 
 export default combineReducers({
   auth,
@@ -52,4 +53,5 @@ export default combineReducers({
   message,
   customerSupport,
   department,
+  staff,
 })

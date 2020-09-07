@@ -60,7 +60,7 @@ class DepartmentsList extends Component {
         <Loader active={loading} />
         <Row className='mb-3'>
           <Col md={2} xs={12}>
-            <Button color='primary' tag={Link} size='sm' to={`/permissions/edit_department/`}>
+            <Button color='primary' tag={Link} size='sm' to={`/permissions/departments/new`}>
               {BUTTONS.ADD}
             </Button>
           </Col>
@@ -85,7 +85,7 @@ class DepartmentsList extends Component {
                 <td>{moment(department.created).format('YYYY-MM-DD')}</td>
                 <td><Switch onChange={() => this.handleChange(department._id, department.active)} checked={department.active} /></td>
                 <td>
-                  <Button color='primary' tag={Link} size='sm' to={`/permissions/edit_department/${department._id}`}>
+                  <Button color='primary' tag={Link} size='sm' to={`/permissions/departments/view/${department._id}`}>
                     {BUTTONS.EDIT}
                   </Button>
                   {' '}

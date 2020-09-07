@@ -54,7 +54,7 @@ export const  createNotification = (type, message = '') => {
         NotificationManager.warning('Warning message', 'Close after 3000ms', 3000)
         break
       case 'error':
-        NotificationManager.error(message, 'Error!', 3000,)
+        NotificationManager.error(message, '错误!', 3000,)
         break
       default :
         break

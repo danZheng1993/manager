@@ -15,7 +15,7 @@ import * as selectors from '../../redux/selectors'
 import { BUTTONS } from '../../constants'
 import PermissionInput from '../../components/PermissionInput';
 
-class DepartmentEdit extends Component {
+class DepartmentEditor extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -129,4 +129,4 @@ export default compose(
     enableReinitialize: true,
   }),
   withRouter
-)(DepartmentEdit)
+)(DepartmentEditor)
