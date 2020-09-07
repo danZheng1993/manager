@@ -97,7 +97,7 @@ class DepartmentEditor extends Component {
             <Row>
               <Col xs={6}>
                 <Link to='/permissions/departments/' className='btn btn-secondary'>
-                  Cancel
+                  {BUTTONS.CANCEL}
                 </Link>
               </Col>
               <Col>

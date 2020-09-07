@@ -14,7 +14,6 @@ import { isFieldRequired, createNotification } from '../../helpers'
 import InputField from '../../components/InputField'
 import * as selectors from '../../redux/selectors'
 import { BUTTONS } from '../../constants'
-import PermissionInput from '../../components/PermissionInput';
 
 class StaffEditor extends Component {
   constructor(props) {
@@ -45,12 +44,12 @@ class StaffEditor extends Component {
       id: params.id,
       body: {...values, active, permissions},
       success: () => this.handleSuccess(),
-      fail: err => alert(err)
+      // fail: err => alert(err)
     })
     : createStaff({
       body: {...values, active, permissions},
       success: () => this.handleSuccess(),
-      fail: err => alert(err)
+      // fail: err => alert(err)
     })
   }
 
@@ -83,7 +82,7 @@ class StaffEditor extends Component {
 
   render() {
     const { handleSubmit } = this.props
-    const { active, permissions } = this.state;
+    const { active } = this.state;
     return (
       <Row>
         <Col sm={12} md={{ size: 10, offset: 1 }}>          
@@ -108,6 +107,14 @@ class StaffEditor extends Component {
             <Field
               label='邮件地址'
               name='email'
+              type='text'
+              required
+              validate={[isFieldRequired]}
+              component={InputField}
+            />
+            <Field
+              label='电话号码'
+              name='phoneNumber'
               type='text'
               required
               validate={[isFieldRequired]}
@@ -160,7 +167,7 @@ class StaffEditor extends Component {
             <Row>
               <Col xs={6}>
                 <Link to='/permissions/staffs/' className='btn btn-secondary'>
-                  Cancel
+                  {BUTTONS.CANCEL}
                 </Link>
               </Col>
               <Col>

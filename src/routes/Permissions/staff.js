@@ -90,13 +90,15 @@ class StaffsList extends Component {
           <tbody>
             {staffsList && staffsList.map((staff, index) => (
               <tr key={index}>
-                <th scope='row'>{index + 1}</th>
+                <td>{staff.userName}</td>
                 <td>{staff.name}</td>
-                <td>{staff.description}</td>
+                <td>{staff.email}</td>
                 <td>{this.getDepartmentName(staff.department)}</td>
                 {/* <td>{moment(staff.created).format('YYYY-MM-DD')}</td> */}
                 <td><Switch onChange={() => this.handleChange(staff._id, staff.active)} checked={staff.active} /></td>
                 <td>
+                  <Button color='secondary' tag={Link} size='sm' to={`/permissions/staffs/edit/${staff._id}`}>变更许可</Button>
+                  {' '}
                   <Button color='primary' tag={Link} size='sm' to={`/permissions/staffs/view/${staff._id}`}>
                     {BUTTONS.EDIT}
                   </Button>

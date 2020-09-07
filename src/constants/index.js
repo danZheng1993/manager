@@ -1,4 +1,4 @@
-// const SITE_ADDRESS = `http://localhost:4000/` ;
+// const SITE_ADDRESS = `http://localhost:4000/`;
 const SITE_ADDRESS = `http://47.105.53.235/api/`;
 
 export const BUTTONS = {
