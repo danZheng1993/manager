@@ -24,7 +24,7 @@ import Databases from './Databases'
 import Contracts from './Contracts'
 import Messages from './Messages'
 import CustomerSupport from './CustomerSupport';
-import { Departments } from './Permissions';
+import { Departments, EditDepartment } from './Permissions';
 
 import { userIsAuthenticatedRedir, userIsNotAuthenticatedRedir, userIsAdminOrManagerRedir }
   from '../helpers/authHelpers'
@@ -80,6 +80,7 @@ const routes = ({ isAuthenticated }) => (
             <Route path='/databases' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Databases))} />
             <Route path='/contracts' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Contracts))} />
             <Route path='/permissions/departments' component={userIsAdminOrManagerRedir(userIsAdminOrManagerRedir(Departments))} />
+            <Route path='/permissions/edit_department/:id' component={userIsAdminOrManagerRedir(userIsAdminOrManagerRedir(EditDepartment))} />
           </Container>
           </div>
         </section>

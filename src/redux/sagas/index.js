@@ -22,6 +22,7 @@ import database from './database'
 import contract from './contract'
 import message from './messages'
 import customerSupport from './customerSupport'
+import department from './department'
 
 export default function* rootSaga () {
   yield all([
@@ -48,5 +49,6 @@ export default function* rootSaga () {
     statistic(),
     message(),
     customerSupport(),
+    department(),
   ])
 }

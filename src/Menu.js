@@ -98,10 +98,10 @@ const Menu = [
                 name: '通知消息',
                 path: 'message?type=notification',
             },
-            {
-                name: '短信消息',
-                path: '',
-            },
+            // {
+            //     name: '短信消息',
+            //     path: '',
+            // },
             {
                 name: '活动消息',
                 path: 'message?type=event',

@@ -17,7 +17,7 @@ const doGetDepartments = apiCall({
   method: 'get',
   path: () => `/department/`,
   payloadOnSuccess: (res, { payload }) => ({
-    supportItems: res.supportItems,
+    departments: res.departments,
     count: res.count,
     ...pick(get(payload, 'params', {}), ['page', 'page_size']),
   }),

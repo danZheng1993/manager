@@ -17,8 +17,6 @@ import Loader from '../../containers/Loader'
 import { deleteDepartment, getDepartments, updateDepartment } from '../../redux/modules/department'
 import { departmentListSelector, departmentParamsSelector, departmentLoadingSelector } from '../../redux/selectors'
 
-import PermissionInput from './PermissionInput';
-
 class DepartmentsList extends Component {
 
   componentDidMount () {
@@ -45,11 +43,11 @@ class DepartmentsList extends Component {
     )
   }
 
-  handleChange = (id) => {
+  handleChange = (id, active) => {
     const { updateDepartment } = this.props
     updateDepartment({
       id,
-      body: {solved: true},
+      body: {active: !active},
       success: () => createNotification('success'),
     })
   }
@@ -60,6 +58,13 @@ class DepartmentsList extends Component {
     return (
       <div>
         <Loader active={loading} />
+        <Row className='mb-3'>
+          <Col md={2} xs={12}>
+            <Button color='primary' tag={Link} size='sm' to={`/permissions/edit_department/`}>
+              {BUTTONS.ADD}
+            </Button>
+          </Col>
+        </Row>
         <Table striped bordered className="text-center">
           <thead>
             <tr>
@@ -80,7 +85,7 @@ class DepartmentsList extends Component {
                 <td>{moment(department.created).format('YYYY-MM-DD')}</td>
                 <td><Switch onChange={() => this.handleChange(department._id, department.active)} checked={department.active} /></td>
                 <td>
-                  <Button color='primary' tag={Link} size='sm' to={`/customer_support/edit/${department._id}`}>
+                  <Button color='primary' tag={Link} size='sm' to={`/permissions/edit_department/${department._id}`}>
                     {BUTTONS.EDIT}
                   </Button>
                   {' '}
@@ -93,7 +98,6 @@ class DepartmentsList extends Component {
           </tbody>
         </Table>
         <Pagination pagination={pagination} setPagination={this.handlePagination} />
-        <PermissionInput />
       </div>
     )
   }
