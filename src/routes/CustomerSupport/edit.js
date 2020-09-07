@@ -104,7 +104,7 @@ class SupportItemEdit extends Component {
             <Row>
               <Col xs={6}>
                 <Link to='/customer_support' className='btn btn-secondary'>
-                  Cancel
+                  {BUTTONS.CANCEL}
                 </Link>
               </Col>
               <Col>
