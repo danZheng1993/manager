@@ -1,8 +1,8 @@
-const SITE_ADDRESS = `http://localhost:4000/` ;
-// const SITE_ADDRESS = `http://47.105.53.235/api/`;
+// const SITE_ADDRESS = `http://localhost:4000/` ;
+const SITE_ADDRESS = `http://47.105.53.235/api/`;
 
 export const BUTTONS = {
-  ADD: 'ADD',
+  ADD: '添新',
   TEST: '审核',
   EDIT: '编辑',
   VIEW: '查看',
@@ -13,8 +13,8 @@ export const BUTTONS = {
   NO: '不',
   FILTER: '过滤',
   POST: '提交',
-  CLOSE: 'CLOSE',
-  SAVE: 'SAVE',
+  CLOSE: '关',
+  SAVE: '保存',
   RESTORE: '恢复',
   BACKUP: '开始备份',
   UPLOAD: '上传',
@@ -56,13 +56,13 @@ export const RULES = {
 }
 
 export const MSGS = {
-  NETWORK_ERROR: 'NETWORK ERROR',
-  REQUIRED: 'THIS FEILD IS REQUIRED',
-  SUCCESS: 'SUCCESS',
+  NETWORK_ERROR: '网络错误',
+  REQUIRED: '这是必填栏',
+  SUCCESS: '成功',
 }
 
 export const CONFIRM = {
-  DELETE: 'ARE YOU SURE TO DELETE?',
+  DELETE: '您确定要删除吗',
 }
 
 export const TABLE_HEADERS = {

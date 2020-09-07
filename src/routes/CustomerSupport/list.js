@@ -88,7 +88,7 @@ class SupportItemsList extends Component {
               onChange={(e) => this.setState({ contact: e.target.value })}
               />
             </Col>
-            <Col md={6}>
+            <Col md={6} style={{ paddingTop: 30 }}>
               <Row>
                 <Col>
                   <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
