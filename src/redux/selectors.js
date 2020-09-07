@@ -215,6 +215,18 @@ export const supportItemLoadingSelector = (state) =>
 export const supportItemStateSelector = (state) =>
   get(state, 'customerSupport', {})
 
+export const departmentDetailSelector = (state) =>
+  get(state, 'department.department', {})
+
+export const departmentListSelector = (state) =>
+  get(state, 'department.departments', [])
+
+export const departmentLoadingSelector = (state) =>
+  get(state, 'department.loading', false)
+
+export const departmentStateSelector = (state) =>
+  get(state, 'department', {})
+
 export const contractDetailSelector = (state) =>
   get(state, 'contract.contract', {})
 
@@ -283,6 +295,9 @@ export const bannersParamsSelector = (state) =>
 
 export const supportItemParamsSelector = (state) =>
   get(state, 'customerSupport.params', {})
+
+export const departmentParamsSelector = (state) =>
+  get(state, 'department.params', {})
 
 export const databasesParamsSelector = (state) =>
   get(state, 'database.params', {})

@@ -98,10 +98,10 @@ const Menu = [
                 name: '通知消息',
                 path: 'message?type=notification',
             },
-            {
-                name: '短信消息',
-                path: '',
-            },
+            // {
+            //     name: '短信消息',
+            //     path: '',
+            // },
             {
                 name: '活动消息',
                 path: 'message?type=event',
@@ -160,21 +160,22 @@ const Menu = [
         ]
     },
     {
-        name: '权限管理',
-        icon: 'icon-lock',
-        submenu: [{
-                name: '部门管理',
-                path: 'permissions',
-            },
-            {
-                name: '成员管理',
-                path: ''
-            },
-            {
-                name: '数据库管理',
-                path: 'databases'
-            },
-        ]
+      name: '权限管理',
+      icon: 'icon-lock',
+      submenu: [
+        {
+          name: '部门管理',
+          path: 'permissions/departments'
+        },
+        {
+          name: '成员管理',
+          path: 'permissions/staffs'
+        },
+        {
+          name: '数据库管理',
+          path: 'databases'
+        },
+      ]
     },
 ];
 
