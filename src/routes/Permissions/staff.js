@@ -97,9 +97,7 @@ class StaffsList extends Component {
                 {/* <td>{moment(staff.created).format('YYYY-MM-DD')}</td> */}
                 <td><Switch onChange={() => this.handleChange(staff._id, staff.active)} checked={staff.active} /></td>
                 <td>
-                  <Button color='secondary' tag={Link} size='sm' to={`/permissions/staffs/edit/${staff._id}`}>变更许可</Button>
-                  {' '}
-                  <Button color='primary' tag={Link} size='sm' to={`/permissions/staffs/view/${staff._id}`}>
+                  <Button color='primary' tag={Link} size='sm' to={`/permissions/staffs/edit/${staff._id}`}>
                     {BUTTONS.EDIT}
                   </Button>
                   {' '}

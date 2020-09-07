@@ -29,6 +29,12 @@ const defaultHeaders = () => {
   return headers
 }
 
+export const fetchPermissions = () => axios.request({
+  url: `/permissions`,
+  method: 'GET',
+  headers: defaultHeaders(),
+})
+
 export default ({
   type,
   method, // one of 'get', 'post', 'put', 'delete'

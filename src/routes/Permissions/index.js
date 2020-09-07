@@ -12,7 +12,6 @@ export default () => (
     <Route path='/permissions/departments/view/:id' component={DepartmentEditor} />
     <Route path='/permissions/departments/new' component={DepartmentEditor} />
     <Route path='/permissions/staffs' exact component={Staffs} />
-    <Route path='/permissions/staffs/view/:id' component={StaffEditor} />
     <Route path='/permissions/staffs/new' component={StaffEditor} />
     <Route path='/permissions/staffs/edit/:id' component={StaffPermEditor} />
   </div>
