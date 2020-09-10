@@ -44,9 +44,9 @@ class Header extends React.Component {
             {auth.me && canManageUsers(auth.me)
             && <Nav className="ml-auto" navbar>
               <NavItem>
-                <Link to='/profile' className='nav-link'>
+                <Link to='/profile' className='nav-link' style={{ fontWeight: 'bold' }}>
                   <img src={ADDRESS.BASE_URL + 'profileImage/' + auth.me.photo + `?t=${new Date().toISOString()}`} 
-                  width="28" height="28" style={{borderRadius: '50%'}} alt="avatar" />
+                  width="28" height="28" style={{borderRadius: '50%', marginRight: '8px'}} alt="avatar" />
                   {auth.me.userName}
                 </Link>
               </NavItem>
