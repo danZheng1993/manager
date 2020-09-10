@@ -76,6 +76,7 @@ class Profile extends Component {
           <Form onSubmit={handleSubmit(this.handleSave)}>
             <Row>
               <Col xs={12} className="text-center">
+
                 <Dropzone
                   className="card p-3 d-flex justify-content-center align-items-center"
                   ref="dropzone"
@@ -83,12 +84,17 @@ class Profile extends Component {
                   onDrop={this.handleImageChange}
                   style={{borderWidth: 1, borderColor: '#dde6e9'}}
                 >
-                  { imagePreviewUrl ? 
-                    <img src={imagePreviewUrl}
-                      className="avatar" alt="avatar" /> :
-                    <img src={ADDRESS.BASE_URL + initialValues.photo}
-                      className="avatar" alt="avatar" />
-                  }
+                  {({getRootProps, getInputProps}) => (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      { imagePreviewUrl ? 
+                        <img src={imagePreviewUrl}
+                          className="avatar" alt="avatar" /> :
+                        <img src={ADDRESS.BASE_URL + 'profileImage/' + initialValues.photo}
+                          className="avatar" alt="avatar" />
+                      }
+                    </div>
+                  )}
                 </Dropzone>
               </Col>
             </Row>

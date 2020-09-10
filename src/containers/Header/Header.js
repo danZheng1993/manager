@@ -45,7 +45,7 @@ class Header extends React.Component {
             && <Nav className="ml-auto" navbar>
               <NavItem>
                 <Link to='/profile' className='nav-link'>
-                  <img src={ADDRESS.BASE_URL + auth.me.photo} 
+                  <img src={ADDRESS.BASE_URL + 'profileImage/' + auth.me.photo + `?t=${new Date().toISOString()}`} 
                   width="28" height="28" style={{borderRadius: '50%'}} alt="avatar" />
                   {auth.me.userName}
                 </Link>
