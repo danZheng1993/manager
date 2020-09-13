@@ -82,7 +82,17 @@ class Splash extends Component {
                       { imagePreviewUrl ? (
                         <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} />
                       ) : (
-                        <div style={{ display: 'inline-block', padding: '8px 16px 0px 16px', lineHeight: '18px', border: '1px solid #9c9c9c', borderRadius: '4px' }}>
+                        <div
+                          style={{
+                            display: 'inline-block',
+                            padding: '8px 16px 0px 16px',
+                            lineHeight: '18px',
+                            border: '1px solid #9c9c9c',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            margin: '16px',
+                          }}
+                        >
                           <p>{PLACEHOLDER.IMAGE}</p>
                         </div>
                       )}
