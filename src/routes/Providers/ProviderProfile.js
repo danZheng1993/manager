@@ -4,6 +4,7 @@ import { Row, Col, Table } from 'reactstrap'
 
 import { ADDRESS } from '../../constants'
 import { getDateTimeStr } from '../../helpers'
+import Image from './Image';
 
 class Profile extends Component {
 
@@ -14,15 +15,15 @@ class Profile extends Component {
   render() {
     const { user } = this.props
     return (
-      <div>
+      <div style={{ marginBottom: 32 }}>
         {user &&
         <div>
           <Row>
             <Col sm={4}>
               <div className="text-center">
-
-            <img src={ADDRESS.BASE_URL + user.photo}    
-                  width="100px" height="90px" alt="avatar" />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Image src={ADDRESS.PROFILE_BASE_URL + user.photo} width="100px" height="90px" alt="avatar" />
+              </div>
               <p>{user.userName} </p>
               </div>
             </Col>
@@ -74,18 +75,21 @@ class Profile extends Component {
           <Row>
             <Col sm={4} className="text-center">
               <p>身份证正面</p>
-              <img src={ADDRESS.BASE_URL + user.frontID}    
-                  width="80%" height="50%" alt="avatar" />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Image src={ADDRESS.PROFILE_BASE_URL + user.frontID} width="160px" height="100px" alt="身份证正面" />
+              </div>
             </Col>
             <Col sm={4} className="text-center">
               <p>身份证反面</p>
-              <img src={ADDRESS.BASE_URL + user.backID}    
-                  width="80%" height="50%" alt="avatar" />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Image src={ADDRESS.PROFILE_BASE_URL + user.backID} width="160px" height="100px" alt="身份证正面" />
+              </div>
             </Col>
             <Col sm={4} className="text-center">
               <p>营业执照</p>
-              <img src={ADDRESS.BASE_URL + user.companyLicense}    
-                  width="80%" height="50%" alt="avatar" />
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <Image src={ADDRESS.PROFILE_BASE_URL + user.companyLicense} width="160px" height="100px" alt="身份证正面" />
+              </div>
             </Col>
           </Row>
         </div>

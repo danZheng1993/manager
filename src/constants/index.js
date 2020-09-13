@@ -33,20 +33,20 @@ export const LABEL = {
 }
 
 export const PLACEHOLDER = {
-  DATE: 'Select date...',
-  IMAGE: 'Select image...',
-  TITLE: 'Input title',
+  DATE: '选择日期...',
+  IMAGE: '选择图片...',
+  TITLE: '输入标题',
   CONTRACT_PERSON: '输入甲方名称、乙方名称',
 }
 
 export const cnLocale = {
   format: 'YYYY年 M月 D日',
   separator: ' - ',
-  applyLabel: '확인',
+  applyLabel: '确认',
   cancelLabel: '取消',
-  fromLabel: '언제부터',
-  toLabel: '언제까지',
-  customRangeLabel: '사용자정의',
+  fromLabel: '从何时起',
+  toLabel: '多久',
+  customRangeLabel: '自订范围',
   daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
   monthNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
   firstDay: 1
@@ -81,10 +81,11 @@ export const TABLE_HEADERS = {
 
 export const ADDRESS = {
     BASE_URL: SITE_ADDRESS,
-    BANNER_BASE_URL: `${SITE_ADDRESS}/bannersImage/`,
-    NEWS_BASE_URL: `${SITE_ADDRESS}/newsImage/`,
-    MEDIA_BASE_URL: `${SITE_ADDRESS}/mediaSource/`,
-    INVOICE_BASE_URL: `${SITE_ADDRESS}/invoiceImage/`,
+    BANNER_BASE_URL: `${SITE_ADDRESS}bannersImage/`,
+    NEWS_BASE_URL: `${SITE_ADDRESS}newsImage/`,
+    MEDIA_BASE_URL: `${SITE_ADDRESS}mediaSource/`,
+    INVOICE_BASE_URL: `${SITE_ADDRESS}invoiceImage/`,
+    PROFILE_BASE_URL: `${SITE_ADDRESS}profileImage/`,
 }
 
 export const TARGET_AUDIENCE = [

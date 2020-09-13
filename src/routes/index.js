@@ -55,9 +55,7 @@ class AppRoute extends React.Component {
         <div>
           <NotificationContainer />
           <Header />
-          <div
-            className="wrapper"
-          >
+          <div className="wrapper">
             {isAuthenticated && <SideBar />}
             <section className={isAuthenticated ? 'section-container': ''}>
               { isAuthenticated && <Tab /> }
