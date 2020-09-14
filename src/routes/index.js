@@ -73,7 +73,7 @@ class AppRoute extends React.Component {
                 <Route path='/dashboard' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Dashboard))} />
                 <Route path='/profile' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Profile))} />
                 <Route path='/users' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Users))} />
-                <Route path='/records' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Records))} />
+                {/* <Route path='/records' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Records))} /> */}
                 <Route path='/logs' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Logs))} />
                 <Route path='/medias' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Medias))} />
                 <Route path='/providers' component={userIsAuthenticatedRedir(userIsAdminOrManagerRedir(Providers))} />

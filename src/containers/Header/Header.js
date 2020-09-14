@@ -50,11 +50,11 @@ class Header extends React.Component {
                   {auth.me.userName}
                 </Link>
               </NavItem>
-              <NavItem>
+              {/* <NavItem>
                 <Link to='/records' className='nav-link'>
                   <i className="fa fa-fw fa-bell" style={{ fontSize: '1.5em' }} />
                 </Link>
-              </NavItem>
+              </NavItem> */}
               <NavItem>
                 <Link to='/' onClick={this.handleLogout} className='nav-link'>
                 <i className="fa fa-fw fa-power-off" style={{ fontSize: '1.5em' }} />
