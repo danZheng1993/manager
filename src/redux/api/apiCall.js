@@ -74,7 +74,7 @@ export default ({
     })
   } catch (err) {
     const errRes = get(err, 'response', err)
-
+    console.log({ failCallback });
     failCallback && failCallback(errRes)
     fail && fail(errRes)
 

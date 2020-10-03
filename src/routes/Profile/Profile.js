@@ -32,6 +32,10 @@ class Profile extends Component {
   };
 
   handleSave = (values) => {
+    if (values.confirm_password !== values.new_password) {
+      createNotification('fail', '密码不符合');
+      return;
+    }
     const { saveProfile } = this.props
     const {file} = this.state
     if (file) {
@@ -42,7 +46,12 @@ class Profile extends Component {
     saveProfile({
       body: {userName: values.userName, old_password: values.old_password, new_password: values.new_password},
       success: () => this.handleSuccess(),
+      fail: () => this.handleFailure(),
     })
+  }
+
+  handleFailure = () => {
+    createNotification('error', '无法更新用户个人资料');
   }
 
   handleSuccess = () => {
