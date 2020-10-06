@@ -8,7 +8,7 @@ import { withRouter } from 'react-router'
 import Dropzone from 'react-dropzone';
 
 import { saveProfile } from '../../redux/modules/auth'
-import { isFieldRequired } from '../../helpers'
+import { isFieldRequired, minPasswordLength } from '../../helpers'
 import InputField from '../../components/InputField'
 import { createNotification } from '../../helpers'
 import uploadFile from '../../redux/api/upload'
@@ -138,7 +138,7 @@ class Profile extends Component {
                   name='new_password'
                   type='password'
                   placeholder='new password'
-                  validate={[isFieldRequired]}
+                  validate={[isFieldRequired, minPasswordLength]}
                   component={InputField}
                 />
               </Col>
