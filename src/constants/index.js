@@ -1,5 +1,5 @@
-// const SITE_ADDRESS = `http://localhost:4000/`;
-const SITE_ADDRESS = `http://47.105.53.235/api/`;
+const SITE_ADDRESS = `http://localhost:4000/`;
+// const SITE_ADDRESS = `http://47.105.53.235/api/`;
 
 export const BUTTONS = {
   ADD: '添新',
@@ -59,6 +59,7 @@ export const MSGS = {
   NETWORK_ERROR: '网络错误',
   REQUIRED: '这是必填栏',
   SUCCESS: '成功',
+  FORMAT_MISMATCH: '输入格式无效',
 }
 
 export const CONFIRM = {

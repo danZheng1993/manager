@@ -4,8 +4,22 @@ import 'react-notifications/lib/notifications.css'
 import {NotificationManager} from 'react-notifications'
 import { MSGS } from '../constants'
 
+const phoneNumberRegex = /^[0-9]{11}$/;
+
 export const isFieldRequired = value =>
   value ? undefined : MSGS.REQUIRED
+
+export const isValidPhoneNumber = value =>
+  value && value.match(phoneNumberRegex) ? undefined : MSGS.FORMAT_MISMATCH;
+
+export const isValidEmail = (email) => {
+  // eslint-disable-next-line
+  const regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return regEx.test(email.toLowerCase()) ? undefined : '电子邮件无效';
+}
+
+export const minPasswordLength = (value) =>
+  value && value.length < 8 ? '密码长度必须至少为8个字母' : undefined;
 
 export const ucFirst = (str) =>
   str.charAt(0).toUpperCase() + str.slice(1)

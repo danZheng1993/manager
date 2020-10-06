@@ -10,7 +10,13 @@ import Switch from 'react-switch';
 
 import { createStaff, getStaff, updateStaff } from '../../redux/modules/staff'
 import { getDepartments } from '../../redux/modules/department';
-import { isFieldRequired, createNotification } from '../../helpers'
+import {
+  isFieldRequired,
+  isValidPhoneNumber,
+  isValidEmail,
+  minPasswordLength,
+  createNotification,
+} from '../../helpers'
 import InputField from '../../components/InputField'
 import * as selectors from '../../redux/selectors'
 import { BUTTONS } from '../../constants'
@@ -109,7 +115,7 @@ class StaffEditor extends Component {
               name='email'
               type='text'
               required
-              validate={[isFieldRequired]}
+              validate={[isFieldRequired, isValidEmail]}
               component={InputField}
             />
             <Field
@@ -117,7 +123,7 @@ class StaffEditor extends Component {
               name='phoneNumber'
               type='text'
               required
-              validate={[isFieldRequired]}
+              validate={[isFieldRequired, isValidPhoneNumber]}
               component={InputField}
             />
             <Field
@@ -136,7 +142,7 @@ class StaffEditor extends Component {
               name='password'
               type='password'
               required
-              validate={[isFieldRequired]}
+              validate={[isFieldRequired, minPasswordLength]}
               component={InputField}
             />
             <Field
