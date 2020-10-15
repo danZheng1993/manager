@@ -107,7 +107,7 @@ const Menu = [
                 path: 'message?type=event',
             },
             {
-                name: '广告列表',
+                name: 'Banners',
                 path: 'banners',
             },
             {

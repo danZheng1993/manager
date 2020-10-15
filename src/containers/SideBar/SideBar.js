@@ -183,7 +183,7 @@ class SideBar extends React.Component {
               {/* 广告管理      */}
               <NavItem eventKey="banners">
                 <NavText>
-                广告列表
+                Banners
                 </NavText>
               </NavItem>
               <NavItem eventKey="banners/new">
