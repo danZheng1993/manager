@@ -55,7 +55,7 @@ class Settings extends Component {
             />
             <p className="description">热门搜索关键字,请用半角逗号(,)分隔多个关键字</p>
             <Field
-              label='首付款比例设置'
+              label='场景数量'
               name='upfrontRate'
               type='number'
               min={0}
