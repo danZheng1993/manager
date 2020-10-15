@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Row, Col, Table } from 'reactstrap'
+import moment from 'moment';
 
 import { ADDRESS } from '../../constants'
 import { getDateTimeStr } from '../../helpers'
@@ -14,6 +15,7 @@ class Profile extends Component {
 
   render() {
     const { user } = this.props
+    console.log({ user });
     return (
       <div style={{ marginBottom: 32 }}>
         {user &&
@@ -46,30 +48,48 @@ class Profile extends Component {
                 <th scope="row">城市</th>
                 <td>{user.location}</td>
               </tr>
-            </tbody>
-          </Table>
-          </Col>
-            <Col sm={4} >
-            <Table size="sm" bordered className="detail-table">
-            <tbody>
-              <tr>
-                <th scope="row">账户余额</th>
-                <td>{user.balance}</td>
-              </tr>
-              <tr>
-                <th scope="row">公司名称</th>
-                <td>{user.companyName}</td>
-              </tr>
-              <tr>
-                <th scope="row">注册时间</th>
-                <td>{getDateTimeStr(user.created)}</td>
-              </tr>
               <tr>
                 <th scope="row">服务简介</th>
                 <td>{user.overview}</td>
               </tr>
             </tbody>
           </Table>
+          </Col>
+          <Col sm={4} >
+            <Table size="sm" bordered className="detail-table">
+              <tbody>
+                <tr>
+                  <th scope="row">账户余额</th>
+                  <td>{user.balance}</td>
+                </tr>
+                <tr>
+                  <th scope="row">公司名称</th>
+                  <td>{user.companyName}</td>
+                </tr>
+                <tr>
+                  <th scope="row">注册时间</th>
+                  <td>{getDateTimeStr(user.created)}</td>
+                </tr>
+                {user.holderName && (
+                  <tr>
+                    <th scope="row">身份证持有人姓名</th>
+                    <td>{user.holderName}</td>
+                  </tr>
+                )}
+                {user.idNumber && (
+                  <tr>
+                    <th scope="row">身份证号码</th>
+                    <td>{user.idNumber}</td>
+                  </tr>
+                )}
+                {user.validFrom && user.validDate && (
+                  <tr>
+                    <th scope="row">有效期限</th>
+                    <td>{moment(user.validFrom).format('YYYY-MM-DD')} ~ {moment(user.validDate).format('YYYY-MM-DD')}</td>
+                  </tr>
+                )}
+              </tbody>
+            </Table>
           </Col>
           </Row>
           <Row>

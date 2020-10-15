@@ -68,7 +68,6 @@ class Splash extends Component {
           </h2>
           <Row>
               <Col md={6}>
-
                 <Dropzone
                   className="card p-3 d-flex justify-content-center align-items-center"
                   ref="dropzone"
@@ -98,7 +97,8 @@ class Splash extends Component {
                       )}
                     </div>
                   )}
-                </Dropzone>  
+                </Dropzone>
+                <div style={{ textAlign: 'center', paddingTop: 8 }}>建议尺寸2048*2048 主题内容在中间位置</div>
               </Col>
               <Col md={4}>
                 <Button color='primary' style={{margin: '5px'}} onClick={this.handleSave}>{BUTTONS.SAVE}</Button>

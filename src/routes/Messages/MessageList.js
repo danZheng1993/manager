@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { pick } from 'lodash'
+import { pick, isEqual } from 'lodash'
 import { withRouter } from 'react-router'
 
 import { getDateTimeStr, createNotification } from '../../helpers'
@@ -33,30 +33,42 @@ class MessagesList extends Component {
     history: PropTypes.object,
   };
 
-  componentWillMount () {
-    const { getMessages, params } = this.props
-    getMessages({ params })
+  componentDidMount() {
+    const { getMessages, params, location: { search } } = this.props
+    const type = search.split('type=')[1];
+    getMessages({ params: { ...params, filter: { ...params.filter, type } } });
+  }
+
+  componentDidUpdate(prevProps) {
+    const { params: prevParams, location: { search: prevSearch } } = prevProps;
+    const { getMessages, params, location: { search } } = this.props;
+    if (!isEqual(params, prevParams) || !isEqual(prevSearch, search)) {
+      const type = search.split('type=')[1];
+      getMessages({ params: { ...params, filter: { ...params.filter, type } } });
+    }
   }
 
   handlePagination = (pagination) => {
-    const { getMessages, params } = this.props
+    const { getMessages, params, location: { search } } = this.props
     const {filter} = this.state
+    const type = search.split('type=')[1];
     getMessages({
       params: {
         ...pick(params, ['page', 'page_size', 'count']),
         ...pagination,
-        filter
+        filter: { ...filter, type: type || undefined }
       }
     })
   }
 
   handleAdd = () => {
-    const { params } = this.props;
-    this.props.history.push(`/message/new?type=${params.type || 'notification'}`)
+    const { location: { search } } = this.props;
+    const type = search.split('type=')[1];
+    this.props.history.push(`/message/new?type=${type || 'notification'}`)
   }
 
   handleFilter = () => {
-    const { getMessages, params } = this.props
+    const { getMessages, params, match: { params: routeParam } } = this.props
     const { target } = this.state
     let filter = {}
     if (target) filter['target'] = target
@@ -64,7 +76,7 @@ class MessagesList extends Component {
     getMessages({
       params: {
         ...pick(params, ['page', 'page_size', 'count']),
-        filter
+        filter: { ...filter, type: routeParam.type || undefined }
       }
     })
   }

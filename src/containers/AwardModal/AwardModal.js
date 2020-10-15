@@ -33,15 +33,17 @@ class AwardModal extends React.Component {
     super(props)
     this.state = {
       file: '',
+      imagePreviewUrl: '',
+      file: '',
       imagePreviewUrl: ''
     }
   }
 
   handleFilter = (values) => {
     const { users } = this.props
-    const { file } = this.state
-    if (!file || !users) return;
-    upload('awards/upload', 'post', file, {...values, users})
+    const { file, file1 } = this.state
+    if (!file || !users || !file1) return;
+    upload('awards/upload', 'post', [file, file1], {...values, users})
     .then(() => createNotification('success'))
     .catch(err => alert(err))
     this.props.handleHide()
@@ -60,16 +62,29 @@ class AwardModal extends React.Component {
     file && reader.readAsDataURL(file)
   }
 
+  handleImageChange = (files)  => {
+    let reader = new FileReader()
+    let file = files[0]
+
+    reader.onloadend = () => {
+      this.setState({
+        file1: file,
+        imagePreviewUrl1: reader.result
+      })
+    }
+    file && reader.readAsDataURL(file)
+  }
+
   render() {
     const { show, handleHide, handleSubmit, users } = this.props
-    const { imagePreviewUrl } = this.state
+    const { imagePreviewUrl, imagePreviewUrl1 } = this.state
     return (
       <Modal isOpen={show} toggle={handleHide} size='sm'>
         <ModalHeader toggle={this.toggle} className="text-center">
           红包设置
         </ModalHeader>
         <ModalBody>
-          <Row>
+          <Row style={{ overflowY: 'scroll' }}>
             <Col sm={12}>
               <Form onSubmit={handleSubmit(this.handleFilter)}>
                 <FormGroup row>
@@ -118,7 +133,37 @@ class AwardModal extends React.Component {
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       {imagePreviewUrl ?
-                        <img src={imagePreviewUrl} alt="splash" style={{width: '100%', height: '100%'}} />
+                        <img src={imagePreviewUrl} alt="splash" style={{width: '50px', height: '50px'}} />
+                      :
+                        <div
+                          style={{
+                            display: 'inline-block',
+                            padding: '8px 16px 0px 16px',
+                            lineHeight: '18px',
+                            border: '1px solid #9c9c9c',
+                            borderRadius: '4px',
+                            cursor: 'pointer',
+                            margin: '16px',
+                          }}
+                        >
+                          <p>{PLACEHOLDER.IMAGE}</p>
+                        </div>
+                      }
+                    </div>
+                  )}
+                </Dropzone>
+                <Dropzone
+                  className="card p-3 d-flex justify-content-center align-items-center"
+                  ref="dropzone"
+                  accept={RULES.IMAGE}
+                  onDrop={this.handleImageChange1}
+                  style={{borderWidth: 1, borderColor: '#dde6e9'}}
+                >
+                  {({getRootProps, getInputProps}) => (
+                    <div {...getRootProps()}>
+                      <input {...getInputProps()} />
+                      {imagePreviewUrl1 ?
+                        <img src={imagePreviewUrl1} alt="splash" style={{width: '100%', height: '100%'}} />
                       :
                         <div
                           style={{

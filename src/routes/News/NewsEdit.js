@@ -48,13 +48,21 @@ class NewsEdit extends Component {
     params.id && getNews({ id: params.id , success: (payload) => this.initEditorState(payload.data)})
   }
 
+  componentDidUpdate (prevProps) {
+    const { getNews, match: { params } } = this.props;
+    const { match: { params: prevParams } } = prevProps;
+    if (params.id !== prevParams.id) {
+      params.id && getNews({ id: params.id , success: (payload) => this.initEditorState(payload.data)})
+    }
+  }
+
   initEditorState = (news) => {
     if (news.content) {
       const blocksFromHtml = htmlToDraft(news.content)
       const { contentBlocks, entityMap } = blocksFromHtml
       const contentState = ContentState.createFromBlockArray(contentBlocks, entityMap)
       const editorState = EditorState.createWithContent(contentState)
-      this.setState({editorState, imagePreviewUrl: isEmpty(news.image) ? null : ADDRESS.NEWS_BASE_URL + news.image})
+      this.setState({editorState, content: news.content, imagePreviewUrl: isEmpty(news.image) ? null : ADDRESS.NEWS_BASE_URL + news.image})
     }
   }
   handleSave = (values) => {
@@ -64,16 +72,27 @@ class NewsEdit extends Component {
     ? updateNews({
       id: params.id,
       body: {...values, content},
-      success: (payload) => 
-        uploadFile('news/upload', 'post', file, {id: params.id})
-        .then(() => createNotification('success'))
-        .catch(err => alert(err)),
+      success: (payload) => {
+        if (file) {
+          uploadFile('news/upload', 'post', file, {id: params.id})
+            .then(() => createNotification('成功'))
+            .catch(err => alert(err));
+        } else {
+          createNotification('成功')
+        }
+      },
     })
     : createNews({
       body: {...values, content},
-      success: () => uploadFile('news/upload', 'post', file, {id: params.id})
-        .then(() => createNotification('success'))
-        .catch(err => alert(err)),
+      success: (payload) => {
+        if (file) {
+          uploadFile('news/upload', 'post', file, {id: payload.id})
+            .then(() => createNotification('成功'))
+            .catch(err => alert(err));
+        } else {
+          createNotification('成功')
+        }
+      },
     })
   }
 
