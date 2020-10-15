@@ -99,7 +99,7 @@ class MessagesList extends Component {
         <Row className='mb-3'>
           <Col md={2} xs={12}>
             <Input
-              label="Target Audience"
+              label="选择范围"
               type='select'
               options={TARGET_AUDIENCE}
               onChange={(e) => this.setState({target: e.target.value})}
@@ -111,7 +111,7 @@ class MessagesList extends Component {
               <Col>
                 <Button color='secondary' onClick={this.handleFilter}>{BUTTONS.FILTER}</Button>
                 <div style={{ display: 'inline-block', width: '16px' }} />
-                <Button color='primary' onClick={this.handleAdd}>{BUTTONS.ADD}</Button>
+                <Button color='primary' onClick={this.handleAdd}>{params.type === 'message' ? '发送新通知' : '发送新活动'}</Button>
               </Col>
             </Row>
           </Col>

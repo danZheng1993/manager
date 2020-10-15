@@ -72,11 +72,11 @@ class MessageEdit extends Component {
       <Row>
         <Col sm={12} md={{ size: 10, offset: 1 }}>          
           <h2 className='text-center mb-5'>
-            {params.id ? 'Edit Message' : 'Add New Message'}
+            {params.type === 'message' ? '发送新通知' : '发送新活动'}
           </h2>
           <Form onSubmit={handleSubmit(this.handleSave)}>
             <Field
-              label='Message Content'
+              label='信息内容'
               name='content'
               type='text'
               required
@@ -84,7 +84,7 @@ class MessageEdit extends Component {
               component={InputField}
             />
             <Field
-              label='Target Group'
+              label='选择范围'
               name='target'
               type='select'
               required

@@ -90,9 +90,9 @@ export const ADDRESS = {
 }
 
 export const TARGET_AUDIENCE = [
-  { label: 'All', value: 'all' },
-  { label: 'Client', value: 'client' },
-  { label: 'Provider', value: 'provider' },
+  { label: '所有人', value: 'all' },
+  { label: '服务方', value: 'client' },
+  { label: '需求方', value: 'provider' },
 ]
 
 export const CUSTOMER_TYPE = [
