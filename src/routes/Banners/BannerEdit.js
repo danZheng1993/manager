@@ -46,23 +46,29 @@ class BannerEdit extends Component {
   handleSave = (values) => {
     const { createBanner, updateBanner, match: { params } } = this.props
     const {status, file} = this.state
-    if (!file)  return
-    params.id
-    ? updateBanner({
-      id: params.id,
-      body: {...values, status},
-      success: (payload) => 
-        uploadFile('banners/upload', 'post', file, {id: params.id})
-        .then(() => createNotification('success'))
-        .catch(err => alert(err)),
-    })
-    : createBanner({
-      body: {...values, status},
-      success: (payload) => 
-        uploadFile('banners/upload', 'post', file, {id: payload.data._id})
-        .then(() => this.handleSuccess())
-        .catch(err => alert(err)),
-    })
+    if (params.id) {
+      updateBanner({
+        id: params.id,
+        body: {...values, status},
+        success: (payload) => {
+          if (file) {
+            uploadFile('banners/upload', 'post', file, {id: params.id})
+              .then(() => createNotification('success'))
+              .catch(err => alert(err));
+          } else {
+            createNotification('success')
+          }
+        }
+      });
+    } else {
+      createBanner({
+        body: {...values, status},
+        success: (payload) => 
+          uploadFile('banners/upload', 'post', file, {id: payload.data._id})
+          .then(() => this.handleSuccess())
+          .catch(err => alert(err)),
+      });
+    }
   }
 
   handleSuccess = () => {
@@ -186,7 +192,6 @@ class BannerEdit extends Component {
               name='url'
               type='text'
               required
-              validate={[isFieldRequired]}
               component={InputField}
             />
             <Field
