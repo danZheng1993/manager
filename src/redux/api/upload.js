@@ -19,7 +19,13 @@ const defaultHeaders = () => {
 
 const upload = (uri, method, file, body = {}) => {
   const data = new FormData()
-  data.append("image", file)
+  if (Array.isArray(file)) {
+    for (let i = 0; i < file.length; i += 1) {
+      data.append(`image_${i}`, file[i]);
+    }
+  } else {
+    data.append("image", file)
+  }
   Object.keys(body).forEach(key => {
     data.append(key, body[key])
   })

@@ -62,7 +62,7 @@ class AwardModal extends React.Component {
     file && reader.readAsDataURL(file)
   }
 
-  handleImageChange = (files)  => {
+  handleImageChange1 = (files)  => {
     let reader = new FileReader()
     let file = files[0]
 
@@ -133,7 +133,7 @@ class AwardModal extends React.Component {
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       {imagePreviewUrl ?
-                        <img src={imagePreviewUrl} alt="splash" style={{width: '50px', height: '50px'}} />
+                        <img src={imagePreviewUrl} alt="splash" style={{width: 'auto', height: '150px'}} />
                       :
                         <div
                           style={{
@@ -154,7 +154,7 @@ class AwardModal extends React.Component {
                 </Dropzone>
                 <Dropzone
                   className="card p-3 d-flex justify-content-center align-items-center"
-                  ref="dropzone"
+                  ref="dropzone1"
                   accept={RULES.IMAGE}
                   onDrop={this.handleImageChange1}
                   style={{borderWidth: 1, borderColor: '#dde6e9'}}
@@ -163,7 +163,7 @@ class AwardModal extends React.Component {
                     <div {...getRootProps()}>
                       <input {...getInputProps()} />
                       {imagePreviewUrl1 ?
-                        <img src={imagePreviewUrl1} alt="splash" style={{width: '100%', height: '100%'}} />
+                        <img src={imagePreviewUrl1} alt="splash" style={{width: 'auto', height: '150px'}} />
                       :
                         <div
                           style={{
