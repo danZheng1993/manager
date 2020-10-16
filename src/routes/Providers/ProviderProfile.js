@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Row, Col, Table } from 'reactstrap'
+import { connect } from 'react-redux';
+import { Row, Col, Table, Button } from 'reactstrap'
 import moment from 'moment';
 
 import { ADDRESS } from '../../constants'
 import { getDateTimeStr } from '../../helpers'
 import Image from './Image';
+import { updateUser } from '../../redux/modules/user'
 
 class Profile extends Component {
 
@@ -13,9 +15,37 @@ class Profile extends Component {
     user: PropTypes.object
   };
 
+  state = {
+    companyVerified: false,
+    personallyVerified: false,
+  }
+
+  canVerifyPersonalId = () => {
+    const { user } = this.props;
+    const { personallyVerified } = this.state;
+    return !user.personalIDVerified && user.frontID && user.backID && user.holderName && user.validFrom && user.validDate && user.idNumber && !personallyVerified;
+  }
+
+  canVerifyCompanyId = () => {
+    const { user } = this.props;
+    const { companyVerified } = this.state;
+    return !user.companyIDVerified && user.companyID && user.companyName && user.companyLicense && !companyVerified;
+  }
+
+  handleApproveCompanyId = () => {
+    const { user } = this.props;
+    this.setState({ companyVerified: true });
+    this.props.updateUser({ id: user._id, body: { companyIDVerified: true } });
+  }
+
+  handleApprovePersonalId = () => {
+    const { user } = this.props;
+    this.setState({ personallyVerified: true });
+    this.props.updateUser({ id: user._id, body: { personalIDVerified: true } });
+  }
+
   render() {
     const { user } = this.props
-    console.log({ user });
     return (
       <div style={{ marginBottom: 32 }}>
         {user &&
@@ -23,10 +53,10 @@ class Profile extends Component {
           <Row>
             <Col sm={4}>
               <div className="text-center">
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Image src={ADDRESS.PROFILE_BASE_URL + user.photo} width="100px" height="90px" alt="avatar" />
-              </div>
-              <p>{user.userName} </p>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Image src={ADDRESS.PROFILE_BASE_URL + user.photo} width="100px" height="90px" alt="avatar" />
+                </div>
+                <p>{user.userName} </p>
               </div>
             </Col>
             <Col sm={4} >
@@ -112,6 +142,12 @@ class Profile extends Component {
               </div>
             </Col>
           </Row>
+          {(this.canVerifyCompanyId() || this.canVerifyPersonalId()) && (
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 16 }}>
+              {this.canVerifyPersonalId() && <Col sm={4}><Button onClick={this.handleApprovePersonalId}>Approve Personal</Button></Col>}
+              {this.canVerifyCompanyId() && <Col sm={4}><Button onClick={this.handleApproveCompanyId}>Approve Company</Button></Col>}
+            </div>
+          )}
         </div>
         }
       </div>
@@ -119,4 +155,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default connect(null, { updateUser })(Profile);
