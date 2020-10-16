@@ -55,8 +55,9 @@ class MessageEdit extends Component {
     return search.split('type=')[1];
   }
   handleSave = (values) => {
-    const { createMessage, match: { type } } = this.props
+    const { createMessage } = this.props
     const { file } = this.state;
+    const type = this.getMessageType();
     createMessage({
       body: {...values, type},
       success: (payload) => {
