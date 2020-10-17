@@ -133,7 +133,7 @@ class NewssList extends Component {
               <th>标题</th>
               <th>发布时间</th>
               <th>阅读数量</th>
-              <th>设为banner展示</th>
+              <th>设为首页显示</th>
               <th>操作</th>
             </tr>
           </thead>
