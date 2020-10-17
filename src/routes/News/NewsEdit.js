@@ -75,10 +75,10 @@ class NewsEdit extends Component {
       success: (payload) => {
         if (file) {
           uploadFile('news/upload', 'post', file, {id: params.id})
-            .then(() => createNotification('成功'))
+            .then(() => createNotification('success'))
             .catch(err => alert(err));
         } else {
-          createNotification('成功')
+          createNotification('success')
         }
       },
     })
@@ -86,11 +86,11 @@ class NewsEdit extends Component {
       body: {...values, content},
       success: (payload) => {
         if (file) {
-          uploadFile('news/upload', 'post', file, {id: payload.id})
-            .then(() => createNotification('成功'))
+          uploadFile('news/upload', 'post', file, {id: payload.data._id})
+            .then(() => createNotification('success'))
             .catch(err => alert(err));
         } else {
-          createNotification('成功')
+          createNotification('success')
         }
       },
     })
