@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { pick } from 'lodash'
+import { pick, orderBy } from 'lodash'
 import { withRouter } from 'react-router'
 import Switch from 'react-switch'
 
@@ -102,6 +102,7 @@ class NewssList extends Component {
     const { newssList, params, loading } = this.props
     const { startDate, endDate } = this.state
     const pagination = pick(params, ['page', 'page_size', 'count'])
+    const orderedNewsList = orderBy(newssList, ['created'], ['desc']);
     return (
       <div>
         <Loader active={loading} />
@@ -138,7 +139,7 @@ class NewssList extends Component {
             </tr>
           </thead>
           <tbody>
-            {newssList && newssList.map((news, index) => (
+            {orderedNewsList && orderedNewsList.map((news, index) => (
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
                 <td>{news.title}</td>
