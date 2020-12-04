@@ -67,7 +67,15 @@ const Menu = [
     {
         name: '合同管理',
         icon: 'icon-graph',
-        path: 'contracts',
+        submenu: [{
+                name: '合同管理',
+                path: 'contracts',
+            },
+            {
+                name: '新的合同',
+                path: 'contracts/new',
+            }
+        ]
     },
     {
         name: '发票管理',

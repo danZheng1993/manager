@@ -9,6 +9,7 @@ export default () => {
     <div>
       <CustomRoute path='/contracts' exact component={ContractsList} checkPath='/contracts' />
       <CustomRoute path='/contracts/view/:id' component={ContractView} checkPath='/contracts' />
+      <CustomRoute path='/contracts/new/' component={ContractView} checkPath='/contracts' />
     </div>
   );
 }

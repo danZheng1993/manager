@@ -79,14 +79,15 @@ class ContractsList extends Component {
               onKeyPress = {(target) => this.handleKeyPress(target)}
               />
           </Col>
+          <Col md={2} x2={12}>
+
+          </Col>
         </Row>
         <Table striped bordered className="text-center">
           <thead>
             <tr>
               <th>{TABLE_HEADERS.INDEX}</th>
               <th>{TABLE_HEADERS.CONTRACT_TIME}</th>
-              <th>{TABLE_HEADERS.CONTRACT_ONE}</th>
-              <th>{TABLE_HEADERS.CONTRACT_TWO}</th>
               <th>{TABLE_HEADERS.ACTION}</th>
             </tr>
           </thead>
@@ -95,8 +96,6 @@ class ContractsList extends Component {
               <tr key={index}>
                 <th scope='row'>{index + 1}</th>
                 <td>{getDateTimeStr(contract.created)}</td>
-                <td>{contract.name}</td>
-                <td>{contract.name}</td>
                 <td>
                   <Button color='primary' tag={Link} size='sm' to={`/contracts/view/${contract._id}`}>
                     {BUTTONS.VIEW}

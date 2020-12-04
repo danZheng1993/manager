@@ -1,5 +1,5 @@
-// const SITE_ADDRESS = `http://localhost:4000/`;
-const SITE_ADDRESS = `http://47.105.53.235/api/`;
+const SITE_ADDRESS = `http://localhost:4000/`;
+// const SITE_ADDRESS = `http://47.105.53.235/api/`;
 
 export const BUTTONS = {
   ADD: '添新',
